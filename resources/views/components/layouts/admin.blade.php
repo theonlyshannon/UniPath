@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? '' }}</title>
-    <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon-globe.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

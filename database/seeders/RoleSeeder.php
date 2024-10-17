@@ -46,6 +46,20 @@ class RoleSeeder extends Seeder
             'student-create',
             'student-edit',
             'student-delete',
+
+
+            'article-management',
+
+            'article-list',
+            'article-create',
+            'article-edit',
+            'article-delete',
+
+            'article-category-list',
+            'article-category-create',
+            'article-category-edit',
+            'article-category-delete',
+
         ];
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -91,6 +105,18 @@ class RoleSeeder extends Seeder
             'student-create',
             'student-edit',
             'student-delete',
+
+            'article-management',
+
+            'article-list',
+            'article-create',
+            'article-edit',
+            'article-delete',
+
+            'article-category-list',
+            'article-category-create',
+            'article-category-edit',
+            'article-category-delete',
         ]);
 
         $student->syncPermissions([
