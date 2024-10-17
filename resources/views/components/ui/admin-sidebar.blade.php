@@ -44,6 +44,11 @@
                                 Role
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.permission.index') }}" class="nav-link {{ request()->is('admin/permission*') ? ' active' : '' }}">
+                                Permission
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -52,18 +57,3 @@
     </div>
 </nav>
 
-
-
-<li class="nav-item {{ request()->is('admin/mentor') ? ' active' : '' }}">
-    <a href="{{ route('admin.mentor.index') }}" class="nav-link">
-        <i class="link-icon" data-feather="list"></i>
-        <span class="link-title">mentor</span>
-    </a>
-</li>
-
-<li class="nav-item {{ request()->is('admin/roles') ? ' active' : '' }}">
-    <a href="{{ route('admin.roles.index') }}" class="nav-link">
-        <i class="link-icon" data-feather="list"></i>
-        <span class="link-title">roles</span>
-    </a>
-</li>
