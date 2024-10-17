@@ -21,12 +21,12 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $students = $this->StudentRepository->getAllStudent();
-        return view('pages.admin.Student.index', compact('students'));
+        return view('pages.admin.account-management.student.index', compact('students'));
     }
 
     public function create()
     {
-        return view('pages.admin.Student.create');
+        return view('pages.admin.account-management.student.create');
     }
 
     public function store(StoreStudentRequest $request)
@@ -51,14 +51,14 @@ class StudentController extends Controller
 
     public function show($id)
     {
-        $Student = $this->StudentRepository->getStudentById($id);
-        return view('pages.admin.Student.show', compact('Student'));
+        $student = $this->StudentRepository->getStudentById($id);
+        return view('pages.admin.account-management.student.show', compact('student'));
     }
 
     public function edit($id)
     {
-        $Student = $this->StudentRepository->getStudentById($id);
-        return view('pages.admin.Student.edit', compact('Student'));
+        $student = $this->StudentRepository->getStudentById($id);
+        return view('pages.admin.account-management.student.edit', compact('student'));
     }
 
     public function update(StoreStudentRequest $request, $id)
