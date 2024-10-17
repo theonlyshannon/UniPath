@@ -36,7 +36,7 @@ class CrudGeneratorCommand extends Command
         $this->addRoutes();
         $this->addSidebarMenu();
 
-        $this->comment('Playground created successfully. Happy coding hugo! 🚀');
+        $this->comment('Playground created successfully');
     }
 
     protected function createModel()
