@@ -17,6 +17,6 @@ Route::get('/dashboard', [App\Http\Controllers\Web\Admin\DashboardController::cl
 Route::resource('example', App\Http\Controllers\Web\Admin\ExampleController::class);
 
 Route::resource('student', App\Http\Controllers\Web\Admin\studentController::class);;
-Route::resource('roles', App\Http\Controllers\Web\Admin\rolesController::class);
+Route::resource('role', App\Http\Controllers\Web\Admin\RoleController::class);
 Route::resource('permission', App\Http\Controllers\Web\Admin\PermissionController::class);
 

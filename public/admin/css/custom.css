@@ -137,3 +137,28 @@ a:hover {
     object-fit: contain;
     border-radius: 0px !important;
 }
+
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #fff !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff !important;
+}
+
+.select2-container--default .select2-selection--multiple{
+    display: block;
+    width: 100%;
+    color: #000;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e9ecef !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

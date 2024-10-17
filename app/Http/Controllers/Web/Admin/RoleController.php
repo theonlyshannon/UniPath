@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRolesRequest;
-use App\Http\Requests\UpdateRolesRequest;
-use App\Interfaces\RolesRepositoryInterface;
+use App\Interfaces\RoleRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
-use Illuminate\Http\Request;
+use App\Interfaces\PermissionRepositoryInterface;
 
-class RolesController extends Controller
+class RoleController extends Controller
 {
     private $roleRepository;
 
     private $permissionRepository;
 
-    public function __construct(RolesRepositoryInterface $roleRepository, PermissionRepositoryInterface $permissionRepository)
+    public function __construct(RoleRepositoryInterface $roleRepository, PermissionRepositoryInterface $permissionRepository)
     {
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
@@ -31,9 +32,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = $this->roleRepository->getAllRoles();
+        $roles = $this->roleRepository->getAllRole();
 
-        return view('pages.admin.account-managements.roles.index', compact('roles'));
+        return view('pages.admin.account-management.role.index', compact('roles'));
     }
 
     /**
@@ -43,18 +44,18 @@ class RolesController extends Controller
     {
         $permissions = $this->permissionRepository->getAllPermission();
 
-        return view('pages.admin.account-managements.roles.create', compact('permissions'));
+        return view('pages.admin.account-management.role.create', compact('permissions'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRolesRequest $request)
+    public function store(RoleRequest $request)
     {
         $data = $request->validated();
 
         try {
-            $this->roleRepository->createRoles($data);
+            $this->roleRepository->createRole($data);
 
             Swal::toast('Role berhasil ditambahkan', 'success');
         } catch (\Exception $e) {
@@ -69,9 +70,9 @@ class RolesController extends Controller
      */
     public function show(string $id)
     {
-        $role = $this->roleRepository->getRolesById($id);
+        $role = $this->roleRepository->getRoleById($id);
 
-        return view('pages.admin.account-managements.roles.show', compact('role'));
+        return view('pages.admin.account-management.role.show', compact('role'));
     }
 
     /**
@@ -79,21 +80,21 @@ class RolesController extends Controller
      */
     public function edit(string $id)
     {
-        $role = $this->roleRepository->getRolesById($id);
+        $role = $this->roleRepository->getRoleById($id);
         $permissions = $this->permissionRepository->getAllPermission();
 
-        return view('pages.admin.account-managements.roles.edit', compact('role', 'permissions'));
+        return view('pages.admin.account-management.role.edit', compact('role', 'permissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRolesRequest $request, string $id)
+    public function update(RoleRequest $request, string $id)
     {
         $data = $request->validated();
 
         try {
-            $this->roleRepository->updateRoles($data, $id);
+            $this->roleRepository->updateRole($data, $id);
 
             Swal::toast('Role berhasil diupdate', 'success');
         } catch (\Exception $e) {
@@ -109,7 +110,7 @@ class RolesController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->roleRepository->deleteRoles($id);
+            $this->roleRepository->deleteRole($id);
 
             Swal::toast('Role berhasil dihapus', 'success');
         } catch (\Exception $e) {

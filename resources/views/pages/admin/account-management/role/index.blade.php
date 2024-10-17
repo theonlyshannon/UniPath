@@ -1,5 +1,5 @@
 
-<x-layouts.admin title="roles">
+<x-layouts.admin title="Role">
 
     <x-ui.breadcumb-admin>
         <li class="breadcrumb-item active" aria-current="page">Role</li>
@@ -9,7 +9,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <x-ui.base-card>
                 <x-slot name="header">
-                    <x-ui.base-button color="primary" type="button" href="{{ route('admin.roles.create') }}">
+                    <x-ui.base-button color="primary" type="button" href="{{ route('admin.role.create') }}">
                         Tambah roles
                     </x-ui.base-button>
                 </x-slot>
@@ -24,11 +24,11 @@
                         </tr>
                     </x-slot>
                     <x-slot name="tbody">
-                        @foreach ($roles as $roles)
+                        @foreach ($roles as $role)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $role->name }}</td>
-                            <td>{{ $ro }}</td>
+                            <td>{{ $role->guard_name }}</td>
                             <td class="d-flex flex-wrap">
                                 @forelse ($role->permissions as $permission)
                                     <span class="badge bg-primary m-1">{{ $permission->name }}</span>
@@ -57,7 +57,8 @@
                                 @endcan
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
+
                     </x-slot>
                 </x-ui.datatables>
             </x-ui.base-card>

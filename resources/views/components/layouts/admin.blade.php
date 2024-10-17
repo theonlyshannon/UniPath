@@ -16,6 +16,7 @@
     <!-- plugin css -->
     <link href="{{ asset('admin/assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- end plugin css -->
 
     @stack('plugin-styles')
@@ -56,6 +57,7 @@
     <script src="{{ asset('admin/js/app.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- end base js -->
 
     <!-- plugin js -->

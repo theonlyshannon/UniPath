@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.roles.index') }}" class="nav-link {{ request()->is('admin/role*') ? ' active' : '' }}">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link {{ request()->is('admin/role*') ? ' active' : '' }}">
                                 Role
                             </a>
                         </li>
