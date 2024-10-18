@@ -15,13 +15,16 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
     $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
     $this->app->bind(\App\Interfaces\StudentRepositoryInterface::class, \App\Repositories\StudentRepository::class);
+    $this->app->bind(\App\Interfaces\WriterRepositoryInterface::class, \App\Repositories\WriterRepository::class);
     $this->app->bind(\App\Interfaces\RoleRepositoryInterface::class, \App\Repositories\RoleRepository::class);
     $this->app->bind(\App\Interfaces\PermissionRepositoryInterface::class, \App\Repositories\PermissionRepository::class);
     $this->app->bind(\App\Interfaces\ArticleCategoryRepositoryInterface::class, \App\Repositories\ArticleCategoryRepository::class);
     $this->app->bind(\App\Interfaces\ArticleTagRepositoryInterface::class, \App\Repositories\ArticleTagRepository::class);
     $this->app->bind(\App\Interfaces\ArticleRepositoryInterface::class, \App\Repositories\ArticleRepository::class);
+
     }
 
 

@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
 
         if ($env === 'local') {
             $this->call([
+                WriterSeeder::class,
                 ArticleTagSeeder::class,
                 ArticleCategorySeeder::class,
-                Article
             ]);
         }
 

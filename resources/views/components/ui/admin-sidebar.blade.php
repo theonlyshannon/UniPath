@@ -19,16 +19,25 @@
 
             @can('account-management')
                 <li
-                    class="nav-item {{ request()->is('admin/mentor*', 'admin/writer*', 'admin/student*', 'admin/role*') ? ' active' : '' }}">
+                    class="nav-item {{ request()->is('admin/writer*', 'admin/student*', 'admin/role*') ? ' active' : '' }}">
                     <a class="nav-link" data-bs-toggle="collapse" href="#account-management" role="button"
-                        aria-expanded="{{ request()->is('admin/mentor*', 'admin/writer*', 'admin/student*', 'admin/role*') ? 'true' : 'false' }}">
+                        aria-expanded="{{ request()->is('admin/writer*', 'admin/student*', 'admin/role*') ? 'true' : 'false' }}">
                         <i class="link-icon" data-feather="users"></i>
                         <span class="link-title">Manajemen Akun</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
-                    <div class="collapse {{ request()->is('admin/mentor*', 'admin/writer*', 'admin/student*', 'admin/role*') ? 'show' : '' }}"
+                    <div class="collapse {{ request()->is('admin/writer*', 'admin/student*', 'admin/role*') ? 'show' : '' }}"
                         id="account-management">
                         <ul class="nav sub-menu">
+                            @can('student-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.writer.index') }}"
+                                        class="nav-link {{ request()->is('admin/student*') ? ' active' : '' }}">
+                                        Writer
+                                    </a>
+                                </li>
+                            @endcan
+
                             @can('student-list')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.student.index') }}"

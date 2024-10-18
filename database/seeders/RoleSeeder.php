@@ -47,7 +47,6 @@ class RoleSeeder extends Seeder
             'student-edit',
             'student-delete',
 
-
             'article-management',
 
             'article-list',
@@ -68,7 +67,7 @@ class RoleSeeder extends Seeder
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
 
-        // $writer = Role::firstOrCreate(['name' => 'writer']);
+        $writer = Role::firstOrCreate(['name' => 'writer']);
 
         // $mentor = Role::firstOrCreate(['name' => 'mentor']);
 
@@ -109,6 +108,29 @@ class RoleSeeder extends Seeder
             'student-create',
             'student-edit',
             'student-delete',
+
+            'article-management',
+
+            'article-list',
+            'article-create',
+            'article-edit',
+            'article-delete',
+
+            'article-category-list',
+            'article-category-create',
+            'article-category-edit',
+            'article-category-delete',
+
+            'article-tag-list',
+            'article-tag-create',
+            'article-tag-edit',
+            'article-tag-delete',
+        ]);
+
+        $writer->syncPermissions([
+            'dashboard-view',
+
+            'dashboard-writer-view',
 
             'article-management',
 
