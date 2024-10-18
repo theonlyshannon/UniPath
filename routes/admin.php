@@ -20,4 +20,5 @@ Route::resource('role', App\Http\Controllers\Web\Admin\RoleController::class);
 Route::resource('permission', App\Http\Controllers\Web\Admin\PermissionController::class);
 Route::resource('article-category', App\Http\Controllers\Web\Admin\ArticleCategoryController::class);
 Route::resource('article-tag', App\Http\Controllers\Web\Admin\ArticleTagController::class);
+Route::resource('article-tag', App\Http\Controllers\Web\Admin\ArticleController::class);
 

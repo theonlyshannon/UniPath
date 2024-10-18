@@ -21,6 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
     $this->app->bind(\App\Interfaces\PermissionRepositoryInterface::class, \App\Repositories\PermissionRepository::class);
     $this->app->bind(\App\Interfaces\ArticleCategoryRepositoryInterface::class, \App\Repositories\ArticleCategoryRepository::class);
     $this->app->bind(\App\Interfaces\ArticleTagRepositoryInterface::class, \App\Repositories\ArticleTagRepository::class);
+    $this->app->bind(\App\Interfaces\ArticleRepositoryInterface::class, \App\Repositories\ArticleRepository::class);
     }
 
 
