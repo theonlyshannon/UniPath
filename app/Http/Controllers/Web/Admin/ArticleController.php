@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\ArticleStoreRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 use App\Interfaces\ArticleCategoryRepositoryInterface;
 use App\Interfaces\ArticleRepositoryInterface;
 use App\Interfaces\ArticleTagRepositoryInterface;
@@ -54,7 +55,7 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ArticleRequest $request)
+    public function store(ArticleStoreRequest $request)
     {
         $data = $request->validated();
 
@@ -98,7 +99,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleRequest $request, string $id)
+    public function update(ArticleUpdateRequest $request, string $id)
     {
         $data = $request->validated();
 

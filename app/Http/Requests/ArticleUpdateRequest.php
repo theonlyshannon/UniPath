@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleRequest extends FormRequest
+class ArticleUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,13 +16,13 @@ class ArticleRequest extends FormRequest
         return [
             'writer_id' => 'required|exists:writers,id',
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:articles,slug,'.$this->route('article'),
+            'slug' => 'required|string|max:255|unique:articles,slug,' . $this->route('article'),
             'content' => 'required|string',
             'categories' => 'required|array',
             'categories.*' => 'exists:article_categories,id',
             'tags' => 'required|array',
             'tags.*' => 'exists:article_tags,id',
-            'thumbnail' => request()->isMethod('post') ? 'required|image|mimes:jpg,jpeg,png' : 'nullable|image|mimes:jpg,jpeg,png',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png', // Tidak lagi required, hanya nullable
         ];
     }
 
