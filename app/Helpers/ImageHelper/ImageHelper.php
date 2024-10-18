@@ -64,7 +64,7 @@ class ImageHelper
         }
 
         $text = $width.' x '.$height;
-        $font = __DIR__.'/fonts/arial/ARIAL.TTF';
+        $font = __DIR__.'/Font/Poppins/Poppins Light 300.ttf';
         $textBox = imagettfbbox($fontSize, 0, $font, $text);
         $textWidth = $textBox[2] - $textBox[0];
         $textHeight = $textBox[1] - $textBox[7];

@@ -19,6 +19,11 @@ class Article extends Model
         'writer_id'
     ];
 
+    public function writer()
+    {
+        return $this->belongsTo(Writer::class);
+    }
+
     public function categories()
     {
         return $this->belongsToMany(ArticleCategory::class, 'article_category_pivot');

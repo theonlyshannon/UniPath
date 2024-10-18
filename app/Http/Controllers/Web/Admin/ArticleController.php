@@ -122,6 +122,14 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $this->articleRepository->deleteArticle($id);
+
+            Swal::toast('Article berhasil dihapus', 'success');
+        } catch (\Exception $e) {
+            Swal::toast('Article gagal dihapus', 'error');
+        }
+
+        return redirect()->route('admin.article.index');
     }
 }

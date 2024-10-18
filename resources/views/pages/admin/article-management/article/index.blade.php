@@ -67,6 +67,7 @@
                                             Hapus
                                         </x-ui.base-button>
                                     </form>
+
                                 </td>
                             </tr>
                         @endforeach
