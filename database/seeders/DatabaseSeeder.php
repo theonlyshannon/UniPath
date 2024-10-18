@@ -12,9 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $env = config('app.env');
+
         $this->call([
             RoleSeeder::class,
             AccountSeeder::class,
         ]);
+
+        if ($env === 'local') {
+            $this->call([
+                ArticleTagSeeder::class,
+                ArticleCategorySeeder::class,
+            ]);
+        }
+
     }
 }

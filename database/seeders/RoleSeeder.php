@@ -60,6 +60,10 @@ class RoleSeeder extends Seeder
             'article-category-edit',
             'article-category-delete',
 
+            'article-tag-list',
+            'article-tag-create',
+            'article-tag-edit',
+            'article-tag-delete',
         ];
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -117,6 +121,11 @@ class RoleSeeder extends Seeder
             'article-category-create',
             'article-category-edit',
             'article-category-delete',
+
+            'article-tag-list',
+            'article-tag-create',
+            'article-tag-edit',
+            'article-tag-delete',
         ]);
 
         $student->syncPermissions([

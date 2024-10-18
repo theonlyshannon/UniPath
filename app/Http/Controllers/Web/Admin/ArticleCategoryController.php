@@ -17,10 +17,10 @@ class ArticleCategoryController extends Controller
     {
         $this->articleCategoryRepository = $articleCategoryRepository;
 
-        // $this->middleware(['permission:article-category-list|article-category-create|article-category-edit|article-category-delete'], ['only' => ['index', 'store']]);
-        // $this->middleware(['permission:article-category-create'], ['only' => ['create', 'store']]);
-        // $this->middleware(['permission:article-category-edit'], ['only' => ['edit', 'update']]);
-        // $this->middleware(['permission:article-category-delete'], ['only' => ['destroy']]);
+        $this->middleware(['permission:article-category-list|article-category-create|article-category-edit|article-category-delete'], ['only' => ['index', 'store']]);
+        $this->middleware(['permission:article-category-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:article-category-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['permission:article-category-delete'], ['only' => ['destroy']]);
     }
 
     /**
