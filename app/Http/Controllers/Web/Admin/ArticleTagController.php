@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ArticleTagRequest;
+use App\Http\Requests\ArticleTagStoreRequest;
+use App\Http\Requests\ArticleTagUpdateRequest;
 use App\Interfaces\ArticleTagRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 
@@ -42,7 +43,7 @@ class ArticleTagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ArticleTagRequest $request)
+    public function store(ArticleTagStoreRequest $request)
     {
         $data = $request->validated();
 
@@ -74,13 +75,13 @@ class ArticleTagController extends Controller
     {
         $tag = $this->articleTagRepository->getArticleTagById($id);
 
-        return view('pages.admin.article-managements.tag.edit', compact('tag'));
+        return view('pages.admin.article-management.tag.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleTagRequest $request, string $id)
+    public function update(ArticleTagUpdateRequest $request, string $id)
     {
         $data = $request->validated();
 

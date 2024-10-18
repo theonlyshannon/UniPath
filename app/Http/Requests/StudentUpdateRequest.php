@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudentRequest extends FormRequest
+class StudentUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,14 +15,19 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $this->route('student'),
+            'password' => 'nullable|string',
             'gender' => 'required|string',
             'phone' => 'required|string',
             'city' => 'required|string',
         ];
     }
 
+    /**
+     * Get the validation attributes that apply to the request.
+     *
+     * @return array<string, string>
+     */
     public function attributes(): array
     {
         return [
@@ -35,6 +40,11 @@ class StoreStudentRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array<string, string>
+     */
     public function messages(): array
     {
         return [

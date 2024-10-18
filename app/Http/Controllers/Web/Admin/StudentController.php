@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
+use App\Http\Requests\StudentStoreRequest;
+use App\Http\Requests\StudentUpdateRequest;
 use App\Interfaces\StudentRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class StudentController extends Controller
         $this->StudentRepository = $StudentRepository;
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $students = $this->StudentRepository->getAllStudent();
         return view('pages.admin.account-management.student.index', compact('students'));
@@ -29,7 +29,7 @@ class StudentController extends Controller
         return view('pages.admin.account-management.student.create');
     }
 
-    public function store(StoreStudentRequest $request)
+    public function store(StudentStoreRequest $request)
     {
         $request->validated();
 
@@ -52,27 +52,34 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = $this->StudentRepository->getStudentById($id);
+
         return view('pages.admin.account-management.student.show', compact('student'));
     }
 
     public function edit($id)
     {
         $student = $this->StudentRepository->getStudentById($id);
+
         return view('pages.admin.account-management.student.edit', compact('student'));
     }
 
-    public function update(StoreStudentRequest $request, $id)
+    public function update(StudentUpdateRequest $request, $id)
     {
         $data = $request->validated();
+
         $this->StudentRepository->updateStudent($data, $id);
+
         Swal::toast('Student updated successfully!', 'success')->timerProgressBar();
+
         return redirect()->route('admin.student.index');
     }
 
     public function destroy($id)
     {
         $this->StudentRepository->deleteStudent($id);
+
         Swal::toast('Student deleted successfully!', 'success')->timerProgressBar();
+
         return redirect()->route('admin.student.index');
     }
 }

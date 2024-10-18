@@ -36,7 +36,7 @@ class ArticleController extends Controller
         $articles = $this->articleRepository->getAllArticle();
         $writers = $this->writerRepository->getAllWriter();
 
-        return view('pages.admin.article-managements.article.index', compact('articles', 'writers'));
+        return view('pages.admin.article-management.article.index', compact('articles', 'writers'));
     }
 
     /**
@@ -48,7 +48,7 @@ class ArticleController extends Controller
         $tags = $this->articleTagRepository->getAllArticleTag();
         $writers = $this->writerRepository->getAllWriter();
 
-        return view('pages.admin.article-managements.article.create', compact('categories', 'tags', 'writers'));
+        return view('pages.admin.article-management.article.create', compact('categories', 'tags', 'writers'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ArticleController extends Controller
     {
         $article = $this->articleRepository->getArticleById($id);
 
-        return view('pages.admin.article-managements.article.show', compact('article'));
+        return view('pages.admin.article-management.article.show', compact('article'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ArticleController extends Controller
         $tags = $this->articleTagRepository->getAllArticleTag();
         $writers = $this->writerRepository->getAllWriter();
 
-        return view('pages.admin.article-managements.article.edit', compact('article', 'categories', 'tags', 'writers'));
+        return view('pages.admin.article-management.article.edit', compact('article', 'categories', 'tags', 'writers'));
     }
 
     /**
@@ -125,4 +125,3 @@ class ArticleController extends Controller
         //
     }
 }
-    

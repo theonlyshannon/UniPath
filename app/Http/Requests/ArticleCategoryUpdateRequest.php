@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleCategoryRequest extends FormRequest
+class ArticleCategoryUpdateRequest extends FormRequest
 {
-     /**
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -15,8 +15,21 @@ class ArticleCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:article_tags,slug,'.$this->route('article_tag'),
+            'slug' => 'nullable|string|max:255|unique:article_categories,slug,'.$this->route('article_category'),
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            // Set slug to null if it's an empty string
+            'slug' => $this->input('slug') === '' ? null : $this->input('slug'),
+        ]);
     }
 
     /**
@@ -27,7 +40,7 @@ class ArticleCategoryRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Nama Tag',
+            'name' => 'Nama Kategori',
             'slug' => 'Slug',
         ];
     }

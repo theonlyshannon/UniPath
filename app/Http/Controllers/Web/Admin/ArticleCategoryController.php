@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ArticleCategoryRequest;
+use App\Http\Requests\ArticleCategoryStoreRequest;
+use App\Http\Requests\ArticleCategoryUpdateRequest;
 use App\Interfaces\ArticleCategoryRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 
@@ -44,7 +44,7 @@ class ArticleCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ArticleCategoryRequest $request)
+    public function store(ArticleCategoryStoreRequest $request)
     {
         $data = $request->validated();
 
@@ -80,7 +80,7 @@ class ArticleCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleCategoryRequest $request, string $id)
+    public function update(ArticleCategoryUpdateRequest $request, string $id)
     {
         $data = $request->validated();
 

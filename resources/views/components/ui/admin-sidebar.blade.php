@@ -99,6 +99,15 @@
                                     </a>
                                 </li>
                             @endcan
+
+                            @can('article-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.article.index') }}"
+                                        class="nav-link {{ request()->is('admin/tag*') ? ' active' : '' }}">
+                                        Artikel
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>
