@@ -38,12 +38,12 @@ class AuthRepository implements AuthRepositoryInterface
         $password = $data['password'];
 
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
-            if (auth()->user()->hasRole('admin')) {
+            if (!auth()->user()->hasRole('student')) {
                 return redirect()->route('admin.dashboard');
             }
         }
 
-        Swal::toast('Email atau password salah', 'error')->timerProgressBar();
+        Swal::toast('Email atau passwor d salah', 'error')->timerProgressBar();
 
         return redirect()->back();
     }

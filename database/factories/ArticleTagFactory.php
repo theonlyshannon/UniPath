@@ -17,20 +17,20 @@ class ArticleTagFactory extends Factory
     public function definition(): array
     {
         $articleTags = [
-            'Technology',
-            'Programming',
-            'Web Development',
-            'Mobile Development',
-            'Desktop Development',
-            'Game Development',
-            'Software Development',
-            'Database',
-            'Cloud Computing',
-            'DevOps',
-            'Cybersecurity',
-            'Machine Learning',
-            'Artificial Intelligence',
-            'Internet of Things',
+            'Universitas',
+            'Beasiswa',
+            'Jurusan',
+            'Tips',
+            'SBMPTN',
+            'Luar Negeri',
+            'Terbaik',
+            'Persiapan',
+            'Wawancara',
+            'Menulis Esai',
+            'Studi',
+            'Double Degree',
+            'Portofolio',
+            'Karir',
         ];
 
         return [
