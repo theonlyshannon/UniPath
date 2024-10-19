@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [App\Http\Controllers\Web\Admin\DashboardController::class, 'index'])->name('dashboard');
 
+Route::resource('mentor', App\Http\Controllers\Web\Admin\MentorController::class);
 Route::resource('student', App\Http\Controllers\Web\Admin\studentController::class);
 Route::resource('writer', App\Http\Controllers\Web\Admin\WriterController::class);
 Route::resource('role', App\Http\Controllers\Web\Admin\RoleController::class);

@@ -102,7 +102,7 @@ class MentorRepository implements MentorRepositoryInterface
             'gender' => $data['gender'],
             'phone' => $data['phone'],
             'city' => $data['city'],
-            'specialization' => $data['specialization'],
+            'degree' => $data['degree'],
             'bio' => $data['bio'],
         ]);
     }
@@ -116,7 +116,7 @@ class MentorRepository implements MentorRepositoryInterface
             'gender' => $data['gender'],
             'phone' => $data['phone'],
             'city' => $data['city'],
-            'specialization' => $data['specialization'],
+            'degree' => $data['degree'],
             'bio' => $data['bio'],
         ]);
     }

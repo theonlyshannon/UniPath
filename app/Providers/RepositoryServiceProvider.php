@@ -17,6 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
 
     $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+    $this->app->bind(\App\Interfaces\MentorRepositoryInterface::class, \App\Repositories\MentorRepository::class);
     $this->app->bind(\App\Interfaces\StudentRepositoryInterface::class, \App\Repositories\StudentRepository::class);
     $this->app->bind(\App\Interfaces\WriterRepositoryInterface::class, \App\Repositories\WriterRepository::class);
     $this->app->bind(\App\Interfaces\RoleRepositoryInterface::class, \App\Repositories\RoleRepository::class);

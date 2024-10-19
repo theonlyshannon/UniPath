@@ -69,7 +69,7 @@ class RoleSeeder extends Seeder
 
         $writer = Role::firstOrCreate(['name' => 'writer']);
 
-        // $mentor = Role::firstOrCreate(['name' => 'mentor']);
+        $mentor = Role::firstOrCreate(['name' => 'mentor']);
 
         $student = Role::firstOrCreate(['name' => 'student']);
 

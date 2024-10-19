@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('phone');
             $table->string('city');
-            $table->string('specialization');
+            $table->string('degree');
             $table->text('bio');
 
             $table->softDeletes();

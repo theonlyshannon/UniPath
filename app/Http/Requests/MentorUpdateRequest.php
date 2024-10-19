@@ -16,12 +16,12 @@ class MentorUpdateRequest extends FormRequest
         return [
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email ' . request()->route('mentor'),
+            'email' => 'nullable|email|unique:users,email,' . request()->route('mentor'),
             'password' => 'nullable|string',
             'gender' => 'required|string',
             'phone' => ['required', 'string', 'regex:/^62[0-9]{9,12}$/'],
             'city' => 'required|string',
-            'specialization' => 'required|string',
+            'degree' => 'required|string',
             'bio' => 'required|string',
         ];
     }
@@ -38,7 +38,7 @@ class MentorUpdateRequest extends FormRequest
             'name' => 'Nama Lengkap',
             'email' => 'Email',
             'password' => 'Password',
-            'specialization' => 'Specialisasi',
+            'degree' => 'Gelar',
             'gender' => 'Jenis Kelamin',
             'phone' => 'No. Handphone',
             'city' => 'Kota',

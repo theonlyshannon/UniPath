@@ -19,7 +19,7 @@ class Mentor extends Model
         'gender',
         'phone',
         'city',
-        'specialization',
+        'degree',
         'bio',
     ];
 

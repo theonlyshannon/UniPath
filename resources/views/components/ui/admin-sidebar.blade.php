@@ -19,18 +19,28 @@
 
             @can('account-management')
                 <li
-                    class="nav-item {{ request()->is('admin/writer*', 'admin/student*', 'admin/role*', 'admin/permission*') ? ' active' : '' }}">
+                    class="nav-item {{ request()->is('admin/mentor*', 'admin/writer*', 'admin/student*', 'admin/role*', 'admin/permission*') ? ' active' : '' }}">
                     <a class="nav-link" data-bs-toggle="collapse" href="#account-management" role="button"
-                        aria-expanded="{{ request()->is('admin/writer*', 'admin/student*', 'admin/role*', 'admin/permission*') ? 'true' : 'false' }}">
+                        aria-expanded="{{ request()->is('admin/mentor*', 'admin/writer*', 'admin/student*', 'admin/role*', 'admin/permission*') ? 'true' : 'false' }}">
                         <i class="link-icon" data-feather="users"></i>
                         <span class="link-title">Manajemen Akun</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
-                    <div class="collapse {{ request()->is('admin/writer*', 'admin/student*', 'admin/role*', 'admin/permission*') ? 'show' : '' }}"
+                    <div class="collapse {{ request()->is('admin/mentor*', 'admin/writer*', 'admin/student*', 'admin/role*', 'admin/permission*') ? 'show' : '' }}"
                         id="account-management">
                         <ul class="nav sub-menu">
 
-                            @can('student-list')
+                            @can('mentor-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.mentor.index') }}"
+                                        class="nav-link {{ request()->is('admin/mentor*') ? ' active' : '' }}">
+                                        Mentor
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('writer-list')
+                                <!-- Diganti dari 'student-list' ke 'writer-list' untuk konsistensi -->
                                 <li class="nav-item">
                                     <a href="{{ route('admin.writer.index') }}"
                                         class="nav-link {{ request()->is('admin/writer*') ? ' active' : '' }}">

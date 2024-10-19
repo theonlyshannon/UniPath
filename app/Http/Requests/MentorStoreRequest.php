@@ -22,7 +22,7 @@ class MentorStoreRequest extends FormRequest
             'gender' => 'required|string',
             'phone' => ['required', 'string', 'regex:/^62[0-9]{9,12}$/'],
             'city' => 'required|string',
-            'specialization' => 'required|string',
+            'degree' => 'required|string',
             'bio' => 'required|string',
         ];
     }
@@ -39,7 +39,7 @@ class MentorStoreRequest extends FormRequest
             'name' => 'Nama Lengkap',
             'email' => 'Email',
             'password' => 'Password',
-            'specialization' => 'Specialisasi',
+            'degree' => 'Gelar',
             'gender' => 'Jenis Kelamin',
             'phone' => 'No. Handphone',
             'city' => 'Kota',
