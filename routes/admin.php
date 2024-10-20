@@ -28,4 +28,6 @@ Route::resource('article', App\Http\Controllers\Web\Admin\ArticleController::cla
 Route::resource('university', App\Http\Controllers\Web\Admin\UniversityController::class);
 Route::resource('faculty', App\Http\Controllers\Web\Admin\FacultyController::class);
 
+Route::resource('course-category', App\Http\Controllers\Web\Admin\CourseCategoryController::class);
+
 

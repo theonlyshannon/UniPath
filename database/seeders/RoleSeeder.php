@@ -75,6 +75,18 @@ class RoleSeeder extends Seeder
             'faculty-create',
             'faculty-edit',
             'faculty-delete',
+
+            'course-management',
+
+            'course-category-list',
+            'course-category-create',
+            'course-category-edit',
+            'course-category-delete',
+
+            'course-list',
+            'course-create',
+            'course-edit',
+            'course-delete',
         ];
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -149,6 +161,18 @@ class RoleSeeder extends Seeder
             'faculty-create',
             'faculty-edit',
             'faculty-delete',
+
+            'course-management',
+
+            'course-category-list',
+            'course-category-create',
+            'course-category-edit',
+            'course-category-delete',
+
+            'course-list',
+            'course-create',
+            'course-edit',
+            'course-delete',
         ]);
 
         $writer->syncPermissions([

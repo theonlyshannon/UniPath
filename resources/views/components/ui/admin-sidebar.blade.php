@@ -115,6 +115,33 @@
                 </li>
             @endcan
 
+            @can('course-management')
+                <li class="nav-item {{ request()->is('admin/course*', 'admin/class*') ? ' active' : '' }}">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#course-management" role="button"
+                        aria-expanded="{{ request()->is('admin/course*', 'admin/class*') ? 'true' : 'false' }}">
+                        <i class="link-icon" data-feather="layers"></i>
+                        <span class="link-title">Manajemen Kelas</span>
+                        <i class="link-arrow" data-feather="chevron-down"></i>
+                    </a>
+                    <div class="collapse {{ request()->is('admin/course*', 'admin/class*') ? 'show' : '' }}"
+                        id="course-management">
+                        <ul class="nav sub-menu">
+
+                            @can('course-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.course-category.index') }}"
+                                        class="nav-link {{ request()->is('admin/course*') ? ' active' : '' }}">
+                                        Kategori Kelas
+                                    </a>
+                                </li>
+                            @endcan
+
+                        </ul>
+                    </div>
+                </li>
+            @endcan
+
+
             @can('article-management')
                 <li
                     class="nav-item {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? ' active' : '' }}">

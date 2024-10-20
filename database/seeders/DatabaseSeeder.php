@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
                 ArticleSeeder::class,
 
                 UniversitySeeder::class,
-                FacultySeeder::class
+                FacultySeeder::class,
+                CourseCategorySeeder::class
             ]);
         }
 
