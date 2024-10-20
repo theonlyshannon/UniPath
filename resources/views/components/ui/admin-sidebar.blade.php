@@ -85,8 +85,8 @@
                 <li class="nav-item {{ request()->is('admin/university*', 'admin/faculty*') ? ' active' : '' }}">
                     <a class="nav-link" data-bs-toggle="collapse" href="#university-management" role="button"
                         aria-expanded="{{ request()->is('admin/university*', 'admin/faculty*') ? 'true' : 'false' }}">
-                        <i class="link-icon" data-feather="file-text"></i>
-                        <span class="link-title">Manajemen Universitas</span>
+                        <i class="link-icon" data-feather="book"></i>
+                        <span class="link-title">Manajemen University</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
                     <div class="collapse {{ request()->is('admin/university*', 'admin/faculty*') ? 'show' : '' }}"
@@ -102,14 +102,14 @@
                                 </li>
                             @endcan
 
-                            {{-- @can('faculty-list')
+                            @can('faculty-list')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.faculty.index') }}"
                                         class="nav-link {{ request()->is('admin/faculty*') ? ' active' : '' }}">
                                         Fakultas
                                     </a>
                                 </li>
-                            @endcan --}}
+                            @endcan
                         </ul>
                     </div>
                 </li>
