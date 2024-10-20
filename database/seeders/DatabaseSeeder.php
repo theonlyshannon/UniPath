@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder
                 WriterSeeder::class,
                 ArticleTagSeeder::class,
                 ArticleCategorySeeder::class,
-                ArticleSeeder::class
+                ArticleSeeder::class,
+
+                UniversitySeeder::class,
+                FacultySeeder::class
             ]);
         }
 
