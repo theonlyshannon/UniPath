@@ -81,49 +81,83 @@
                 </li>
             @endcan
 
+            @can('university-management')
+                <li class="nav-item {{ request()->is('admin/university*', 'admin/faculty*') ? ' active' : '' }}">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#university-management" role="button"
+                        aria-expanded="{{ request()->is('admin/university*', 'admin/faculty*') ? 'true' : 'false' }}">
+                        <i class="link-icon" data-feather="file-text"></i>
+                        <span class="link-title">Manajemen Universitas</span>
+                        <i class="link-arrow" data-feather="chevron-down"></i>
+                    </a>
+                    <div class="collapse {{ request()->is('admin/university*', 'admin/faculty*') ? 'show' : '' }}"
+                        id="university-management">
+                        <ul class="nav sub-menu">
 
-            <li
-                class="nav-item {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? ' active' : '' }}">
-                <a class="nav-link" data-bs-toggle="collapse" href="#article-management" role="button"
-                    aria-expanded="{{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? 'true' : 'false' }}">
-                    <i class="link-icon" data-feather="file-text"></i>
-                    <span class="link-title">Manajemen Artikel</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                </a>
-                <div class="collapse {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? 'show' : '' }}"
-                    id="article-management">
-                    <ul class="nav sub-menu">
+                            @can('university-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.university.index') }}"
+                                        class="nav-link {{ request()->is('admin/university*') ? ' active' : '' }}">
+                                        Universitas
+                                    </a>
+                                </li>
+                            @endcan
 
-                        @can('article-category-list')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.article-category.index') }}"
-                                    class="nav-link {{ request()->is('admin/article-category*') ? ' active' : '' }}">
-                                    Kategori Artikel
-                                </a>
-                            </li>
-                        @endcan
+                            {{-- @can('faculty-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.faculty.index') }}"
+                                        class="nav-link {{ request()->is('admin/faculty*') ? ' active' : '' }}">
+                                        Fakultas
+                                    </a>
+                                </li>
+                            @endcan --}}
+                        </ul>
+                    </div>
+                </li>
+            @endcan
 
-                        @can('article-tag-list')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.article-tag.index') }}"
-                                    class="nav-link {{ request()->is('admin/article-tag*') ? ' active' : '' }}">
-                                    Tag Artikel
-                                </a>
-                            </li>
-                        @endcan
+            @can('article-management')
+                <li
+                    class="nav-item {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? ' active' : '' }}">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#article-management" role="button"
+                        aria-expanded="{{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? 'true' : 'false' }}">
+                        <i class="link-icon" data-feather="file-text"></i>
+                        <span class="link-title">Manajemen Artikel</span>
+                        <i class="link-arrow" data-feather="chevron-down"></i>
+                    </a>
+                    <div class="collapse {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? 'show' : '' }}"
+                        id="article-management">
+                        <ul class="nav sub-menu">
 
-                        @can('article-list')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.article.index') }}"
-                                    class="nav-link {{ request()->is('admin/article*') && !request()->is('admin/article-tag') && !request()->is('admin/article-category') ? ' active' : '' }}">
-                                    Artikel
-                                </a>
-                            </li>
-                        @endcan
-                    </ul>
-                </div>
-            </li>
+                            @can('article-category-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.article-category.index') }}"
+                                        class="nav-link {{ request()->is('admin/article-category*') ? ' active' : '' }}">
+                                        Kategori Artikel
+                                    </a>
+                                </li>
+                            @endcan
 
+                            @can('article-tag-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.article-tag.index') }}"
+                                        class="nav-link {{ request()->is('admin/article-tag*') ? ' active' : '' }}">
+                                        Tag Artikel
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('article-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.article.index') }}"
+                                        class="nav-link {{ request()->is('admin/article*') && !request()->is('admin/article-tag') && !request()->is('admin/article-category') ? ' active' : '' }}">
+                                        Artikel
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+            @endcan
         </ul>
     </div>
 </nav>

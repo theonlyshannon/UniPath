@@ -24,4 +24,6 @@ Route::resource('article-category', App\Http\Controllers\Web\Admin\ArticleCatego
 Route::resource('article-tag', App\Http\Controllers\Web\Admin\ArticleTagController::class);
 Route::resource('article', App\Http\Controllers\Web\Admin\ArticleController::class);
 
+Route::resource('university', App\Http\Controllers\Web\Admin\UniversityController::class);
+
 

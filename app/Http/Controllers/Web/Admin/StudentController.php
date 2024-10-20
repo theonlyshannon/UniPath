@@ -21,6 +21,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = $this->StudentRepository->getAllStudent();
+        
         return view('pages.admin.account-management.student.index', compact('students'));
     }
 

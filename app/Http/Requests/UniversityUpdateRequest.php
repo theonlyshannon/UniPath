@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleCategoryStoreRequest extends FormRequest
+class UniversityUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,7 +15,7 @@ class ArticleCategoryStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:article_tags,slug,' . $this->route('article_tag'),
+            'slug' => 'required|string|max:255|unique:universities,slug,'.$this->route('university'),
         ];
     }
 
@@ -27,8 +27,8 @@ class ArticleCategoryStoreRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Nama Tag',
-            'slug' => 'Slug',
+            'name' => 'Nama Universitas',
+            'slug' => 'Slug'
         ];
     }
 
