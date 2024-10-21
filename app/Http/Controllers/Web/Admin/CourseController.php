@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseStoreRequest;
+use App\Http\Requests\CourseUpdateRequest;
 use App\Interfaces\CourseRepositoryInterface;
 use App\Interfaces\MentorRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
@@ -47,7 +48,7 @@ class CourseController extends Controller
         $mentors = $this->mentorRepository->getAllMentor();
         $categories = $this->courseCategoryRepository->getAllCourseCategory();
 
-        return view('pages.admin.course-management.course.create', compact('mentors', 'category'));
+        return view('pages.admin.course-management.course.create', compact('mentors', 'categories'));
     }
 
     /**
@@ -87,18 +88,32 @@ class CourseController extends Controller
     {
         $course = $this->courseRepository->getCourseById($id);
 
-        $mentors = $this->mentorRepository->getAllMentor();
-        $categories = $this->courseCategoryRepository->getAllCourseCategory();
+        $mentor = $this->mentorRepository->getAllMentor();
+        $category = $this->courseCategoryRepository->getAllCourseCategory();
 
-        return view('pages.admin.course-managements.course.edit', compact('course', 'mentors', 'category'));
+        return view('pages.admin.course-management.course.edit', compact('course', 'mentor', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CourseUpdateRequest $request, string $id)
     {
-        //
+        $data = $request->all();
+
+        if ($request->hasFile('thumbnail')) {
+            $data['thumbnail'] = $request->file('thumbnail')->storeAs('assets/images/course/thumbnail', Str::random(40) . '.' . $request->file('thumbnail')->extension(), 'public');
+        }
+
+        try {
+            $this->courseRepository->updateCourse($data, $id);
+
+            Swal::toast('Course berhasil diupdate', 'success');
+        } catch (\Exception $e) {
+            Swal::toast('Course gagal diupdate', 'error');
+        }
+
+        return redirect()->route('admin.course.index');
     }
 
     /**
@@ -106,6 +121,14 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $this->courseRepository->deleteCourse($id);
+
+            Swal::toast('Course berhasil dihapus', 'success');
+        } catch (\Exception $e) {
+            Swal::toast('Course gagal dihapus', 'error');
+        }
+
+        return redirect()->route('admin.course.index');
     }
 }

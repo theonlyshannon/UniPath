@@ -23,7 +23,7 @@
                             <th>Thumbnail</th>
                             <th>Trailer</th>
                             <th>Aktif</th>
-                            <th>Kelas Populer</th>
+                            <th>Kelas Favorite</th>
                             <th>Aksi</th>
                         </tr>
                     </x-slot>
@@ -35,7 +35,7 @@
                                 <td>{{ $course->title }}</td>
                                 <td>{{ $course->slug }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}" width="100">
+                                    <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}" width="500">
                                 </td>
                                 <td>
                                     @if ($course->trailer)
