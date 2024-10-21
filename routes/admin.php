@@ -1,6 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Admin\MentorController;
+use App\Http\Controllers\Web\Admin\studentController;
+use App\Http\Controllers\Web\Admin\WriterController;
+use App\Http\Controllers\Web\Admin\RoleController;
+use App\Http\Controllers\Web\Admin\PermissionController;
+use App\Http\Controllers\Web\Admin\ArticleCategoryController;
+use App\Http\Controllers\Web\Admin\ArticleTagController;
+use App\Http\Controllers\Web\Admin\ArticleController;
+use App\Http\Controllers\Web\Admin\UniversityController;
+use App\Http\Controllers\Web\Admin\FacultyController;
+use App\Http\Controllers\Web\Admin\CourseCategoryController;
+use App\Http\Controllers\Web\Admin\CourseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,19 +28,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [App\Http\Controllers\Web\Admin\DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('mentor', App\Http\Controllers\Web\Admin\MentorController::class);
-Route::resource('student', App\Http\Controllers\Web\Admin\studentController::class);
-Route::resource('writer', App\Http\Controllers\Web\Admin\WriterController::class);
-Route::resource('role', App\Http\Controllers\Web\Admin\RoleController::class);
-Route::resource('permission', App\Http\Controllers\Web\Admin\PermissionController::class);
+Route::resource('mentor', MentorController::class);
+Route::resource('student', studentController::class);
+Route::resource('writer', WriterController::class);
+Route::resource('role', RoleController::class);
+Route::resource('permission', PermissionController::class);
 
-Route::resource('article-category', App\Http\Controllers\Web\Admin\ArticleCategoryController::class);
-Route::resource('article-tag', App\Http\Controllers\Web\Admin\ArticleTagController::class);
-Route::resource('article', App\Http\Controllers\Web\Admin\ArticleController::class);
+Route::resource('article-category', ArticleCategoryController::class);
+Route::resource('article-tag', ArticleTagController::class);
+Route::resource('article', ArticleController::class);
 
-Route::resource('university', App\Http\Controllers\Web\Admin\UniversityController::class);
-Route::resource('faculty', App\Http\Controllers\Web\Admin\FacultyController::class);
+Route::resource('university', UniversityController::class);
+Route::resource('faculty', FacultyController::class);
 
-Route::resource('course-category', App\Http\Controllers\Web\Admin\CourseCategoryController::class);
+Route::resource('course-category', CourseCategoryController::class);
+Route::resource('course', CourseController::class);
 
 
