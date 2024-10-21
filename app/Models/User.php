@@ -45,6 +45,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function chatLogs()
+    {
+        return $this->hasMany(ChatLogs::class);
+    }
+
+    public function interests()
+    {
+        return $this->hasMany(UserInterest::class);
+    }
+
     public function student()
     {
         return $this->hasOne(Student::class);

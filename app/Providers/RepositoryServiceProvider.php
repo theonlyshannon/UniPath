@@ -5,6 +5,11 @@ namespace App\Providers;
 use App\Interfaces\AuthRepositoryInterface;
 use App\Repositories\AuthRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\AIRepositoryInterface;
+use App\Repositories\AIRepository;
+use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\UserRepository;
+use App\Services\AIService;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -28,6 +33,12 @@ class RepositoryServiceProvider extends ServiceProvider
     $this->app->bind(\App\Interfaces\UniversityRepositoryInterface::class, \App\Repositories\UniversityRepository::class);
     $this->app->bind(\App\Interfaces\FacultyRepositoryInterface::class, \App\Repositories\FacultyRepository::class);
     $this->app->bind(\App\Interfaces\CourseCategoryRepositoryInterface::class, \App\Repositories\CourseCategoryRepository::class);
+    $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+    $this->app->bind(AIRepositoryInterface::class, AIRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
+
 
     }
 

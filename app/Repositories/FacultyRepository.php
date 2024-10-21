@@ -7,6 +7,11 @@ use App\Models\Faculty;
 
 class FacultyRepository implements FacultyRepositoryInterface
 {
+    public function find(string $id): ?Faculty
+    {
+        return Faculty::with('interests')->find($id);
+    }
+    
     public function getAllFaculty()
     {
         return Faculty::all();

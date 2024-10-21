@@ -2,28 +2,22 @@
 
 namespace App\Models;
 
-use App\Traits\UUID;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\UUID;
 
-class Faculty extends Model
+class UniversityInterest extends Model
 {
     use HasFactory, UUID, SoftDeletes;
 
     protected $fillable = [
-        'name',
         'university_id',
-        'description',
+        'interest',
     ];
 
     public function university()
     {
         return $this->belongsTo(University::class);
-    }
-
-    public function interests()
-    {
-        return $this->hasMany(FacultyInterest::class);
     }
 }

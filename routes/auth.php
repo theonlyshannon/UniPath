@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Web\Admin\DashboardController;
+use App\Http\Controllers\Student\InterestController;
+use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
+use App\Http\Controllers\AIController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +25,16 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 });
+
+// Dashboard mahasiswa dan pemilihan minat
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('/student/select-interests', [InterestController::class, 'show'])->name('student.select-interests.show');
+    Route::post('/student/select-interests', [InterestController::class, 'store'])->name('student.select-interests');
+
+    // Route untuk chatbot
+    Route::get('/student/chatbot', [AIController::class, 'showChatbot'])->name('student.chatbot');
+    Route::post('/student/chat', [AIController::class, 'chat'])->name('student.chat');
+});
+
+
