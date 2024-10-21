@@ -13,6 +13,33 @@ class UniversitySeeder extends Seeder
      */
     public function run(): void
     {
-        University::factory()->count(15)->create();
+        $universities = [
+            'Universitas Indonesia',
+            'Universitas Gadjah Mada',
+            'Institut Teknologi Bandung',
+            'Universitas Airlangga',
+            'Universitas Padjadjaran',
+            'Universitas Diponegoro',
+            'Universitas Brawijaya',
+            'Universitas Sebelas Maret',
+            'Institut Pertanian Bogor',
+            'Universitas Hasanuddin',
+            'Universitas Sumatera Utara',
+            'Universitas Pendidikan Indonesia',
+            'Universitas Negeri Yogyakarta',
+            'Institut Teknologi Sepuluh Nopember',
+            'Universitas Udayana',
+            'Universitas Andalas',
+            'Universitas Jember',
+            'Universitas Syiah Kuala',
+            'Universitas Islam Indonesia',
+            'Universitas Riau'
+        ];
+
+        foreach ($universities as $university) {
+            University::factory()->create([
+                'name' => $university
+            ]);
+        }
     }
 }

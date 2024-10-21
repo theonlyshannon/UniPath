@@ -12,6 +12,33 @@ class ArticleCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        ArticleCategory::factory()->count(10)->create();
+        $articleCategories = [
+            'Panduan Universitas',
+            'Beasiswa',
+            'Jurusan Kuliah',
+            'Universitas Terbaik',
+            'Tips Ujian',
+            'Kuliah Luar',
+            'Wawancara Beasiswa',
+            'Studi Favorit',
+            'Simulasi SBMPTN',
+            'Esai Beasiswa',
+            'Karir Pendidikan',
+            'Portofolio Beasiswa',
+            'Kehidupan Kampus',
+            'Universitas Negeri',
+            'Pendaftaran Internasional',
+            'Kuliah Kerja',
+            'Persiapan Psikotes',
+            'Double Degree',
+            'Beasiswa Penuh',
+            'Rekomendasi Beasiswa',
+        ];
+
+        foreach ($articleCategories as $articleCategory) {
+            ArticleCategory::factory()->create([
+                'name' => $articleCategory
+            ]);
+        }
     }
 }

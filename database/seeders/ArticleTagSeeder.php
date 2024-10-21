@@ -12,6 +12,27 @@ class ArticleTagSeeder extends Seeder
      */
     public function run(): void
     {
-        ArticleTag::factory()->count(10)->create();
+        $articleTags = [
+            'Universitas',
+            'Beasiswa',
+            'Jurusan',
+            'Tips',
+            'SBMPTN',
+            'Luar Negeri',
+            'Terbaik',
+            'Persiapan',
+            'Wawancara',
+            'Menulis Esai',
+            'Studi',
+            'Double Degree',
+            'Portofolio',
+            'Karir',
+        ];
+
+        foreach ($articleTags as $articleTag) {
+            ArticleTag::factory()->create([
+                'name' => $articleTag
+            ]);
+        }
     }
 }

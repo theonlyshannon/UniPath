@@ -16,25 +16,8 @@ class ArticleTagFactory extends Factory
      */
     public function definition(): array
     {
-        $articleTags = [
-            'Universitas',
-            'Beasiswa',
-            'Jurusan',
-            'Tips',
-            'SBMPTN',
-            'Luar Negeri',
-            'Terbaik',
-            'Persiapan',
-            'Wawancara',
-            'Menulis Esai',
-            'Studi',
-            'Double Degree',
-            'Portofolio',
-            'Karir',
-        ];
-
         return [
-            'name' => $this->faker->unique()->randomElement($articleTags),
+            'name' => $this->faker->name(),
             'slug' => $this->faker->unique()->slug,
         ];
     }
