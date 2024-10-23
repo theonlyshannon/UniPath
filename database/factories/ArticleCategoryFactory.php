@@ -16,31 +16,8 @@ class ArticleCategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $articleCategories = [
-            'Panduan Universitas',
-            'Beasiswa',
-            'Jurusan Kuliah',
-            'Universitas Terbaik',
-            'Tips Ujian',
-            'Kuliah Luar',
-            'Wawancara Beasiswa',
-            'Studi Favorit',
-            'Simulasi SBMPTN',
-            'Esai Beasiswa',
-            'Karir Pendidikan',
-            'Portofolio Beasiswa',
-            'Kehidupan Kampus',
-            'Universitas Negeri',
-            'Pendaftaran Internasional',
-            'Kuliah Kerja',
-            'Persiapan Psikotes',
-            'Double Degree',
-            'Beasiswa Penuh',
-            'Rekomendasi Beasiswa',
-        ];
-
         return [
-            'name' => $this->faker->unique()->randomElement($articleCategories),
+            'name' => $this->faker->name(),
             'slug' => $this->faker->unique()->slug,
         ];
     }

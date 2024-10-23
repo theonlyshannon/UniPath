@@ -11,7 +11,7 @@ use App\Helpers\ImageHelper\ImageHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ArticleSeeder extends Seeder
-{   
+{
     /**
      * Run the database seeds.
      */

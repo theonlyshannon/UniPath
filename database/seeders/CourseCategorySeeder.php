@@ -13,6 +13,18 @@ class CourseCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        CourseCategory::factory()->count(5)->create();
+        $courseCategories = [
+            'Bahasa Indonesia',
+            'Bahasa Inggris',
+            'Matematika',
+            'Biollogi',
+            'Fisika',
+        ];
+
+        foreach ($courseCategories as $courseCategory) {
+            CourseCategory::factory()->create([
+                'name' => $courseCategory
+            ]);
+        }
     }
 }

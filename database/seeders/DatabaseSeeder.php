@@ -17,18 +17,22 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             AccountSeeder::class,
+            MentorSeeder::class,
+            WriterSeeder::class,
+            // StudentSeeder::class
         ]);
 
         if ($env === 'local') {
             $this->call([
-                WriterSeeder::class,
                 ArticleTagSeeder::class,
                 ArticleCategorySeeder::class,
                 ArticleSeeder::class,
 
                 UniversitySeeder::class,
                 FacultySeeder::class,
-                CourseCategorySeeder::class
+
+                CourseCategorySeeder::class,
+                CourseSeeder::class
             ]);
         }
 

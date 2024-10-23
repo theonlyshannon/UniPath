@@ -16,16 +16,8 @@ class CourseCategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $courseCategories = [
-            'Bahasa Indonesia',
-            'Bahasa Inggris',
-            'Matematika',
-            'Biollogi',
-            'Fisika',
-        ];
-
         return [
-            'name' => $this->faker->unique()->randomElement($courseCategories),
+            'name' => $this->faker->name(),
         ];
     }
 }
