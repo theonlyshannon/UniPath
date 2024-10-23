@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\ServiceProvider;
+
 /**
  *Interface Register
  *
@@ -19,6 +21,8 @@ use App\Interfaces\UniversityRepositoryInterface;
 use App\Interfaces\FacultyRepositoryInterface;
 use App\Interfaces\CourseCategoryRepositoryInterface;
 use App\Interfaces\CourseRepositoryInterface;
+use App\Interfaces\CourseSubjectRepositoryInterface;
+
 
 /**
  *Repository Register
@@ -37,8 +41,8 @@ use App\Repositories\UniversityRepository;
 use App\Repositories\FacultyRepository;
 use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
+use App\Repositories\CourseSubjectRepository;
 
-use Illuminate\Support\ServiceProvider;
 use App\Interfaces\AIRepositoryInterface;
 use App\Repositories\AIRepository;
 use App\Interfaces\UserRepositoryInterface;
@@ -71,6 +75,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AIRepositoryInterface::class, AIRepository::class);
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(CourseSubjectRepositoryInterface::class, CourseSubjectRepository::class);
     }
 
     /**
