@@ -9,18 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('faculties', function (Blueprint $table) {
+        Schema::create('user_interests', function (Blueprint $table) {
             $table->uuid('id')->primary(); // UUID sebagai primary key
-            $table->uuid('university_id'); // UUID sebagai foreign key
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->uuid('user_id'); // UUID sebagai foreign key
+            $table->string('interest');
             $table->softDeletes();
             $table->timestamps();
 
             // Definisikan foreign key
-            $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('faculties');
+        Schema::dropIfExists('user_interests');
     }
 };

@@ -7,6 +7,11 @@ use App\Models\University;
 
 class UniversityRepository implements UniversityRepositoryInterface
 {
+    public function find(string $id): ?University
+    {
+        return University::with('interests')->find($id);
+    }
+    
     public function getAllUniversity()
     {
         return University::all();

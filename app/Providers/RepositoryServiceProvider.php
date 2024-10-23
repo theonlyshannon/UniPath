@@ -39,6 +39,11 @@ use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
 
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\AIRepositoryInterface;
+use App\Repositories\AIRepository;
+use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\UserRepository;
+use App\Services\AIService;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -62,6 +67,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FacultyRepositoryInterface::class, FacultyRepository::class);
         $this->app->bind(CourseCategoryRepositoryInterface::class, CourseCategoryRepository::class);
         $this->app->bind(CourseRepositoryInterface::class, CourseRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(AIRepositoryInterface::class, AIRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**

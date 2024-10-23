@@ -30,12 +30,11 @@ class RegisterController extends Controller
 
         $data = $request->only('name', 'email', 'password', 'role');
 
-        $this->authRepository->register($data);
+        $user = $this->authRepository->register($data);
 
         Swal::toast('Registrasi berhasil', 'success')->timerProgressBar();
 
-        $this->authRepository->login($data);
-
-        return redirect()->route('home');
+        // Redirect ke halaman pemilihan minat
+        return redirect()->route('student.select-interests.show');
     }
 }

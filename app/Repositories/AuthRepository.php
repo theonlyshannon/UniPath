@@ -39,6 +39,9 @@ class AuthRepository implements AuthRepositoryInterface
 
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
             if (!auth()->user()->hasRole('student')) {
+                return redirect()->route('student.select-interests.show');
+            }
+            else {
                 return redirect()->route('admin.dashboard');
             }
         }

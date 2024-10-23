@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Faculty;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
+use App\Models\University;
 
 class FacultySeeder extends Seeder
 {
@@ -13,33 +15,30 @@ class FacultySeeder extends Seeder
      */
     public function run(): void
     {
+        $universities = University::all();
+
         $faculties = [
-            'Fakultas Kedokteran',
-            'Fakultas Hukum',
-            'Fakultas Ekonomi dan Bisnis',
             'Fakultas Teknik',
+            'Fakultas Ekonomi',
+            'Fakultas Hukum',
+            'Fakultas Kedokteran',
             'Fakultas Ilmu Sosial dan Ilmu Politik',
-            'Fakultas Ilmu Komputer',
-            'Fakultas Matematika dan Ilmu Pengetahuan Alam (MIPA)',
-            'Fakultas Farmasi',
-            'Fakultas Psikologi',
-            'Fakultas Kesehatan Masyarakat',
             'Fakultas Pertanian',
-            'Fakultas Teknik Sipil',
-            'Fakultas Teknik Elektro',
-            'Fakultas Teknik Mesin',
-            'Fakultas Ilmu Budaya',
-            'Fakultas Peternakan',
-            'Fakultas Kehutanan',
-            'Fakultas Perikanan dan Ilmu Kelautan',
-            'Fakultas Teknik Informatika',
-            'Fakultas Ilmu Pendidikan',
+            'Fakultas Ilmu Komputer',
+            'Fakultas Psikologi',
+            'Fakultas Pendidikan',
+            'Fakultas Seni dan Desain',
         ];
 
-        foreach ($faculties as $faculty) {
-            Faculty::factory()->create([
-                'name' => $faculty
-            ]);
+        foreach ($universities as $university) {
+            foreach ($faculties as $facultyName) {
+                Faculty::create([
+                    'id' => (string) Str::uuid(),
+                    'university_id' => $university->id,
+                    'name' => $facultyName,
+                    'description' => "Deskripsi untuk {$facultyName} di {$university->name}.",
+                ]);
+            }
         }
     }
 }

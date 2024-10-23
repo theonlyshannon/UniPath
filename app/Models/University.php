@@ -14,5 +14,17 @@ class University extends Model
     protected $fillable = [
         'name',
         'slug',
+        'location',
+        'description',
     ];
+
+    function faculties()
+    {
+        return $this->hasMany(Faculty::class);
+    }
+
+    function Interests()
+    {
+        return $this->hasMany(UniversityInterest::class);
+    }
 }

@@ -9,13 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('faculties', function (Blueprint $table) {
+        Schema::create('university_interests', function (Blueprint $table) {
             $table->uuid('id')->primary(); // UUID sebagai primary key
             $table->uuid('university_id'); // UUID sebagai foreign key
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('interest');
             $table->softDeletes();
             $table->timestamps();
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('faculties');
+        Schema::dropIfExists('university_interests');
     }
 };

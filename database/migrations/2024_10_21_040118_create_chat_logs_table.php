@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('universities', function (Blueprint $table) {
+        Schema::create('chat_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            $table->string('name');
-            $table->string('location');
-            $table->text('description')->nullable();
-
+            $table->uuid('user_id'); // Foreign key ke tabel users
+            $table->enum('sender', ['user', 'ai']); // Menandai pengirim pesan
+            $table->text('message');
+            // softdelete
             $table->softDeletes();
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('universities');
+        Schema::dropIfExists('chat_logs');
     }
 };
