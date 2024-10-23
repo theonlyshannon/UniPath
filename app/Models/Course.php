@@ -40,4 +40,9 @@ class Course extends Model
         return $this->belongsTo(CourseCategory::class);
     }
 
+    public function syllabus()
+    {
+        return $this->hasMany(CourseSyllabus::class);
+    }
+
 }

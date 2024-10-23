@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\Admin;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\CourseSyllabus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;
@@ -61,7 +62,12 @@ class CourseController extends Controller
         $data['thumbnail'] = $request->file('thumbnail')->storeAs('assets/images/course/thumbnail', Str::random(40) . '.' . $request->file('thumbnail')->extension(), 'public');
 
         try {
-            $this->courseRepository->createCourse($data);
+            $course = $this->courseRepository->createCourse($data);
+
+            foreach ($data['syllabus'] as $syllabus) {
+                $syllabus['course_id'] = $course->id;
+                CourseSyllabus::create($syllabus);
+            }
 
             Swal::toast('Course berhasil ditambahkan', 'success');
         } catch (\Exception $e) {
@@ -106,11 +112,18 @@ class CourseController extends Controller
         }
 
         try {
-            $this->courseRepository->updateCourse($data, $id);
+            $course = $this->courseRepository->updateCourse($data, $id);
 
-            Swal::toast('Course berhasil diupdate', 'success');
+            CourseSyllabus::where('course_id', $id)->delete();
+
+            foreach ($data['syllabus'] as $syllabus) {
+                $syllabus['course_id'] = $course->id;
+                CourseSyllabus::create($syllabus);
+            }
+
+            Swal::toast('Course berhasil diperbarui', 'success');
         } catch (\Exception $e) {
-            Swal::toast('Course gagal diupdate', 'error');
+            Swal::toast('Course gagal diperbarui', 'error');
         }
 
         return redirect()->route('admin.course.index');
