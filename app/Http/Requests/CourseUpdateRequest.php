@@ -23,10 +23,10 @@ class CourseUpdateRequest extends FormRequest
             'trailer' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
             'syllabus' => 'nullable|array',
             'syllabus.*.sort' => 'required|integer',
+            'is_favourite' => 'nullable|in:0,1',
             'syllabus.*.title' => 'required|string|max:255',
             'syllabus.*.file' => 'nullable|file|mimes:doc,docx,pdf|max:5120',
             'syllabus.*.video' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
-            'is_favourite' => 'nullable|in:0,1',
         ];
     }
 

@@ -10,27 +10,34 @@
                 <x-slot name="header">
                     <h6>Tambah Kelas</h6>
                 </x-slot>
-                <form action="{{ route('admin.course.store') }}" method="POST" enctype="multipart/form-data" id="form">
+                <form action="{{ route('admin.course.store') }}" method="POST" enctype="multipart/form-data"
+                    id="form">
                     @csrf
 
-                    <x-forms.select label="Mentor" name="mentor_id" id="mentor_id" :options="$mentors" key="id" value="name" :selected="old('mentor_id')" />
+                    <x-forms.select label="Mentor" name="mentor_id" id="mentor_id" :options="$mentors" key="id"
+                        value="name" :selected="old('mentor_id')" />
 
-                    <x-forms.select label="Kategori Kelas" name="course_category_id" id="course_category_id" :options="$categories" key="id" value="name" :selected="old('course_category_id')" />
+                    <x-forms.select label="Kategori Kelas" name="course_category_id" id="course_category_id"
+                        :options="$categories" key="id" value="name" :selected="old('course_category_id')" />
 
                     <x-forms.input label="Judul" name="title" id="title" value="{{ old('title') }}" />
 
                     <x-forms.input label="Slug" name="slug" id="slug" value="{{ old('slug') }}" />
 
-                    <x-forms.textarea label="Deskripsi" name="description" id="description">{{ old('description') }}</x-forms.textarea>
+                    <x-forms.textarea label="Deskripsi" name="description"
+                        id="description">{{ old('description') }}</x-forms.textarea>
 
-                    <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
+                    <img id="thumbnail-preview" src="#" alt="Thumbnail Preview"
+                        style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
 
-                    <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file" value="{{ old('thumbnail') }}" />
+                    <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file"
+                        value="{{ old('thumbnail') }}" />
 
                     <div id="trailer-preview" class="mb-3" style="display: none;">
                         <label for="trailer-preview">Preview Trailer</label>
                         <div class="video-container mb-45" id="player">
-                            <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="trailer-iframe"></iframe>
+                            <iframe width="560" height="315" src="" frameborder="0" allowfullscreen
+                                id="trailer-iframe"></iframe>
                         </div>
                     </div>
 
@@ -38,7 +45,8 @@
 
                     <div class="mb-3">
                         <input type="hidden" name="is_favourite" value="0">
-                        <x-forms.checkbox label="Kelas Favourite" id="is_favourite" name="is_favourite" :checked="old('is_favourite')" />
+                        <x-forms.checkbox label="Kelas Favourite" id="is_favourite" name="is_favourite"
+                            :checked="old('is_favourite')" />
                     </div>
 
                     <div id="syllabus" class="mb-3">
@@ -59,7 +67,7 @@
 
     @push('plugin-scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const elements = {
                     title: document.querySelector('#title'),
                     slug: document.querySelector('#slug'),
@@ -81,15 +89,22 @@
                         return url.split('youtu.be/')[1].split(/[?&]/)[0];
                     } else if (url.includes('youtube.com/watch?v=')) {
                         return url.split('youtube.com/watch?v=')[1].split(/[?&]/)[0];
+                    } else if (url.includes('youtube.com/embed/')) {
+                        return url.split('youtube.com/embed/')[1].split(/[?&]/)[0];
                     }
                     return '';
                 };
 
+                const convertToEmbedLink = (youtubeId) => {
+                    return `https://www.youtube.com/embed/${youtubeId}`;
+                };
+
                 const updateTrailerPreview = (youtubeId) => {
                     if (youtubeId) {
-                        elements.trailerIframe.src = `https://www.youtube.com/embed/${youtubeId}`;
+                        const embedLink = convertToEmbedLink(youtubeId);
+                        elements.trailerIframe.src = embedLink;
                         elements.trailerPreview.style.display = 'block';
-                        elements.trailer.value = `https://www.youtube.com/embed/${youtubeId}`;
+                        elements.trailer.value = embedLink;
                     } else {
                         elements.trailerIframe.src = '';
                         elements.trailerPreview.style.display = 'none';
@@ -98,7 +113,7 @@
 
                 const updateThumbnailPreview = (file) => {
                     const reader = new FileReader();
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         elements.thumbnailPreview.src = e.target.result;
                         elements.thumbnailPreview.style.display = 'block';
                     };
@@ -110,19 +125,25 @@
                         <div class="card mt-3" id="syllabus-${index}">
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="syllabus-sort-${index}">Urutan</label>
+                                    <label for="syllabus-sort-${index}" class="mb-1">Urutan</label>
                                     <input type="number" class="form-control" name="syllabus[${index}][sort]" id="syllabus-sort-${index}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="syllabus-title-${index}">Materi</label>
+                                    <label for="syllabus-title-${index}" class="mb-1">Materi</label>
                                     <input type="text" class="form-control" name="syllabus[${index}][title]" id="syllabus-title-${index}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="syllabus-file-${index}">File (DOCX/PDF)</label>
+                                    <label for="syllabus-file-${index}" class="mb-1">File (DOCX/PDF)</label>
                                     <input type="file" class="form-control" accept=".doc,.docx,.pdf" name="syllabus[${index}][file]" id="syllabus-file-${index}">
                                 </div>
+                                <div id="syllabus-video-preview-${index}" class="mb-3" style="display: none;">
+                                    <label for="syllabus-video-preview-${index}" class="mb-1">Preview Video</label>
+                                    <div class="video-container mb-45">
+                                        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="syllabus-video-iframe-${index}"></iframe>
+                                    </div>
+                                </div>
                                 <div class="mb-3">
-                                    <label for="syllabus-video-${index}">Link Video (YouTube)</label>
+                                    <label for="syllabus-video-${index}" class="mb-1">Link Video (YouTube)</label>
                                     <input type="text" class="form-control" name="syllabus[${index}][video]" id="syllabus-video-${index}">
                                 </div>
                                 <button class="btn btn-danger remove-syllabus" type="button" data-index="${index}">Hapus</button>
@@ -131,30 +152,48 @@
                     elements.syllabusContainer.insertAdjacentHTML('beforeend', syllabusHtml);
                 };
 
-                elements.title.addEventListener('keyup', function () {
+                elements.title.addEventListener('keyup', function() {
                     elements.slug.value = createSlug(elements.title.value);
                 });
 
-                elements.trailer.addEventListener('input', function () {
+                elements.trailer.addEventListener('input', function() {
                     const youtubeId = extractYouTubeId(elements.trailer.value);
                     updateTrailerPreview(youtubeId);
                 });
 
                 let syllabusIndex = {{ count(old('syllabus', [])) }};
 
-                elements.addSyllabusButton.addEventListener('click', function () {
+                elements.addSyllabusButton.addEventListener('click', function() {
                     addSyllabusItem(syllabusIndex);
                     syllabusIndex++;
                 });
 
-                elements.syllabusContainer.addEventListener('click', function (e) {
+                elements.syllabusContainer.addEventListener('input', function(e) {
+                    if (e.target && e.target.id.startsWith('syllabus-video-')) {
+                        const index = e.target.id.split('-')[2];
+                        const youtubeId = extractYouTubeId(e.target.value);
+                        const videoPreview = document.querySelector(`#syllabus-video-preview-${index}`);
+                        const videoIframe = document.querySelector(`#syllabus-video-iframe-${index}`);
+                        if (youtubeId) {
+                            const embedLink = convertToEmbedLink(youtubeId);
+                            videoIframe.src = embedLink;
+                            videoPreview.style.display = 'block';
+                            e.target.value = embedLink;
+                        } else {
+                            videoIframe.src = '';
+                            videoPreview.style.display = 'none';
+                        }
+                    }
+                });
+
+                elements.syllabusContainer.addEventListener('click', function(e) {
                     if (e.target.classList.contains('remove-syllabus')) {
                         const index = e.target.getAttribute('data-index');
                         document.querySelector(`#syllabus-${index}`).remove();
                     }
                 });
 
-                elements.thumbnail.addEventListener('change', function (e) {
+                elements.thumbnail.addEventListener('change', function(e) {
                     const file = e.target.files[0];
                     if (file) {
                         updateThumbnailPreview(file);
@@ -167,7 +206,7 @@
         </script>
 
         <script>
-            $('#is_favourite').change(function () {
+            $('#is_favourite').change(function() {
                 $(this).val(this.checked ? 1 : 0);
             });
         </script>

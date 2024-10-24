@@ -30,33 +30,22 @@
                     <x-forms.textarea label="Deskripsi" name="description"
                         id="description">{{ old('description', $course->description) }}</x-forms.textarea>
 
-                    @if ($course->thumbnail)
-                        <img id="thumbnail-preview" src="{{ asset('storage/' . $course->thumbnail) }}"
-                            alt="Thumbnail Preview" style="max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
-                    @else
-                        <img id="thumbnail-preview" src="#" alt="Thumbnail Preview"
-                            style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
-                    @endif
+                    <img id="thumbnail-preview"
+                        src="{{ $course->thumbnail ? asset('storage/' . $course->thumbnail) : '#' }}"
+                        alt="Thumbnail Preview"
+                        style="display: {{ $course->thumbnail ? 'block' : 'none' }}; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
 
-                    <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file" />
+                    <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file"
+                        value="{{ old('thumbnail') }}" />
 
-                    @if ($course->trailer)
-                        <div id="trailer-preview" class="mb-3">
-                            <label for="trailer-preview">Preview Trailer</label>
-                            <div class="video-container mb-45" id="player">
-                                <iframe width="560" height="315" src="{{ $course->trailer }}" frameborder="0"
-                                    allowfullscreen id="trailer-iframe"></iframe>
-                            </div>
+                    <div id="trailer-preview" class="mb-3"
+                        style="display: {{ $course->trailer ? 'block' : 'none' }};">
+                        <label for="trailer-preview">Preview Trailer</label>
+                        <div class="video-container mb-45" id="player">
+                            <iframe width="560" height="315" src="{{ $course->trailer }}" frameborder="0"
+                                allowfullscreen id="trailer-iframe"></iframe>
                         </div>
-                    @else
-                        <div id="trailer-preview" class="mb-3" style="display: none;">
-                            <label for="trailer-preview">Preview Trailer</label>
-                            <div class="video-container mb-45" id="player">
-                                <iframe width="560" height="315" src="" frameborder="0" allowfullscreen
-                                    id="trailer-iframe"></iframe>
-                            </div>
-                        </div>
-                    @endif
+                    </div>
 
                     <x-forms.input label="Trailer" name="trailer" id="trailer"
                         value="{{ old('trailer', $course->trailer) }}" />
@@ -67,12 +56,12 @@
                             :checked="old('is_favourite', $course->is_favourite)" />
                     </div>
 
-                    <p>Silabus</p>
-                    <button class="btn btn-primary mt-3" type="button" id="add-syllabus">+</button>
-
                     <div id="syllabus" class="mb-3">
-                        @if (old('syllabus', $course->syllabus))
-                            @foreach (old('syllabus', $course->syllabus) as $index => $syllabus)
+                        <p>Silabus</p>
+                        <button class="btn btn-primary mt-3" type="button" id="add-syllabus">+</button>
+
+                        <div id="syllabus-container">
+                            @foreach ($course->syllabus as $index => $syllabus)
                                 <div class="card mt-3" id="syllabus-{{ $index }}">
                                     <div class="card-body">
                                         <div class="mb-3">
@@ -80,40 +69,58 @@
                                             <input type="number" class="form-control"
                                                 name="syllabus[{{ $index }}][sort]"
                                                 id="syllabus-sort-{{ $index }}"
-                                                value="{{ $syllabus['sort'] }}">
+                                                value="{{ old('syllabus.' . $index . '.sort', $syllabus->sort) }}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="syllabus-title-{{ $index }}">Materi</label>
                                             <input type="text" class="form-control"
                                                 name="syllabus[{{ $index }}][title]"
                                                 id="syllabus-title-{{ $index }}"
-                                                value="{{ $syllabus['title'] }}">
+                                                value="{{ old('syllabus.' . $index . '.title', $syllabus->title) }}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="syllabus-file-{{ $index }}">File (DOCX/PDF)</label>
-                                            @if (isset($syllabus['file']))
-                                                <a href="{{ asset('storage/' . $syllabus['file']) }}"
-                                                    target="_blank">Lihat File</a>
+                                            @if ($syllabus->file)
+                                                <input type="file" class="form-control" accept=".doc,.docx,.pdf"
+                                                    name="syllabus[{{ $index }}][file]"
+                                                    id="syllabus-file-{{ $index }}"
+                                                    value="{{ asset('public/' . $syllabus->file) }}">
+                                            @else
+                                                <input type="file" class="form-control" accept=".doc,.docx,.pdf"
+                                                    name="syllabus[{{ $index }}][file]"
+                                                    id="syllabus-file-{{ $index }}">
                                             @endif
-                                            <input type="file" class="form-control" accept=".doc,.docx,.pdf"
-                                                name="syllabus[{{ $index }}][file]"
-                                                id="syllabus-file-{{ $index }}">
+                                        </div>
+                                        <div id="syllabus-video-preview-{{ $index }}" class="mb-3"
+                                            style="display: {{ $syllabus->video ? 'block' : 'none' }};">
+                                            <label for="syllabus-video-preview-{{ $index }}">Preview
+                                                Video</label>
+                                            <div class="video-container mb-45">
+                                                <iframe width="560" height="315" src="{{ $syllabus->video }}"
+                                                    frameborder="0" allowfullscreen
+                                                    id="syllabus-video-iframe-{{ $index }}"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="syllabus-video-{{ $index }}">Link Video
+                                                (YouTube)
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                name="syllabus[{{ $index }}][video]"
+                                                id="syllabus-video-{{ $index }}"
+                                                value="{{ old('syllabus.' . $index . '.video', $syllabus->video) }}">
                                         </div>
                                         <button class="btn btn-danger remove-syllabus" type="button"
                                             data-index="{{ $index }}">Hapus</button>
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
+                        </div>
                     </div>
 
-                    <x-ui.base-button color="danger" href="{{ route('admin.course.index') }}">
-                        Kembali
-                    </x-ui.base-button>
-
-                    <x-ui.base-button color="primary" type="submit">
-                        Update Kelas
-                    </x-ui.base-button>
+                    <x-ui.base-button color="danger"
+                        href="{{ route('admin.course.index') }}">Kembali</x-ui.base-button>
+                    <x-ui.base-button color="primary" type="submit">Update Kelas</x-ui.base-button>
                 </form>
             </x-ui.base-card>
         </div>
@@ -130,7 +137,7 @@
                     trailerIframe: document.querySelector('#trailer-iframe'),
                     thumbnail: document.querySelector('#thumbnail'),
                     thumbnailPreview: document.querySelector('#thumbnail-preview'),
-                    syllabusContainer: document.querySelector('#syllabus'),
+                    syllabusContainer: document.querySelector('#syllabus-container'),
                     addSyllabusButton: document.querySelector('#add-syllabus')
                 };
 
@@ -143,14 +150,22 @@
                         return url.split('youtu.be/')[1].split(/[?&]/)[0];
                     } else if (url.includes('youtube.com/watch?v=')) {
                         return url.split('youtube.com/watch?v=')[1].split(/[?&]/)[0];
+                    } else if (url.includes('youtube.com/embed/')) {
+                        return url.split('youtube.com/embed/')[1].split(/[?&]/)[0];
                     }
                     return '';
                 };
 
+                const convertToEmbedLink = (youtubeId) => {
+                    return `https://www.youtube.com/embed/${youtubeId}`;
+                };
+
                 const updateTrailerPreview = (youtubeId) => {
                     if (youtubeId) {
-                        elements.trailerIframe.src = `https://www.youtube.com/embed/${youtubeId}`;
+                        const embedLink = convertToEmbedLink(youtubeId);
+                        elements.trailerIframe.src = embedLink;
                         elements.trailerPreview.style.display = 'block';
+                        elements.trailer.value = embedLink;
                     } else {
                         elements.trailerIframe.src = '';
                         elements.trailerPreview.style.display = 'none';
@@ -168,31 +183,33 @@
 
                 const addSyllabusItem = (index) => {
                     const syllabusHtml = `
-                        <div class="card mt-3" id="syllabus-{{ $index }}">
-    <div class="card-body">
-        <div class="mb-3">
-            <label for="syllabus-sort-{{ $index }}">Urutan</label>
-            <input type="number" class="form-control" name="syllabus[{{ $index }}][sort]" id="syllabus-sort-{{ $index }}" value="{{ $syllabus['sort'] ?? '' }}">
-        </div>
-        <div class="mb-3">
-            <label for="syllabus-title-{{ $index }}">Materi</label>
-            <input type="text" class="form-control" name="syllabus[{{ $index }}][title]" id="syllabus-title-{{ $index }}" value="{{ $syllabus['title'] ?? '' }}">
-        </div>
-        <div class="mb-3">
-            <label for="syllabus-file-{{ $index }}">File (DOCX/PDF)</label>
-            @if (isset($syllabus['file']))
-                <a href="{{ asset('storage/' . $syllabus['file']) }}" target="_blank">Lihat File</a>
-            @endif
-            <input type="file" class="form-control" accept=".doc,.docx,.pdf" name="syllabus[{{ $index }}][file]" id="syllabus-file-{{ $index }}">
-        </div>
-        <div class="mb-3">
-            <label for="syllabus-video-{{ $index }}">Link Video (YouTube)</label>
-            <input type="text" class="form-control" name="syllabus[{{ $index }}][video]" id="syllabus-video-{{ $index }}" value="{{ $syllabus['video'] ?? '' }}">
-        </div>
-        <button class="btn btn-danger remove-syllabus" type="button" data-index="{{ $index }}">Hapus</button>
-    </div>
-</div>
-`;
+                        <div class="card mt-3" id="syllabus-${index}">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="syllabus-sort-${index}" class="mb-1">Urutan</label>
+                                    <input type="number" class="form-control" name="syllabus[${index}][sort]" id="syllabus-sort-${index}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="syllabus-title-${index}" class="mb-1">Materi</label>
+                                    <input type="text" class="form-control" name="syllabus[${index}][title]" id="syllabus-title-${index}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="syllabus-file-${index}" class="mb-1">File (DOCX/PDF)</label>
+                                    <input type="file" class="form-control" accept=".doc,.docx,.pdf" name="syllabus[${index}][file]" id="syllabus-file-${index}">
+                                </div>
+                                <div id="syllabus-video-preview-${index}" class="mb-3" style="display: none;">
+                                    <label for="syllabus-video-preview-${index}" class="mb-1">Preview Video</label>
+                                    <div class="video-container mb-45">
+                                        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="syllabus-video-iframe-${index}"></iframe>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="syllabus-video-${index}" class="mb-1">Link Video (YouTube)</label>
+                                    <input type="text" class="form-control" name="syllabus[${index}][video]" id="syllabus-video-${index}">
+                                </div>
+                                <button class="btn btn-danger remove-syllabus" type="button" data-index="${index}">Hapus</button>
+                            </div>
+                        </div>`;
                     elements.syllabusContainer.insertAdjacentHTML('beforeend', syllabusHtml);
                 };
 
@@ -205,11 +222,29 @@
                     updateTrailerPreview(youtubeId);
                 });
 
-                let syllabusIndex = {{ count(old('syllabus', $course->syllabus ?? [])) }};
+                let syllabusIndex = {{ count(old('syllabus', $course->syllabus->toArray())) }};
 
                 elements.addSyllabusButton.addEventListener('click', function() {
                     addSyllabusItem(syllabusIndex);
                     syllabusIndex++;
+                });
+
+                elements.syllabusContainer.addEventListener('input', function(e) {
+                    if (e.target && e.target.id.startsWith('syllabus-video-')) {
+                        const index = e.target.id.split('-')[2];
+                        const youtubeId = extractYouTubeId(e.target.value);
+                        const videoPreview = document.querySelector(`#syllabus-video-preview-${index}`);
+                        const videoIframe = document.querySelector(`#syllabus-video-iframe-${index}`);
+                        if (youtubeId) {
+                            const embedLink = convertToEmbedLink(youtubeId);
+                            videoIframe.src = embedLink;
+                            videoPreview.style.display = 'block';
+                            e.target.value = embedLink;
+                        } else {
+                            videoIframe.src = '';
+                            videoPreview.style.display = 'none';
+                        }
+                    }
                 });
 
                 elements.syllabusContainer.addEventListener('click', function(e) {

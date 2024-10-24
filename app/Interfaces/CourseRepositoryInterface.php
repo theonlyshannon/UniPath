@@ -8,8 +8,6 @@ interface CourseRepositoryInterface
 
     public function getAllFavouriteCourses(int $limit = 2);
 
-    public function getSyllabusByCourseId(string $courseId); // Disederhanakan
-
     public function getCourseById(string $id);
 
     public function getCourseBySlug(string $slug);
