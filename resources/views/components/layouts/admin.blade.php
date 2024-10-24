@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? '' }}</title>
+    <title>
+        {{ $title ?? '' }}
+    </title>
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon-globe.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
@@ -21,14 +23,13 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- end plugin css -->
 
-    @stack('plugin-styles')
+    @stack('admin-styles')
 
 
     <style>
         :root {
             --primary: #F9883D;
             --primaryHover: #F57119;
-
         }
     </style>
 
