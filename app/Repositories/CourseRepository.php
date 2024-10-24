@@ -2,13 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\CourseRepositoryInterface;
 use App\Models\Course;
+use App\Models\CourseSyllabus;
 use Illuminate\Support\Facades\DB;
+use App\Interfaces\CourseRepositoryInterface;
 
 class CourseRepository implements CourseRepositoryInterface
 {
-    public function getAllcourse(?int $perPage = null, ?string $search = null)
+    public function getAllCourse(?int $perPage = null, ?string $search = null)
     {
         $courses = Course::query();
 
@@ -76,5 +77,10 @@ class CourseRepository implements CourseRepositoryInterface
             $course->delete();
             return $course;
         });
+    }
+
+    public function getSyllabusByCourseId(string $courseId)
+    {
+        return CourseSyllabus::where('course_id', $courseId)->get();
     }
 }

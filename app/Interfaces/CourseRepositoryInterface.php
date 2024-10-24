@@ -4,9 +4,11 @@ namespace App\Interfaces;
 
 interface CourseRepositoryInterface
 {
-    public function getAllcourse(?int $perPage = null, ?string $search = null);
+    public function getAllCourse(?int $perPage = null, ?string $search = null);
 
     public function getAllFavouriteCourses(int $limit = 2);
+
+    public function getSyllabusByCourseId(string $courseId); // Disederhanakan
 
     public function getCourseById(string $id);
 
@@ -20,3 +22,4 @@ interface CourseRepositoryInterface
 
     public function deleteCourse(string $id);
 }
+

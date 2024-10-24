@@ -11,7 +11,6 @@ use App\Http\Controllers\Web\Admin\studentController;
 use App\Http\Controllers\Web\Admin\ArticleTagController;
 use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\UniversityController;
-use App\Http\Controllers\web\Admin\CourseSubjectController;
 use App\Http\Controllers\Web\Admin\CourseCategoryController;
 use App\Http\Controllers\Web\Admin\ArticleCategoryController;
 
@@ -44,6 +43,5 @@ Route::resource('faculty', FacultyController::class);
 
 Route::resource('course-category', CourseCategoryController::class);
 Route::resource('course', CourseController::class);
-Route::resource('course-subject', CourseSubjectController::class);
 
 

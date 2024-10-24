@@ -45,4 +45,8 @@ class Course extends Model
         return $this->hasMany(CourseSyllabus::class);
     }
 
+    public function courseSubject()
+    {
+        return $this->hasMany(CourseSubject::class);
+    }
 }

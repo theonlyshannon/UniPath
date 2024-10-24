@@ -17,12 +17,9 @@ class CourseUpdateRequest extends FormRequest
             'mentor_id' => 'required|exists:mentors,id',
             'course_category_id' => 'required|exists:course_categories,id',
             'title' => 'required|string|max:255',
-            // Slug harus tetap unik, kecuali untuk course yang sedang diupdate
             'slug' => 'required|string|max:255|unique:courses,slug,' . $this->route('course'),
             'description' => 'required|string',
-            // Thumbnail opsional, hanya wajib saat membuat kursus baru
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            // Trailer opsional
             'trailer' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
             'syllabus' => 'required|array',
             'syllabus.*.sort' => 'required|integer',
