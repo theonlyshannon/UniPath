@@ -1,148 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Select Interests</title>
-    <!-- Tambahkan link CSS SweetAlert jika diperlukan -->
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <style>
-        /* Tambahkan beberapa styling dasar */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        select, input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .btn-submit {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-submit:hover {
-            background-color: #45a049;
-        }
-        .error {
-            color: red;
-            margin-top: 5px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Minat Anda</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <h1>Select Your Interests</h1>
+<div class="container">
+    <h1>Pilih Minat Anda</h1>
 
     @if(session('success'))
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ session('success') }}',
-                timer: 3000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-            });
-        </script>
-    @endif
-
-    @if ($errors->any())
-        <div class="error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
     @endif
 
-    <form method="POST" action="{{ route('student.select-interests') }}">
+    <form action="{{ route('student.select-interests.store') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="university_main">Main University <span style="color: red;">*</span></label>
-            <select name="university_main" id="university_main" required>
-                <option value="">-- Select Main University --</option>
+
+        <div class="mb-3">
+            <label for="university_main_id" class="form-label">Universitas Pilihan</label>
+            <select name="university_main_id" id="university_main_id" class="form-select @error('university_main_id') is-invalid @enderror" required>
+                <option value="">-- Pilih Universitas --</option>
                 @foreach($universities as $university)
-                    <option value="{{ $university->id }}" {{ old('university_main') == $university->id ? 'selected' : '' }}>
+                    <option value="{{ $university->id }}" {{ old('university_main_id', auth()->user()->student->university_main_id ?? '') == $university->id ? 'selected' : '' }}>
                         {{ $university->name }}
                     </option>
                 @endforeach
             </select>
+            @error('university_main_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="university_second">Secondary University</label>
-            <select name="university_second" id="university_second">
-                <option value="">-- Select Secondary University --</option>
+        <div class="mb-3">
+            <label for="university_second_id" class="form-label">Universitas Cadangan (Opsional)</label>
+            <select name="university_second_id" id="university_second_id" class="form-select @error('university_second_id') is-invalid @enderror">
+                <option value="">-- Pilih Universitas --</option>
                 @foreach($universities as $university)
-                    <option value="{{ $university->id }}" {{ old('university_second') == $university->id ? 'selected' : '' }}>
+                    <option value="{{ $university->id }}" {{ old('university_second_id', auth()->user()->student->university_second_id ?? '') == $university->id ? 'selected' : '' }}>
                         {{ $university->name }}
                     </option>
                 @endforeach
             </select>
+            @error('university_second_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="faculty_main">Main Faculty <span style="color: red;">*</span></label>
-            <select name="faculty_main" id="faculty_main" required>
-                <option value="">-- Select Main Faculty --</option>
+        <div class="mb-3">
+            <label for="faculty_main_id" class="form-label">Fakultas Pilihan</label>
+            <select name="faculty_main_id" id="faculty_main_id" class="form-select @error('faculty_main_id') is-invalid @enderror" required>
+                <option value="">-- Pilih Fakultas --</option>
                 @foreach($faculties as $faculty)
-                    <option value="{{ $faculty->id }}" {{ old('faculty_main') == $faculty->id ? 'selected' : '' }}>
+                    <option value="{{ $faculty->id }}" {{ old('faculty_main_id', auth()->user()->student->faculty_main_id ?? '') == $faculty->id ? 'selected' : '' }}>
                         {{ $faculty->name }}
                     </option>
                 @endforeach
             </select>
+            @error('faculty_main_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="faculty_second">Secondary Faculty</label>
-            <select name="faculty_second" id="faculty_second">
-                <option value="">-- Select Secondary Faculty --</option>
+        <div class="mb-3">
+            <label for="faculty_second_id" class="form-label">Fakultas Cadangan (Opsional)</label>
+            <select name="faculty_second_id" id="faculty_second_id" class="form-select @error('faculty_second_id') is-invalid @enderror">
+                <option value="">-- Pilih Fakultas --</option>
                 @foreach($faculties as $faculty)
-                    <option value="{{ $faculty->id }}" {{ old('faculty_second') == $faculty->id ? 'selected' : '' }}>
+                    <option value="{{ $faculty->id }}" {{ old('faculty_second_id', auth()->user()->student->faculty_second_id ?? '') == $faculty->id ? 'selected' : '' }}>
                         {{ $faculty->name }}
                     </option>
                 @endforeach
             </select>
+            @error('faculty_second_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" name="phone" id="phone" value="{{ old('phone') }}" placeholder="Enter your phone number">
+        <div class="mb-3">
+            <label for="phone" class="form-label">Nomor Telepon</label>
+            <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', auth()->user()->student->phone ?? '') }}" required>
+            @error('phone')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <select name="gender" id="gender">
-                <option value="">-- Select Gender --</option>
-                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+        <div class="mb-3">
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', auth()->user()->student->name ?? '') }}" required>
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Jenis Kelamin</label>
+            <select name="gender" id="gender" class="form-select @error('gender') is-invalid @enderror" required>
+                <option value="">-- Pilih Jenis Kelamin --</option>
+                <option value="male" {{ old('gender', auth()->user()->student->gender ?? '') == 'male' ? 'selected' : '' }}>Laki-laki</option>
+                <option value="female" {{ old('gender', auth()->user()->student->gender ?? '') == 'female' ? 'selected' : '' }}>Perempuan</option>
             </select>
+            @error('gender')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Enter your city">
+        <div class="mb-3">
+            <label for="city" class="form-label">Kota</label>
+            <input type="text" name="city" id="city" class="form-control @error('city') is-invalid @enderror" value="{{ old('city', auth()->user()->student->city ?? '') }}" required>
+            @error('city')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" name="city" id="city" value="{{ old('city') }}" placeholder="Enter your city">
+        <div class="mb-3">
+            <label for="asal_sekolah" class="form-label">Asal Sekolah (Opsional)</label>
+            <input type="text" name="asal_sekolah" id="asal_sekolah" class="form-control @error('asal_sekolah') is-invalid @enderror" value="{{ old('asal_sekolah', auth()->user()->student->asal_sekolah ?? '') }}">
+            @error('asal_sekolah')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <button type="submit" class="btn-submit">Save Interests</button>
+        <button type="submit" class="btn btn-primary">Simpan Minat</button>
     </form>
-
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</div>
 </body>
 </html>
