@@ -18,6 +18,8 @@ class CourseSyllabus extends Model
         'course_id',
         'sort',
         'title',
+        'file',
+        'video',
     ];
 
     public function course()

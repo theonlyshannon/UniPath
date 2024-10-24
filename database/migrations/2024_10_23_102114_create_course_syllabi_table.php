@@ -19,6 +19,8 @@ return new class extends Migration
 
             $table->integer('sort');
             $table->string('title');
+            $table->string('file');
+            $table->string('video');
 
             $table->softDeletes();
             $table->timestamps();
