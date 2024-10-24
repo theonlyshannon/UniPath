@@ -12,7 +12,7 @@ use App\Interfaces\CourseRepositoryInterface;
 use App\Interfaces\MentorRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 use App\Interfaces\CourseCategoryRepositoryInterface;
-
+use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -59,18 +59,24 @@ class CourseController extends Controller
     {
         $data = $request->validated();
 
-        $data['thumbnail'] = $request->file('thumbnail')->storeAs('assets/images/course/thumbnail', Str::random(40) . '.' . $request->file('thumbnail')->extension(), 'public');
+        // Log data yang divalidasi
+        Log::info('CourseStoreRequest validated data:', $data);
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = $request->file('thumbnail')->storeAs('assets/images/course/thumbnail', Str::random(40) . '.' . $request->file('thumbnail')->extension(), 'public');
+            $data['thumbnail'] = $thumbnailPath;
+
+            // Log path thumbnail
+            Log::info('Thumbnail stored at:', ['path' => $thumbnailPath]);
+        }
 
         try {
-            $course = $this->courseRepository->createCourse($data);
-
-            foreach ($data['syllabus'] as $syllabus) {
-                $syllabus['course_id'] = $course->id;
-                CourseSyllabus::create($syllabus);
-            }
-
+            $this->courseRepository->createCourse($data);
             Swal::toast('Course berhasil ditambahkan', 'success');
+            Log::info('Course created successfully.');
         } catch (\Exception $e) {
+            // Log exception
+            Log::error('Error creating course:', ['message' => $e->getMessage()]);
             Swal::toast('Course gagal ditambahkan', 'error');
         }
 
@@ -105,22 +111,14 @@ class CourseController extends Controller
      */
     public function update(CourseUpdateRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->storeAs('assets/images/course/thumbnail', Str::random(40) . '.' . $request->file('thumbnail')->extension(), 'public');
         }
 
         try {
-            $course = $this->courseRepository->updateCourse($data, $id);
-
-            CourseSyllabus::where('course_id', $id)->delete();
-
-            foreach ($data['syllabus'] as $syllabus) {
-                $syllabus['course_id'] = $course->id;
-                CourseSyllabus::create($syllabus);
-            }
-
+            $this->courseRepository->updateCourse($data, $id);
             Swal::toast('Course berhasil diperbarui', 'success');
         } catch (\Exception $e) {
             Swal::toast('Course gagal diperbarui', 'error');

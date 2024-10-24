@@ -10,49 +10,61 @@
                 <x-slot name="header">
                     <h6>Edit Kelas</h6>
                 </x-slot>
-                <form action="{{ route('admin.course.update', $course->id) }}" method="POST" enctype="multipart/form-data" id="form">
+                <form action="{{ route('admin.course.update', $course->id) }}" method="POST"
+                    enctype="multipart/form-data" id="form">
                     @csrf
                     @method('PUT')
 
-                    <x-forms.select label="Mentor" name="mentor_id" id="mentor_id" :options="$mentor" key="id" value="name" :selected="$course->mentor_id" />
+                    <x-forms.select label="Mentor" name="mentor_id" id="mentor_id" :options="$mentor" key="id"
+                        value="name" :selected="$course->mentor_id" />
 
-                    <x-forms.select label="Kategori Kelas" name="course_category_id" id="course_category_id" :options="$category" key="id" value="name" :selected="$course->course_category_id" />
+                    <x-forms.select label="Kategori Kelas" name="course_category_id" id="course_category_id"
+                        :options="$category" key="id" value="name" :selected="$course->course_category_id" />
 
-                    <x-forms.input label="Judul" name="title" id="title" value="{{ old('title', $course->title) }}" />
+                    <x-forms.input label="Judul" name="title" id="title"
+                        value="{{ old('title', $course->title) }}" />
 
-                    <x-forms.input label="Slug" name="slug" id="slug" value="{{ old('slug', $course->slug) }}" />
+                    <x-forms.input label="Slug" name="slug" id="slug"
+                        value="{{ old('slug', $course->slug) }}" />
 
-                    <x-forms.textarea label="Deskripsi" name="description" id="description" value="{{ old('description', $course->description) }}" />
+                    <x-forms.textarea label="Deskripsi" name="description"
+                        id="description">{{ old('description', $course->description) }}</x-forms.textarea>
 
                     @if ($course->thumbnail)
-                        <img id="thumbnail-preview" src="{{ asset('storage/' . $course->thumbnail) }}" alt="Thumbnail Preview" style="max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
+                        <img id="thumbnail-preview" src="{{ asset('storage/' . $course->thumbnail) }}"
+                            alt="Thumbnail Preview" style="max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
                     @else
-                        <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
+                        <img id="thumbnail-preview" src="#" alt="Thumbnail Preview"
+                            style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
                     @endif
 
-                    <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file" value="{{ old('thumbnail') }}" />
+                    <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file" />
 
                     @if ($course->trailer)
                         <div id="trailer-preview" class="mb-3">
                             <label for="trailer-preview">Preview Trailer</label>
                             <div class="video-container mb-45" id="player">
-                                <iframe width="560" height="315" src="{{ $course->trailer }}" frameborder="0" allowfullscreen id="trailer-iframe"></iframe>
+                                <iframe width="560" height="315" src="{{ $course->trailer }}" frameborder="0"
+                                    allowfullscreen id="trailer-iframe"></iframe>
                             </div>
                         </div>
                     @else
                         <div id="trailer-preview" class="mb-3" style="display: none;">
                             <label for="trailer-preview">Preview Trailer</label>
                             <div class="video-container mb-45" id="player">
-                                <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="trailer-iframe"></iframe>
+                                <iframe width="560" height="315" src="" frameborder="0" allowfullscreen
+                                    id="trailer-iframe"></iframe>
                             </div>
                         </div>
                     @endif
 
-                    <x-forms.input label="Trailer" name="trailer" id="trailer" value="{{ old('trailer', $course->trailer) }}" />
+                    <x-forms.input label="Trailer" name="trailer" id="trailer"
+                        value="{{ old('trailer', $course->trailer) }}" />
 
                     <div class="mb-3">
                         <input type="hidden" name="is_favourite" value="0">
-                        <x-forms.checkbox label="Kelas Favourite" id="is_favourite" name="is_favourite" :checked="old('is_favourite', $course->is_favourite)" />
+                        <x-forms.checkbox label="Kelas Favourite" id="is_favourite" name="is_favourite"
+                            :checked="old('is_favourite', $course->is_favourite)" />
                     </div>
 
                     <p>Silabus</p>
@@ -65,13 +77,30 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label for="syllabus-sort-{{ $index }}">Urutan</label>
-                                            <input type="number" class="form-control" name="syllabus[{{ $index }}][sort]" id="syllabus-sort-{{ $index }}" value="{{ $syllabus['sort'] }}">
+                                            <input type="number" class="form-control"
+                                                name="syllabus[{{ $index }}][sort]"
+                                                id="syllabus-sort-{{ $index }}"
+                                                value="{{ $syllabus['sort'] }}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="syllabus-title-{{ $index }}">Materi</label>
-                                            <input type="text" class="form-control" name="syllabus[{{ $index }}][title]" id="syllabus-title-{{ $index }}" value="{{ $syllabus['title'] }}">
+                                            <input type="text" class="form-control"
+                                                name="syllabus[{{ $index }}][title]"
+                                                id="syllabus-title-{{ $index }}"
+                                                value="{{ $syllabus['title'] }}">
                                         </div>
-                                        <button class="btn btn-danger remove-syllabus" type="button" data-index="{{ $index }}">Hapus</button>
+                                        <div class="mb-3">
+                                            <label for="syllabus-file-{{ $index }}">File (DOCX/PDF)</label>
+                                            @if (isset($syllabus['file']))
+                                                <a href="{{ asset('storage/' . $syllabus['file']) }}"
+                                                    target="_blank">Lihat File</a>
+                                            @endif
+                                            <input type="file" class="form-control" accept=".doc,.docx,.pdf"
+                                                name="syllabus[{{ $index }}][file]"
+                                                id="syllabus-file-{{ $index }}">
+                                        </div>
+                                        <button class="btn btn-danger remove-syllabus" type="button"
+                                            data-index="{{ $index }}">Hapus</button>
                                     </div>
                                 </div>
                             @endforeach
@@ -122,7 +151,6 @@
                     if (youtubeId) {
                         elements.trailerIframe.src = `https://www.youtube.com/embed/${youtubeId}`;
                         elements.trailerPreview.style.display = 'block';
-                        elements.trailer.value = `https://www.youtube.com/embed/${youtubeId}`;
                     } else {
                         elements.trailerIframe.src = '';
                         elements.trailerPreview.style.display = 'none';
@@ -140,19 +168,31 @@
 
                 const addSyllabusItem = (index) => {
                     const syllabusHtml = `
-                        <div class="card mt-3" id="syllabus-${index}">
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="syllabus-title-${index}">Materi</label>
-                                    <input type="text" class="form-control" name="syllabus[${index}][title]" id="syllabus-title-${index}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="syllabus-sort-${index}">Urutan</label>
-                                    <input type="number" class="form-control" name="syllabus[${index}][sort]" id="syllabus-sort-${index}">
-                                </div>
-                                <button class="btn btn-danger remove-syllabus" type="button" data-index="${index}">Hapus</button>
-                            </div>
-                        </div>`;
+                        <div class="card mt-3" id="syllabus-{{ $index }}">
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="syllabus-sort-{{ $index }}">Urutan</label>
+            <input type="number" class="form-control" name="syllabus[{{ $index }}][sort]" id="syllabus-sort-{{ $index }}" value="{{ $syllabus['sort'] ?? '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="syllabus-title-{{ $index }}">Materi</label>
+            <input type="text" class="form-control" name="syllabus[{{ $index }}][title]" id="syllabus-title-{{ $index }}" value="{{ $syllabus['title'] ?? '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="syllabus-file-{{ $index }}">File (DOCX/PDF)</label>
+            @if (isset($syllabus['file']))
+                <a href="{{ asset('storage/' . $syllabus['file']) }}" target="_blank">Lihat File</a>
+            @endif
+            <input type="file" class="form-control" accept=".doc,.docx,.pdf" name="syllabus[{{ $index }}][file]" id="syllabus-file-{{ $index }}">
+        </div>
+        <div class="mb-3">
+            <label for="syllabus-video-{{ $index }}">Link Video (YouTube)</label>
+            <input type="text" class="form-control" name="syllabus[{{ $index }}][video]" id="syllabus-video-{{ $index }}" value="{{ $syllabus['video'] ?? '' }}">
+        </div>
+        <button class="btn btn-danger remove-syllabus" type="button" data-index="{{ $index }}">Hapus</button>
+    </div>
+</div>
+`;
                     elements.syllabusContainer.insertAdjacentHTML('beforeend', syllabusHtml);
                 };
 
