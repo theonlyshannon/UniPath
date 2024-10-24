@@ -39,16 +39,28 @@ class AuthRepository implements AuthRepositoryInterface
 
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
             if (!auth()->user()->hasRole('student')) {
-                return redirect()->route('student.select-interests.show');
+                return redirect()->route('admin.dashboard');
             }
             else {
-                return redirect()->route('admin.dashboard');
+                $student = auth()->user()->student;
+
+                if ($this->hasSelectedInterests($student)) {
+                    return redirect()->route('student.dashboard');
+                }
+                else {
+                    return redirect()->route('student.select-interests.show');
+                }
             }
         }
 
         Swal::toast('Email atau password salah', 'error')->timerProgressBar();
 
         return redirect()->back();
+    }
+
+    protected function hasSelectedInterests($student)
+    {
+        return !empty($student->university_main_id) && !empty($student->faculty_main_id);
     }
 
     public function logout()

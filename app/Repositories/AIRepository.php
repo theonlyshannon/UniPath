@@ -32,7 +32,7 @@ class AIRepository implements AIRepositoryInterface
 
             $interests = [];
             if ($student) {
-                // Ambil minat universitas utama dan sekunder
+
                 if ($student->mainUniversity) {
                     $interests[] = 'Main University: ' . $student->mainUniversity->name;
                 }
@@ -40,7 +40,6 @@ class AIRepository implements AIRepositoryInterface
                     $interests[] = 'Secondary University: ' . $student->secondUniversity->name;
                 }
 
-                // Ambil minat fakultas utama dan sekunder
                 if ($student->mainFaculty) {
                     $interests[] = 'Main Faculty: ' . $student->mainFaculty->name;
                 }
@@ -54,9 +53,12 @@ class AIRepository implements AIRepositoryInterface
                 if ($student->city) {
                     $interests[] = 'City: ' . $student->city;
                 }
+
+                if ($student->name) {
+                    $interests[] = 'Name: ' . $student->name;
+                }
             }
 
-            // Mengambil chat logs terbaru, misalnya 5 terakhir
             $chatLogs = $user->chatLogs()->latest()->take(5)->get();
 
             $chatHistory = [];
@@ -67,7 +69,6 @@ class AIRepository implements AIRepositoryInterface
                 ];
             }
 
-            // Membuat prompt yang mencakup minat dan chat history
             $messages = [
                 [
                     'role' => 'system',
@@ -86,13 +87,11 @@ class AIRepository implements AIRepositoryInterface
                 $messages = array_merge($messages, $chatHistory);
             }
 
-            // Tambahkan pesan terbaru dari user
             $messages[] = [
                 'role' => 'user',
                 'content' => $data['message'],
             ];
 
-            // Panggilan ke OpenAI GPT-4
             $openAIResponse = $this->openAIClient->chatCompletions()->create(
                 new CreateRequest([
                     'model' => 'gpt-4-turbo',
@@ -103,7 +102,6 @@ class AIRepository implements AIRepositoryInterface
             if (isset($openAIResponse->choices[0]->message->content)) {
                 $responseContent = $openAIResponse->choices[0]->message->content;
 
-                // Simpan respons AI ke chat logs
                 $user->chatLogs()->create([
                     'sender' => 'ai',
                     'message' => $responseContent,

@@ -19,6 +19,7 @@ use App\Interfaces\UniversityRepositoryInterface;
 use App\Interfaces\FacultyRepositoryInterface;
 use App\Interfaces\CourseCategoryRepositoryInterface;
 use App\Interfaces\CourseRepositoryInterface;
+use App\Interfaces\InterestRepositoryInterface;
 
 /**
  *Repository Register
@@ -37,6 +38,7 @@ use App\Repositories\UniversityRepository;
 use App\Repositories\FacultyRepository;
 use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
+use App\Repositories\InterestRepository;
 
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\AIRepositoryInterface;
@@ -71,6 +73,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AIRepositoryInterface::class, AIRepository::class);
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(InterestRepositoryInterface::class, InterestRepository::class);
     }
 
     /**

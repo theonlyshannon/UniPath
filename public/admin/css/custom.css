@@ -1,11 +1,12 @@
 :root {
-    --primary: #4e73df;
-    --primaryHover: #2e59d9;
-    --secondary: #858796;
+    --primary: #39D4D6;
+    --primary-hover: #2ca4a7;
+    --secondary: #674DEF;
     --success: #1cc88a;
     --info: #36b9cc;
-    --warning: #f6c23e;
-    --danger: #e74a3b;
+    --warning: #fa7617;
+    --warning-hover: #e06914;
+    --danger: #FE3636;
     --light: #f8f9fc;
     --dark: #5a5c69;
     --white: #fff;
@@ -30,8 +31,8 @@
 }
 
 .btn-primary:hover {
-    background-color: var(--primaryHover) !important;
-    border-color: var(--primaryHover) !important;
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
 }
 
 .btn-primary:active {
@@ -54,6 +55,28 @@
     color: #fff !important;
     background-color: var(--primary) !important;
     border-color: var(--primary) !important;
+}
+
+.btn-warning {
+    color: #fff ;
+    background-color: var(--warning) ;
+    border-color: var(--warning) ;
+}
+
+.btn-warning {
+    color: #fff ;
+    background-color: var(--warning) !important;
+    border-color: var(--warning) !important;
+}
+
+.btn-warning:hover {
+    background-color: var(--warning-hover) !important;
+    border-color: var(--warning-hover) !important;
+}
+
+.btn-warning:active {
+    background-color: var(--warning) !important;
+    border-color: var(--warning) !important;
 }
 
 .text-primary {

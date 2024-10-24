@@ -16,11 +16,9 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->string('username')->unique();
             $table->string('name');
-            $table->enum('gender', ['male', 'female'])->nullable();
-            $table->enum('occupation_type', ['student', 'employee', 'business', 'other'])->nullable();
-            $table->string('occupation')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('city')->nullable();
+            $table->enum('gender', ['male', 'female']);
+            $table->string('phone');
+            $table->string('city');
             $table->string('asal_sekolah')->nullable();
 
             // Kolom minat universitas dan fakultas
