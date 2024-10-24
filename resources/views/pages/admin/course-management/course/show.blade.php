@@ -18,7 +18,7 @@
 
                 <div class="mb-3">
                     <label>Kategori Kelas</label>
-                    <p>{{ $course->category->name }}</p>
+                    {{-- <p>{{ $course->nam }}</p> --}}
                 </div>
 
                 <div class="mb-3">
@@ -60,6 +60,18 @@
                     <label>Favourite</label>
                     <p>{{ $course->is_favourite ? 'Ya' : 'Tidak' }}</p>
                 </div>
+
+                <tr>
+                    <th>Detail Syllabus</th>
+                    <td>
+                        @foreach ($course->syllabus as $syllabus)
+                            <p>
+                                <strong>{{ $loop->iteration }}. {{ $syllabus->title }}</strong>
+                            </p>
+                            <p>{{ $syllabus->description }}</p>
+                        @endforeach
+                    </td>
+                </tr>
 
                 <x-ui.base-button color="danger" href="{{ route('admin.course.index') }}">
                     Kembali

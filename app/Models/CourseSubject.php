@@ -7,16 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CourseCategory extends Model
+class CourseSubject extends Model
 {
     use HasFactory, UUID, SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'subject_file',
+        'subject_video',
     ];
-
-    public function courses()
-    {
-        return $this->belongsTo(Course::class);
-    }
 }

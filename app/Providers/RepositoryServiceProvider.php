@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\ServiceProvider;
+
 /**
  *Interface Register
  *
@@ -40,7 +42,6 @@ use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\InterestRepository;
 
-use Illuminate\Support\ServiceProvider;
 use App\Interfaces\AIRepositoryInterface;
 use App\Repositories\AIRepository;
 use App\Interfaces\UserRepositoryInterface;

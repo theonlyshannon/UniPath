@@ -21,6 +21,9 @@ class CourseStoreRequest extends FormRequest
             'description' => 'required|string',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'trailer' => ['required', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
+            'syllabus' => 'required|array',
+            'syllabus.*.sort' => 'required|integer',
+            'syllabus.*.title' => 'required|string|max:255',
             'is_favourite' => 'nullable|in:0,1',
         ];
     }
@@ -40,6 +43,9 @@ class CourseStoreRequest extends FormRequest
             'description' => 'Deskripsi',
             'thumbnail' => 'Thumbnail',
             'trailer' => 'Trailer',
+            'syllabus' => 'Syllabus',
+            'syllabus.*.sort' => 'Urutan Syllabus',
+            'syllabus.*.title' => 'Judul Syllabus',
             'is_favourite' => 'Favorit',
         ];
     }
@@ -57,9 +63,13 @@ class CourseStoreRequest extends FormRequest
             'mimes' => ':attribute harus berupa file dengan format: :values',
             'max' => ':attribute tidak boleh lebih dari :max KB',
             'string' => ':attribute harus berupa teks',
+            'integer' => ':attribute harus berupa angka',
+            'boolean' => ':attribute harus berupa boolean',
             'exists' => ':attribute tidak ditemukan',
             'unique' => ':attribute sudah digunakan',
+            'array' => ':attribute harus berupa array',
             'regex' => ':attribute harus berupa link YouTube yang valid',
+            'boolean' => ':attribute harus berupa nilai boolean',
         ];
     }
 }

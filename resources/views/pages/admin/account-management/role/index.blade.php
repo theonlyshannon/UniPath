@@ -31,9 +31,9 @@
                             <td>{{ $role->guard_name }}</td>
                             <td class="d-flex flex-wrap">
                                 @forelse ($role->permissions as $permission)
-                                    <span class="badge bg-primary m-1">{{ $permission->name }}</span>
+                                    <span class="badge custom-badge m-1">{{ $permission->name }}</span>
                                 @empty
-                                    <span class="badge bg-danger m-1">Tidak ada hak akses</span>
+                                    <span class="badge custom-badge-danger m-1">Tidak ada hak akses</span>
                                 @endforelse
                             </td>
                             <td>

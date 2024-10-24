@@ -145,6 +145,15 @@
                                 </li>
                             @endcan
 
+                            @can('course-subject-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.course-subject.index') }}"
+                                        class="nav-link {{ request()->is('admin/course*') && !request()->is('admin/course-category') ? ' active' : '' }}">
+                                        Materi Kelas
+                                    </a>
+                                </li>
+                            @endcan
+
                         </ul>
                     </div>
                 </li>

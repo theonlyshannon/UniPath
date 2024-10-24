@@ -87,6 +87,11 @@ class RoleSeeder extends Seeder
             'course-create',
             'course-edit',
             'course-delete',
+
+            'course-subject-list',
+            'course-subject-create',
+            'course-subject-edit',
+            'course-subject-delete',
         ];
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -173,6 +178,11 @@ class RoleSeeder extends Seeder
             'course-create',
             'course-edit',
             'course-delete',
+
+            'course-subject-list',
+            'course-subject-create',
+            'course-subject-edit',
+            'course-subject-delete',
         ]);
 
         $writer->syncPermissions([
@@ -200,6 +210,29 @@ class RoleSeeder extends Seeder
 
         $student->syncPermissions([
             'dashboard-view',
+        ]);
+
+        $mentor->syncPermissions([
+            'dashboard-view',
+
+            'dashboard-admin-view',
+
+            'course-management',
+
+            'course-category-list',
+            'course-category-create',
+            'course-category-edit',
+            'course-category-delete',
+
+            'course-list',
+            'course-create',
+            'course-edit',
+            'course-delete',
+
+            'course-subject-list',
+            'course-subject-create',
+            'course-subject-edit',
+            'course-subject-delete'
         ]);
     }
 }
