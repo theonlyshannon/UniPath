@@ -21,9 +21,11 @@ class CourseUpdateRequest extends FormRequest
             'description' => 'required|string',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'trailer' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
-            'syllabus' => 'required|array',
+            'syllabus' => 'nullable|array',
             'syllabus.*.sort' => 'required|integer',
             'syllabus.*.title' => 'required|string|max:255',
+            'syllabus.*.file' => 'nullable|file|mimes:doc,docx,pdf|max:5120',
+            'syllabus.*.video' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
             'is_favourite' => 'nullable|in:0,1',
         ];
     }
@@ -43,9 +45,11 @@ class CourseUpdateRequest extends FormRequest
             'description' => 'Deskripsi',
             'thumbnail' => 'Thumbnail',
             'trailer' => 'Trailer',
-            'syllabus' => 'Syllabus',
-            'syllabus.*.sort' => 'Urutan Syllabus',
-            'syllabus.*.title' => 'Judul Syllabus',
+            'syllabus' => 'Silabus',
+            'syllabus.*.sort' => 'Urutan Silabus',
+            'syllabus.*.title' => 'Judul Silabus',
+            'syllabus.*.file' => 'File Silabus',
+            'syllabus.*.video' => 'Link Video Silabus',
             'is_favourite' => 'Favorit',
         ];
     }
@@ -69,6 +73,7 @@ class CourseUpdateRequest extends FormRequest
             'unique' => ':attribute sudah digunakan',
             'array' => ':attribute harus berupa array',
             'regex' => ':attribute harus berupa link YouTube yang valid',
+            'boolean' => ':attribute harus berupa nilai boolean',
         ];
     }
 }

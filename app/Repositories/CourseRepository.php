@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Course;
 use App\Models\CourseSyllabus;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Interfaces\CourseRepositoryInterface;
 
@@ -44,8 +45,24 @@ class CourseRepository implements CourseRepositoryInterface
     public function createCourse(array $data)
     {
         return DB::transaction(function () use ($data) {
-
             $course = Course::create($data);
+
+            if (isset($data['syllabus'])) {
+                foreach ($data['syllabus'] as $syllabus) {
+                    $syllabusData = [
+                        'course_id' => $course->id,
+                        'sort' => $syllabus['sort'],
+                        'title' => $syllabus['title'],
+                        'video' => $syllabus['video'] ?? null,
+                    ];
+
+                    if (isset($syllabus['file'])) {
+                        $syllabusData['file'] = $syllabus['file']->storeAs('assets/files/course/syllabus', Str::random(40) . '.' . $syllabus['file']->extension(), 'public');
+                    }
+
+                    CourseSyllabus::create($syllabusData);
+                }
+            }
 
             return $course;
         });
@@ -56,6 +73,25 @@ class CourseRepository implements CourseRepositoryInterface
         return DB::transaction(function () use ($data, $id) {
             $course = $this->getCourseById($id);
             $course->update($data);
+
+            CourseSyllabus::where('course_id', $id)->delete();
+
+            if (isset($data['syllabus'])) {
+                foreach ($data['syllabus'] as $syllabus) {
+                    $syllabusData = [
+                        'course_id' => $course->id,
+                        'sort' => $syllabus['sort'],
+                        'title' => $syllabus['title'],
+                        'video' => $syllabus['video'] ?? null,
+                    ];
+
+                    if (isset($syllabus['file'])) {
+                        $syllabusData['file'] = $syllabus['file']->storeAs('assets/files/course/syllabus', Str::random(40) . '.' . $syllabus['file']->extension(), 'public');
+                    }
+
+                    CourseSyllabus::create($syllabusData);
+                }
+            }
 
             return $course;
         });
