@@ -38,6 +38,7 @@
 
     <!-- template styles -->
     <link rel="stylesheet" href="{{ asset('app/css/eduhive.css') }}" />
+    <link rel="stylesheet" href="{{ asset('app/css/custom.css') }}" />
 
     @stack('app-style')
 </head>

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="main-footer__top">
             <a href="index.html" class="main-footer__logo">
-                <img src="assets/images/logo-dark.png" width="209" alt="Eduhive HTML Template">
+                <img src="{{ asset('app/images/logo-dark.png') }}" width="209" alt="Eduhive HTML Template">
             </a><!-- /.main-footer__logo -->
             <div class="main-footer__top__inner">
                 <div class="main-footer__newsletter">
@@ -63,41 +63,26 @@
                     <ul class="list-unstyled footer-widget__links">
                         <li>
                             <a href="about.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 About Eduhive
                             </a>
                         </li>
                         <li>
                             <a href="courses.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Our Courses
                             </a>
                         </li>
                         <li>
                             <a href="instructors.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Instructors
                             </a>
                         </li>
                         <li>
                             <a href="instructor-details.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Instructor Details
                             </a>
                         </li>
                         <li>
                             <a href="contact.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Contact Us
                             </a>
                         </li>
@@ -110,41 +95,26 @@
                     <ul class="list-unstyled footer-widget__links">
                         <li>
                             <a href="apps-development.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Apps Development
                             </a>
                         </li>
                         <li>
                             <a href="digital-marketing.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Digital Marketing
                             </a>
                         </li>
                         <li>
                             <a href="graphics-design.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Graphics Design
                             </a>
                         </li>
                         <li>
                             <a href="uiux-design.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 UI/UX Design
                             </a>
                         </li>
                         <li>
                             <a href="data-science.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
                                 Data Science
                             </a>
                         </li>
