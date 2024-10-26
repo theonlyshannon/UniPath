@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Web\App\ArticleController;
 use App\Http\Controllers\Web\App\DashboardController;
 
 
@@ -19,5 +20,10 @@ use App\Http\Controllers\Web\App\DashboardController;
 
 Route::name('app.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::prefix('artikel')->name('article.')->group(function () {
+        Route::get('/', [ArticleController::class, 'index'])->name('index');
+        Route::get('/detail', [ArticleController::class, 'show'])->name('show');
+    });
 });
 
