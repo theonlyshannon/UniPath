@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('asal_sekolah')->nullable();
 
-            // Kolom minat universitas dan fakultas
             $table->uuid('university_main_id')->nullable();
             $table->uuid('university_second_id')->nullable();
             $table->uuid('faculty_main_id')->nullable();
@@ -30,7 +29,6 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            // Foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('university_main_id')->references('id')->on('universities')->onDelete('set null');
             $table->foreign('university_second_id')->references('id')->on('universities')->onDelete('set null');
