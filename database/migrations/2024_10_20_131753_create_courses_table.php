@@ -22,10 +22,11 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('slug');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->text('description');
             $table->string('thumbnail');
             $table->string('trailer');
+            $table->boolean('is_free')->default(false);
             $table->boolean('is_favourite')->default(false);
             $table->boolean('is_active')->default(true);
 

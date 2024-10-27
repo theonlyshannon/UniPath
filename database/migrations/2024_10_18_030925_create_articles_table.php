@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
+            $table->uuid('writer_id');
+            $table->foreign('writer_id')->references('id')->on('writers')->cascadeOnDelete();
+
             $table->string('thumbnail');
             $table->string('title');
             $table->text('content');
             $table->string('slug')->unique();
-
-            $table->uuid('writer_id');
-            $table->foreign('writer_id')->references('id')->on('writers')->cascadeOnDelete();
 
             $table->softDeletes();
             $table->timestamps();

@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('faculties', function (Blueprint $table) {
-            $table->uuid('id')->primary(); // UUID sebagai primary key
-            $table->uuid('university_id'); // UUID sebagai foreign key
+            $table->uuid('id')->primary();
+
+            $table->uuid('university_id');
+            $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade');
+
             $table->string('name');
             $table->text('description')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
-
-            // Definisikan foreign key
-            $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade');
         });
     }
 

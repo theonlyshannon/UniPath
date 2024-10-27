@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('article_category_pivot', function (Blueprint $table) {
             $table->id();
+
             $table->uuid('article_id');
             $table->uuid('article_category_id');
+            
             $table->softDeletes();
             $table->timestamps();
         });
