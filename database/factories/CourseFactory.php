@@ -24,6 +24,7 @@ class CourseFactory extends Factory
             'trailer' => $this->faker->url(),
             'is_favourite' => $this->faker->boolean(),
             'is_active' => $this->faker->boolean(true),
+            'price' => $this->faker->numberBetween(10000, 100000),
         ];
     }
 }

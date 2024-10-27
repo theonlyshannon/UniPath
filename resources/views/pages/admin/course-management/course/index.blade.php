@@ -66,12 +66,6 @@
                                         href="{{ route('admin.course.show', $course->id) }}">
                                         Detail
                                     </x-ui.base-button>
-                                    @can('course-edit')
-                                        <x-ui.base-button color="warning" type="button"
-                                            href="{{ route('admin.course.edit', $course->id) }}">
-                                            Edit
-                                        </x-ui.base-button>
-                                    @endcan
                                     @can('course-delete')
                                         <form action="{{ route('admin.course.destroy', $course->id) }}" method="POST"
                                             class="d-inline">
