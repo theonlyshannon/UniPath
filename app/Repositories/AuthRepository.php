@@ -45,7 +45,7 @@ class AuthRepository implements AuthRepositoryInterface
                 $student = auth()->user()->student;
 
                 if ($this->hasSelectedInterests($student)) {
-                    return redirect()->route('student.dashboard');
+                    return redirect()->route('app.dashboard');
                 }
                 else {
                     return redirect()->route('student.select-interests.show');

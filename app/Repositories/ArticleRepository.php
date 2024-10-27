@@ -7,13 +7,9 @@ use App\Models\Article;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
-    public function getAllArticle(?int $perPage = null, ?string $search = null, ?string $category = null, ?string $tag = null)
+    public function getAllArticle(?int $perPage = null, ?string $category = null, ?string $tag = null)
     {
         $articles = Article::query();
-
-        if ($search) {
-            $articles->where('title', 'like', '%'.$search.'%');
-        }
 
         if ($category) {
             $articles->whereHas('categories', function ($query) use ($category) {

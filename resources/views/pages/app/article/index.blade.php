@@ -15,7 +15,7 @@
         <img src="assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
         <div class="page-header__shape-three"></div><!-- /.page-header__shape-three -->
         <div class="page-header__shape-four"></div><!-- /.page-header__shape-four -->
-    </section><!-- /.page-header -->
+    </section>
 
     <section class="blog-page blog-page--sidebar section-space">
         <div class="container">
