@@ -23,222 +23,54 @@
                 <h3 class="sec-title__title"><span>Our</span> <span class="sec-title__title__shape">Most</span> <span>Popular</span> <span class="sec-title__title__text">Courses</span></h3><!-- /.sec-title__title -->
             </div><!-- /.sec-title -->
             <div class="row gutter-y-30">
-                <div class="col-lg-6">
-                    <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='00ms'>
-                        <div class="course-card__image">
-                            <img src="assets/images/courses/course-2-1.jpg" alt="WordPress for Everyone: Unlock Your Creativity Online">
-                        </div><!-- /.course-card__image -->
-                        <div class="course-card__content">
-                            <div class="course-card__content__top">
-                                <div class="course-card__category">Experts</div><!-- /.course-card__category -->
-                                <div class="course-card__duration">
-                                    <span class="course-card__duration__icon">
-                                        <i class="icon-clock"></i>
-                                    </span><!-- /.course-card__duration__icon -->
-                                    25 weeks
-                                </div><!-- /.course-card__duration -->
-                            </div><!-- /.course-card__content__top -->
-                            <h3 class="course-card__title"><a href="wordpress-development.html">WordPress for Everyone: Unlock Your Creativity Online</a></h3><!-- /.course-card__title -->
-                            <div class="course-card__info">
-                                <div class="course-card__lessons">
-                                    <span class="course-card__lessons__icon">
-                                        <i class="icon-open-book"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    25 lessons
-                                </div><!-- /.course-card__lessons -->
-                                <div class="course-card__students">
-                                    <span class="course-card__students__icon">
-                                        <i class="icon-multiple-users-silhouette"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    350 Students
-                                </div><!-- /.course-card__students -->
-                            </div><!-- /.course-card__info -->
-                            <div class="course-card__ratings">
-                                <div class="eduhive-ratings">
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                </div><!-- /.product-ratings -->
-                                <p class="course-card__ratings__text">5 Ratings</p><!-- /.course-card__ratings__text -->
-                            </div><!-- /.course-card__ratings -->
-                            <h4 class="course-card__price">$<span>69.00</span></h4><!-- /.course-card__price -->
-                        </div><!-- /.course-card__content -->
-                    </div><!-- /.course-card -->
-                </div><!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='100ms'>
-                        <div class="course-card__image">
-                            <img src="assets/images/courses/course-2-2.jpg" alt="The Data Science Revolution: Upgrading Your Skills">
-                        </div><!-- /.course-card__image -->
-                        <div class="course-card__content">
-                            <div class="course-card__content__top">
-                                <div class="course-card__category">Experts</div><!-- /.course-card__category -->
-                                <div class="course-card__duration">
-                                    <span class="course-card__duration__icon">
-                                        <i class="icon-clock"></i>
-                                    </span><!-- /.course-card__duration__icon -->
-                                    20 weeks
-                                </div><!-- /.course-card__duration -->
-                            </div><!-- /.course-card__content__top -->
-                            <h3 class="course-card__title"><a href="data-science.html">The Data Science Revolution: Upgrading Your Skills</a></h3><!-- /.course-card__title -->
-                            <div class="course-card__info">
-                                <div class="course-card__lessons">
-                                    <span class="course-card__lessons__icon">
-                                        <i class="icon-open-book"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    20 lessons
-                                </div><!-- /.course-card__lessons -->
-                                <div class="course-card__students">
-                                    <span class="course-card__students__icon">
-                                        <i class="icon-multiple-users-silhouette"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    300 Students
-                                </div><!-- /.course-card__students -->
-                            </div><!-- /.course-card__info -->
-                            <div class="course-card__ratings">
-                                <div class="eduhive-ratings">
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                </div><!-- /.product-ratings -->
-                                <p class="course-card__ratings__text">5 Ratings</p><!-- /.course-card__ratings__text -->
-                            </div><!-- /.course-card__ratings -->
-                            <h4 class="course-card__price">$<span>50.00</span></h4><!-- /.course-card__price -->
-                        </div><!-- /.course-card__content -->
-                    </div><!-- /.course-card -->
-                </div><!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='00ms'>
-                        <div class="course-card__image">
-                            <img src="assets/images/courses/course-2-3.jpg" alt="From Zero to Website: A Web Development Adventure">
-                        </div><!-- /.course-card__image -->
-                        <div class="course-card__content">
-                            <div class="course-card__content__top">
-                                <div class="course-card__category">Experts</div><!-- /.course-card__category -->
-                                <div class="course-card__duration">
-                                    <span class="course-card__duration__icon">
-                                        <i class="icon-clock"></i>
-                                    </span><!-- /.course-card__duration__icon -->
-                                    30 weeks
-                                </div><!-- /.course-card__duration -->
-                            </div><!-- /.course-card__content__top -->
-                            <h3 class="course-card__title"><a href="web-development.html">From Zero to Website: A Web Development Adventure</a></h3><!-- /.course-card__title -->
-                            <div class="course-card__info">
-                                <div class="course-card__lessons">
-                                    <span class="course-card__lessons__icon">
-                                        <i class="icon-open-book"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    32 lessons
-                                </div><!-- /.course-card__lessons -->
-                                <div class="course-card__students">
-                                    <span class="course-card__students__icon">
-                                        <i class="icon-multiple-users-silhouette"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    250 Students
-                                </div><!-- /.course-card__students -->
-                            </div><!-- /.course-card__info -->
-                            <div class="course-card__ratings">
-                                <div class="eduhive-ratings">
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                </div><!-- /.product-ratings -->
-                                <p class="course-card__ratings__text">5 Ratings</p><!-- /.course-card__ratings__text -->
-                            </div><!-- /.course-card__ratings -->
-                            <h4 class="course-card__price">$<span>40.00</span></h4><!-- /.course-card__price -->
-                        </div><!-- /.course-card__content -->
-                    </div><!-- /.course-card -->
-                </div><!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='100ms'>
-                        <div class="course-card__image">
-                            <img src="assets/images/courses/course-2-4.jpg" alt="advanced Mastering UI/UX Design Fundamentals course">
-                        </div><!-- /.course-card__image -->
-                        <div class="course-card__content">
-                            <div class="course-card__content__top">
-                                <div class="course-card__category">Experts</div><!-- /.course-card__category -->
-                                <div class="course-card__duration">
-                                    <span class="course-card__duration__icon">
-                                        <i class="icon-clock"></i>
-                                    </span><!-- /.course-card__duration__icon -->
-                                    15 weeks
-                                </div><!-- /.course-card__duration -->
-                            </div><!-- /.course-card__content__top -->
-                            <h3 class="course-card__title"><a href="uiux-design.html">advanced Mastering UI/UX Design Fundamentals course</a></h3><!-- /.course-card__title -->
-                            <div class="course-card__info">
-                                <div class="course-card__lessons">
-                                    <span class="course-card__lessons__icon">
-                                        <i class="icon-open-book"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    28 lessons
-                                </div><!-- /.course-card__lessons -->
-                                <div class="course-card__students">
-                                    <span class="course-card__students__icon">
-                                        <i class="icon-multiple-users-silhouette"></i>
-                                    </span><!-- /.course-card__lessons__icon -->
-                                    150 Students
-                                </div><!-- /.course-card__students -->
-                            </div><!-- /.course-card__info -->
-                            <div class="course-card__ratings">
-                                <div class="eduhive-ratings">
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                    <span class="eduhive-ratings__icon">
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.eduhive-ratings__icon -->
-                                </div><!-- /.product-ratings -->
-                                <p class="course-card__ratings__text">5 Ratings</p><!-- /.course-card__ratings__text -->
-                            </div><!-- /.course-card__ratings -->
-                            <h4 class="course-card__price">$<span>70.00</span></h4><!-- /.course-card__price -->
-                        </div><!-- /.course-card__content -->
-                    </div><!-- /.course-card -->
-                </div><!-- /.col-lg-6 -->
+                @foreach ($courses as $course)
+                    <div class="col-lg-6">
+                        <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='00ms'>
+                            <div class="course-card__image">
+                                <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}">
+                            </div>
+                            <div class="course-card__content">
+                                <div class="course-card__content__top">
+                                    <div class="course-card__category">{{ $course->courseCategory->name ?? 'Category' }}</div>
+                                    <div class="course-card__duration">
+                                        <span class="course-card__duration__icon">
+                                            <i class="icon-clock"></i>
+                                        </span>
+                                        {{ $course->duration ?? 'Duration' }}
+                                    </div>
+                                </div>
+                                <h3 class="course-card__title">
+                                    <a href="{{ route('app.course.show', $course->slug) }}">{{ $course->title }}</a>
+                                </h3>
+                                <div class="course-card__info">
+                                    <div class="course-card__lessons">
+                                        <span class="course-card__lessons__icon">
+                                            <i class="icon-open-book"></i>
+                                        </span>
+                                        {{ $course->syllabus->count() }} Lessons
+                                    </div>
+                                    <div class="course-card__students">
+                                        <span class="course-card__students__icon">
+                                            <i class="icon-multiple-users-silhouette"></i>
+                                        </span>
+                                        {{ $course->students_count ?? 0 }} Students
+                                    </div>
+                                </div>
+                                {{-- <div class="course-card__ratings">
+                                    <div class="eduhive-ratings">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            <span class="eduhive-ratings__icon">
+                                                <i class="fa fa-star{{ $i < $course->averageRating() ? '' : '-o' }}"></i>
+                                            </span>
+                                        @endfor
+                                    </div>
+                                    <p class="course-card__ratings__text">{{ $course->reviews_count ?? 0 }} Ratings</p>
+                                </div> --}}
+                                <h4 class="course-card__price">Rp<span>{{ number_format($course->price, 0, ',', '.') }}</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div><!-- /.row gutter-y-30 -->
         </div><!-- /.container -->
         <img src="assets/images/shapes/courses-shape-3-1.png" alt="shape" class="courses-three__shape-one">

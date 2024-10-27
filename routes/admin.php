@@ -13,7 +13,7 @@ use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\UniversityController;
 use App\Http\Controllers\Web\Admin\CourseCategoryController;
 use App\Http\Controllers\Web\Admin\ArticleCategoryController;
-
+use App\Http\Controllers\Web\Admin\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +44,7 @@ Route::resource('faculty', FacultyController::class);
 Route::resource('course-category', CourseCategoryController::class);
 Route::resource('course', CourseController::class);
 
+Route::resource('transaction', TransactionController::class);
 
+    // Route untuk update status transaksi via AJAX
+    Route::post('transaction/{id}/update-status', [TransactionController::class, 'updateStatus'])->name('transaction.update-status');

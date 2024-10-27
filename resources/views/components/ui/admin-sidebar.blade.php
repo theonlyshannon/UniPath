@@ -194,6 +194,15 @@
                     </div>
                 </li>
             @endcan
+
+            @can('transaction-management')
+                <li class="nav-item {{ request()->is('admin/transaction*') ? ' active' : '' }}">
+                    <a href="{{ route('admin.transaction.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="credit-card"></i>
+                        <span class="link-title ">Manajemen Transaksi</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </nav>

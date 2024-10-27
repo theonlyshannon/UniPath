@@ -92,6 +92,10 @@ class RoleSeeder extends Seeder
             'course-subject-create',
             'course-subject-edit',
             'course-subject-delete',
+
+            'transaction-management',
+
+            'transaction-edit',
         ];
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
