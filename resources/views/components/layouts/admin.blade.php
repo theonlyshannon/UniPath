@@ -25,14 +25,6 @@
 
     @stack('admin-styles')
 
-
-    <style>
-        :root {
-            --primary: #F9883D;
-            --primaryHover: #F57119;
-        }
-    </style>
-
     <!-- common css -->
     <link href="{{ asset('admin/css/app.css') }}?v={{ uniqid() }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}?v={{ uniqid() }}">

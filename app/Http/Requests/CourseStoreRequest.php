@@ -27,6 +27,8 @@ class CourseStoreRequest extends FormRequest
             'syllabus.*.file' => 'nullable|file|mimes:doc,docx,pdf|max:5120',
             'syllabus.*.video' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
             'is_favourite' => 'nullable|in:0,1',
+            'is_free' => 'nullable|boolean',
+            'price' => 'nullable|numeric|min:0',
         ];
     }
 
@@ -51,6 +53,8 @@ class CourseStoreRequest extends FormRequest
             'syllabus.*.file' => 'File Silabus',
             'syllabus.*.video' => 'Link Video Silabus',
             'is_favourite' => 'Favorit',
+            'is_free' => 'Gratis',
+            'price' => 'Harga Kelas',   
         ];
     }
 

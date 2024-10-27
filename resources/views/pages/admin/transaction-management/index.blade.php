@@ -10,9 +10,8 @@
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <x-ui.base-card>
-                <!-- Jika tidak diperlukan, Anda bisa menghapus slot header -->
                 <x-slot name="header">
-                    <!-- Contoh: Tidak ada tombol tambah transaksi -->
+                    <p>Jumlah Transaction</p>
                 </x-slot>
                 <x-ui.datatables>
                     <x-slot name="thead">

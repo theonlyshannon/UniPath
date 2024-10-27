@@ -183,10 +183,9 @@ class RoleSeeder extends Seeder
             'course-edit',
             'course-delete',
 
-            'course-subject-list',
-            'course-subject-create',
-            'course-subject-edit',
-            'course-subject-delete',
+            'transaction-management',
+
+            'transaction-edit',
         ]);
 
         $writer->syncPermissions([

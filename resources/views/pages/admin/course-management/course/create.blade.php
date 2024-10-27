@@ -43,10 +43,14 @@
 
                     <x-forms.input label="Trailer" name="trailer" id="trailer" value="{{ old('trailer') }}" />
 
+                    <div class="mb-3" id="price-container">
+                        <x-forms.input label="Harga Kelas" name="price" id="price" type="number"
+                            value="{{ old('price', 0) }}" />
+                    </div>
+
                     <div class="mb-3">
-                        <input type="hidden" name="is_favourite" value="0">
-                        <x-forms.checkbox label="Kelas Favourite" id="is_favourite" name="is_favourite"
-                            :checked="old('is_favourite')" />
+                        <input type="hidden" name="is_free" value="0">
+                        <x-forms.checkbox label="Kelas Gratis" id="is_free" name="is_free" :checked="old('is_free')" />
                     </div>
 
                     <div id="syllabus" class="mb-3">
@@ -122,33 +126,33 @@
 
                 const addSyllabusItem = (index) => {
                     const syllabusHtml = `
-                        <div class="card mt-3" id="syllabus-${index}">
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="syllabus-sort-${index}" class="mb-1">Urutan</label>
-                                    <input type="number" class="form-control" name="syllabus[${index}][sort]" id="syllabus-sort-${index}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="syllabus-title-${index}" class="mb-1">Materi</label>
-                                    <input type="text" class="form-control" name="syllabus[${index}][title]" id="syllabus-title-${index}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="syllabus-file-${index}" class="mb-1">File (DOCX/PDF)</label>
-                                    <input type="file" class="form-control" accept=".doc,.docx,.pdf" name="syllabus[${index}][file]" id="syllabus-file-${index}">
-                                </div>
-                                <div id="syllabus-video-preview-${index}" class="mb-3" style="display: none;">
-                                    <label for="syllabus-video-preview-${index}" class="mb-1">Preview Video</label>
-                                    <div class="video-container mb-45">
-                                        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="syllabus-video-iframe-${index}"></iframe>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="syllabus-video-${index}" class="mb-1">Link Video (YouTube)</label>
-                                    <input type="text" class="form-control" name="syllabus[${index}][video]" id="syllabus-video-${index}">
-                                </div>
-                                <button class="btn btn-danger remove-syllabus" type="button" data-index="${index}">Hapus</button>
+                    <div class="card mt-3" id="syllabus-${index}">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="syllabus-sort-${index}" class="mb-1">Urutan</label>
+                                <input type="number" class="form-control" name="syllabus[${index}][sort]" id="syllabus-sort-${index}">
                             </div>
-                        </div>`;
+                            <div class="mb-3">
+                                <label for="syllabus-title-${index}" class="mb-1">Materi</label>
+                                <input type="text" class="form-control" name="syllabus[${index}][title]" id="syllabus-title-${index}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="syllabus-file-${index}" class="mb-1">File (DOCX/PDF)</label>
+                                <input type="file" class="form-control" accept=".doc,.docx,.pdf" name="syllabus[${index}][file]" id="syllabus-file-${index}">
+                            </div>
+                            <div id="syllabus-video-preview-${index}" class="mb-3" style="display: none;">
+                                <label for="syllabus-video-preview-${index}" class="mb-1">Preview Video</label>
+                                <div class="video-container mb-45">
+                                    <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="syllabus-video-iframe-${index}"></iframe>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="syllabus-video-${index}" class="mb-1">Link Video (YouTube)</label>
+                                <input type="text" class="form-control" name="syllabus[${index}][video]" id="syllabus-video-${index}">
+                            </div>
+                            <button class="btn btn-danger remove-syllabus" type="button" data-index="${index}">Hapus</button>
+                        </div>
+                    </div>`;
                     elements.syllabusContainer.insertAdjacentHTML('beforeend', syllabusHtml);
                 };
 
@@ -208,6 +212,24 @@
         <script>
             $('#is_favourite').change(function() {
                 $(this).val(this.checked ? 1 : 0);
+            });
+
+            $('#is_free').change(function() {
+                $(this).val(this.checked ? 1 : 0);
+
+                if (this.checked) {
+                    $('#price-container').hide();
+                    $('#price').val(0);
+                } else {
+                    $('#price-container').show();
+                }
+            });
+
+            $(document).ready(function() {
+                if ($('#is_free').is(':checked')) {
+                    $('#price-container').hide();
+                    $('#price').val(0);
+                }
             });
         </script>
     @endpush

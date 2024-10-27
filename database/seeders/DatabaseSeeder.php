@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
                 FacultySeeder::class,
 
                 CourseCategorySeeder::class,
-                CourseSeeder::class
+                // CourseSeeder::class
             ]);
         }
 

@@ -1,4 +1,4 @@
-@push('plugin-styles')
+@push('admin-styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/plugins/datatables-net-bs5/dataTables.bootstrap5.css') }}">
 @endpush
 
