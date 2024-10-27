@@ -24,8 +24,8 @@
 
                     <x-forms.input label="Slug" name="slug" id="slug" value="{{ old('slug') }}" />
 
-                    <x-forms.textarea label="Deskripsi" name="description"
-                        id="description">{{ old('description') }}</x-forms.textarea>
+                    <x-forms.textarea label="Deskripsi" name="description" id="description"
+                        value="{{ old('description') }}" />
 
                     <img id="thumbnail-preview" src="#" alt="Thumbnail Preview"
                         style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
@@ -44,8 +44,7 @@
                     <x-forms.input label="Trailer" name="trailer" id="trailer" value="{{ old('trailer') }}" />
 
                     <div class="mb-3" id="price-container">
-                        <x-forms.input label="Harga Kelas" name="price" id="price" type="number"
-                            value="{{ old('price', 0) }}" />
+                        <x-forms.input label="Harga Kelas" name="price" id="price" type="text" value="{{ old('price', 0) }}" />
                     </div>
 
                     <div class="mb-3">
@@ -210,25 +209,43 @@
         </script>
 
         <script>
-            $('#is_favourite').change(function() {
-                $(this).val(this.checked ? 1 : 0);
-            });
+            document.addEventListener('DOMContentLoaded', function() {
+                const priceInput = document.getElementById('price');
+                const isFreeCheckbox = document.getElementById('is_free');
+                const isFavouriteCheckbox = document.getElementById('is_favourite');
 
-            $('#is_free').change(function() {
-                $(this).val(this.checked ? 1 : 0);
+                priceInput.addEventListener('keyup', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
 
-                if (this.checked) {
-                    $('#price-container').hide();
-                    $('#price').val(0);
-                } else {
-                    $('#price-container').show();
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                    e.target.value = value;
+                });
+
+                if (isFavouriteCheckbox) {
+                    isFavouriteCheckbox.addEventListener('change', function() {
+                        this.value = this.checked ? 1 : 0;
+                    });
                 }
-            });
 
-            $(document).ready(function() {
-                if ($('#is_free').is(':checked')) {
-                    $('#price-container').hide();
-                    $('#price').val(0);
+                if (isFreeCheckbox) {
+                    isFreeCheckbox.addEventListener('change', function() {
+                        this.value = this.checked ? 1 : 0;
+
+                        if (this.checked) {
+                            priceInput.value = 0;
+                            priceInput.dispatchEvent(new Event('keyup')); 
+                            document.getElementById('price-container').style.display = 'none';
+                        } else {
+                            document.getElementById('price-container').style.display = 'block';
+                        }
+                    });
+                }
+
+                if (isFreeCheckbox && isFreeCheckbox.checked) {
+                    priceInput.value = 0;
+                    priceInput.dispatchEvent(new Event('keyup'));
+                    document.getElementById('price-container').style.display = 'none';
                 }
             });
         </script>

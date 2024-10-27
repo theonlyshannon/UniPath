@@ -21,6 +21,7 @@
                             <th>Title</th>
                             <th>Slug</th>
                             <th>Thumbnail</th>
+                            <th>Harga Kelas</th>
                             <th>Trailer</th>
                             <th>Aktif</th>
                             <th>Kelas Favorite</th>
@@ -37,6 +38,9 @@
                                 <td>
                                     <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
                                         width="500">
+                                </td>
+                                <td>
+                                    {{ $course->formatted_price }}
                                 </td>
                                 <td>
                                     @if ($course->trailer)

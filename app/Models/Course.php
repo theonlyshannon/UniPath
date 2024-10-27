@@ -47,4 +47,9 @@ class Course extends Model
     {
         return $this->hasMany(CourseSyllabus::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return number_format($this->price, 0, ',', '.');
+    }
 }

@@ -27,8 +27,8 @@
                     <x-forms.input label="Slug" name="slug" id="slug"
                         value="{{ old('slug', $course->slug) }}" />
 
-                    <x-forms.textarea label="Deskripsi" name="description"
-                        id="description" value="{{ old('description', $course->description) }}" />
+                    <x-forms.textarea label="Deskripsi" name="description" id="description"
+                        value="{{ old('description', $course->description) }}" />
 
                     <img id="thumbnail-preview"
                         src="{{ $course->thumbnail ? asset('storage/' . $course->thumbnail) : '#' }}"
@@ -57,7 +57,7 @@
 
                     <div class="mb-3" id="price-container" style="{{ $course->is_free ? 'display: none;' : '' }}">
                         <x-forms.input label="Harga Kelas" name="price" id="price" type="number"
-                            value="{{ old('price', $course->price) }}" />
+                            value="{{ old('price', $course->formatted_price) }}" />
                     </div>
 
                     <div id="syllabus" class="mb-3">
@@ -277,6 +277,7 @@
                 const priceInput = document.getElementById('price');
                 const isFavouriteCheckbox = document.getElementById('is_favourite');
 
+                // Event listener for is_free checkbox
                 isFreeCheckbox.addEventListener('change', function() {
                     isFreeCheckbox.value = this.checked ? 1 : 0;
 
@@ -288,13 +289,27 @@
                     }
                 });
 
+                // Initial setup if is_free is checked on page load
                 if (isFreeCheckbox.checked) {
                     priceContainer.style.display = 'none';
                     priceInput.value = 0;
                 }
 
+                // Event listener for is_favourite checkbox
                 $('#is_favourite').change(function() {
                     $(this).val(this.checked ? 1 : 0);
+                });
+
+                // Format input price on keyup event
+                priceInput.addEventListener('keyup', function(e) {
+                    // Remove non-numeric characters
+                    let value = e.target.value.replace(/\D/g, '');
+
+                    // Format value with thousand separators (dot as separator)
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                    // Set formatted value back to input
+                    e.target.value = value;
                 });
             });
         </script>
