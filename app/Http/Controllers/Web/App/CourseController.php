@@ -2,30 +2,35 @@
 
 namespace App\Http\Controllers\Web\App;
 
-use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Interfaces\CourseRepositoryInterface;
 
 class CourseController extends Controller
 {
+    private $courseRepository;
+
+    public function __construct(CourseRepositoryInterface $courseRepository)
+    {
+        $this->courseRepository = $courseRepository;
+    }
+
     public function index()
     {
-        // Mengambil semua kursus yang aktif
-        $courses = Course::where('is_active', true)->get();
+        $category = request()->query('category');
 
-        // Mengirim data ke view
+        $courses = $this->courseRepository->getAllCourse(8, $category);
+
         return view('pages.app.course.index', compact('courses'));
     }
 
-    // Menampilkan detail kursus
     public function show($slug)
     {
-        // Mencari kursus berdasarkan slug
-        $course = Course::where('slug', $slug)->firstOrFail();
+        $course = $this->courseRepository->getCourseBySlug($slug);
 
-        // Mengirim data ke view
-        return view('pages.app.course.detail', compact('course'));
+        return view('pages.app.course.show', compact('course'));
     }
 
-    
+
 }

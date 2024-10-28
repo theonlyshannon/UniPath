@@ -27,6 +27,9 @@ class ArticleController extends Controller
         $this->writerRepository = $writerRepository;
     }
 
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $category = request()->query('category');
@@ -46,10 +49,9 @@ class ArticleController extends Controller
 
         $categories = $this->articleCategoryRepository->getAllArticleCategory();
         $tags = $this->articleTagRepository->getAllArticleTag();
-        $relatedArticles = $this->articleRepository->getAllArticle(3, null, $article->categories->first()->slug, null)->except($article->id);
         $recentArticles = $this->articleRepository->getAllArticle(3);
 
-        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'relatedArticles', 'recentArticles'));
+        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'recentArticles'));
     }
 
 }
