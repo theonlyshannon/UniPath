@@ -16,7 +16,9 @@ interface CourseRepositoryInterface
 
     public function updateCourse(array $data, string $id);
 
-    public function updateStatus(string $courseId, bool $isActive);
+    public function updateStatusIsActive(string $courseId, bool $isActive);
+
+    public function updateStatusIsFavourite(string $courseId, bool $isFavourite);
 
     public function deleteCourse(string $id);
 }

@@ -57,7 +57,7 @@ class CourseRepository implements CourseRepositoryInterface
                     ];
 
                     if (isset($syllabus['file'])) {
-                        $syllabusData['file'] = $syllabus['file']->storeAs('assets/files/course/syllabus', Str::random(40) . '.' . $syllabus['file']->extension(), 'public');
+                        $syllabusData['file'] = $syllabus['file']->storeAs('assets/files/course/syllabus', Str::random(40) . '.' . $syllabus['file']->extension());
                     }
 
                     CourseSyllabus::create($syllabusData);
@@ -86,7 +86,7 @@ class CourseRepository implements CourseRepositoryInterface
                     ];
 
                     if (isset($syllabus['file'])) {
-                        $syllabusData['file'] = $syllabus['file']->storeAs('assets/files/course/syllabus', Str::random(40) . '.' . $syllabus['file']->extension(), 'public');
+                        $syllabusData['file'] = $syllabus['file']->storeAs('assets/files/course/syllabus', Str::random(40) . '.' . $syllabus['file']->extension());
                     }
 
                     CourseSyllabus::create($syllabusData);
@@ -97,11 +97,20 @@ class CourseRepository implements CourseRepositoryInterface
         });
     }
 
-    public function updateStatus($courseId, $isActive)
+    public function updateStatusIsActive($courseId, $isActive)
     {
         $course = Course::findOrFail($courseId);
 
         $course->is_active = $isActive;
+
+        $course->save();
+    }
+
+    public function updateStatusIsFavourite($courseId, $isFavourite)
+    {
+        $course = Course::findOrFail($courseId);
+
+        $course->is_favourite = $isFavourite;
 
         $course->save();
     }

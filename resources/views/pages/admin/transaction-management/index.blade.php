@@ -1,10 +1,8 @@
-<!-- resources/views/admin/transaction/index.blade.php -->
-
-<x-layouts.admin title="Transaction Management">
+<x-layouts.admin title="Transaksi">
 
     <x-ui.breadcumb-admin>
         <li class="breadcrumb-item " aria-current="page">Manajemen Transaksi</li>
-        <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+        <li class="breadcrumb-item active" aria-current="page">Transaksi</li>
     </x-ui.breadcumb-admin>
 
     <div class="row">
@@ -17,11 +15,11 @@
                     <x-slot name="thead">
                         <tr>
                             <th>No</th>
-                            <th>Transaction Code</th>
+                            <th>Kode Transaksi</th>
                             <th>User</th>
-                            <th>Amount</th>
+                            <th>Jumlah</th>
                             <th>Status</th>
-                            <th>Transaction Date</th>
+                            <th>Tanggal Transaksi</th>
                             <th>Aksi</th>
                         </tr>
                     </x-slot>

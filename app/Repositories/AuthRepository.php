@@ -54,7 +54,6 @@ class AuthRepository implements AuthRepositoryInterface
         }
 
         Swal::toast('Email atau password salah', 'error')->timerProgressBar();
-
         return redirect()->back();
     }
 

@@ -43,8 +43,8 @@ Route::resource('faculty', FacultyController::class);
 
 Route::resource('course-category', CourseCategoryController::class);
 Route::resource('course', CourseController::class);
+Route::post('/course/{courseId}/update-status', [CourseController::class, 'updateStatusIsActive']);
+Route::post('/admin/course/{courseId}/update-favourite', [CourseController::class, 'updateStatusIsFavourite']);
 
 Route::resource('transaction', TransactionController::class);
-
-    // Route untuk update status transaksi via AJAX
-    Route::post('transaction/{id}/update-status', [TransactionController::class, 'updateStatus'])->name('transaction.update-status');
+Route::post('transaction/{id}/update-status', [TransactionController::class, 'updateStatus'])->name('transaction.update-status');

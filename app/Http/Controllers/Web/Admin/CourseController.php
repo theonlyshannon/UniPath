@@ -142,4 +142,26 @@ class CourseController extends Controller
 
         return redirect()->route('admin.course.index');
     }
+
+    public function updateStatusIsActive(Request $request, $courseId)
+    {
+        try {
+            $this->courseRepository->updateStatusIsActive($courseId, $request->is_active);
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
+    }
+
+    public function updateStatusIsFavourite(Request $request, $courseId)
+    {
+        try {
+            $this->courseRepository->updateStatusIsFavourite($courseId, $request->is_favourite);
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
+    }
 }
