@@ -29,7 +29,7 @@ Route::name('app.')->group(function () {
 
     Route::prefix('artikel')->name('article.')->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('index');
-        Route::get('/detail', [ArticleController::class, 'show'])->name('show');
+        Route::get('/{slug}', [ArticleController::class, 'show'])->name('show');
     });
 
     Route::prefix('kelas')->name('course.')->group(function () {

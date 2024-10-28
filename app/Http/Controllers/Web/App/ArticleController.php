@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\App;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Interfaces\WriterRepositoryInterface;
 use App\Interfaces\ArticleRepositoryInterface;
 use App\Interfaces\ArticleTagRepositoryInterface;
 use App\Interfaces\ArticleCategoryRepositoryInterface;
@@ -13,14 +14,17 @@ class ArticleController extends Controller
     private $articleRepository;
     private $articleCategoryRepository;
     private $articleTagRepository;
+    private $writerRepository;
 
-    public function __construct(ArticleRepositoryInterface $articleRepository, ArticleCategoryRepositoryInterface $articleCategoryRepository, ArticleTagRepositoryInterface $articleTagRepository)
+    public function __construct(ArticleRepositoryInterface $articleRepository, ArticleCategoryRepositoryInterface $articleCategoryRepository, ArticleTagRepositoryInterface $articleTagRepository, WriterRepositoryInterface $writerRepository)
     {
         $this->articleRepository = $articleRepository;
 
         $this->articleCategoryRepository = $articleCategoryRepository;
 
         $this->articleTagRepository = $articleTagRepository;
+
+        $this->writerRepository = $writerRepository;
     }
 
     public function index()
@@ -31,8 +35,9 @@ class ArticleController extends Controller
         $articles = $this->articleRepository->getAllArticle(5, $category, $tag);
         $categories = $this->articleCategoryRepository->getAllArticleCategory();
         $tags = $this->articleTagRepository->getAllArticleTag();
+        $writers = $this->writerRepository->getAllWriter();
 
-        return view('pages.app.article.index', compact('articles', 'categories', 'tags'));
+        return view('pages.app.article.index', compact('articles', 'categories', 'tags', 'writers'));
     }
 
     public function show($slug)
@@ -44,7 +49,7 @@ class ArticleController extends Controller
         $relatedArticles = $this->articleRepository->getAllArticle(3, null, $article->categories->first()->slug, null)->except($article->id);
         $recentArticles = $this->articleRepository->getAllArticle(3);
 
-        return view('pages.app.article.show', compact('article', 'comments', 'categories', 'tags', 'relatedArticles', 'recentArticles'));
+        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'relatedArticles', 'recentArticles'));
     }
 
 }

@@ -37,7 +37,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function getArticleBySlug(string $slug)
     {
-        return Article::where('slug', $slug)->first();
+        return Article::where('slug', $slug)->firstOrFail();
     }
 
     public function getArticleByCategory(string $category)

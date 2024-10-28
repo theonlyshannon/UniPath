@@ -16,8 +16,8 @@ class ArticleCategory extends Model
         'slug',
     ];
 
-    // public function getArticleCountAttribute()
-    // {
-    //     return $this->articles->count();
-    // }
+    public function getArticleCountAttribute()
+    {
+        return $this->articles->count();
+    }
 }
