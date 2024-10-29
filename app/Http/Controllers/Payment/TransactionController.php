@@ -53,7 +53,7 @@ class TransactionController extends Controller
             'transaction_code' => $transactionCode,
             'user_id' => $user->id,
             'amount' => $amount,
-            'status' => 'pending',
+            'status' => $amount == 0 ? 'paid' : 'pending',
             'transaction_date' => now(),
         ]);
 
@@ -67,6 +67,10 @@ class TransactionController extends Controller
         }
 
         Cart::where('user_id', $user->id)->delete();
+
+        if ($amount == 0) {
+            return redirect()->route('app.transaction.success', $transactionCode)->with('success', 'Transaksi berhasil tanpa pembayaran.');
+        }
 
         return redirect()->route('app.transaction.payment.page', ['transactionCode' => $transactionCode]);
     }

@@ -30,7 +30,18 @@
                     {{ $course->students_count ?? 0 }} Students
                 </div>
             </div>
-            <h4 class="course-card__price">Rp<span>{{ number_format($course->price, 0, ',', '.') }}</span></h4>
+            @php
+                $hasAccess = Auth::check() && Auth::user()->hasPurchasedCourse($course->id);
+            @endphp
+            <h4 class="course-card__price">
+                @if($hasAccess)
+                    <span>Sudah Dibeli</span>
+                @elseif($course->price == 0)
+                    <span>Gratis</span>
+                @else
+                    Rp<span>{{ number_format($course->price, 0, ',', '.') }}</span>
+                @endif
+            </h4>
         </div>
     </div>
 </div>

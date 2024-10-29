@@ -2,16 +2,7 @@
 
 <x-layouts.app title="Keranjang Belanja">
     <section class="page-header">
-        <div class="container">
-            <div class="page-header__content">
-                <ul class="eduhive-breadcrumb list-unstyled">
-                    <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="{{ route('app.dashboard') }}">Home</a></li>
-                    <li><span>Cart</span></li>
-                </ul>
-                <h2 class="page-header__title">Cart</h2>
-            </div>
-        </div>
-        <!-- Tambahkan shape jika diperlukan -->
+        <!-- ... -->
     </section>
 
     <section class="cart-page section-space2">
@@ -54,9 +45,21 @@
                                                     </h3>
                                                 </div>
                                             </td>
-                                            <td class="cart-page__table__price">Rp{{ number_format($cartItem->course->price, 0, ',', '.') }}</td>
+                                            <td class="cart-page__table__price">
+                                                @if($cartItem->course->price == 0)
+                                                    Rp0 (Free Course)
+                                                @else
+                                                    Rp{{ number_format($cartItem->course->price, 0, ',', '.') }}
+                                                @endif
+                                            </td>
                                             <td>{{ $cartItem->quantity }}</td>
-                                            <td class="cart-page__table__total">Rp{{ number_format($cartItem->course->price * $cartItem->quantity, 0, ',', '.') }}</td>
+                                            <td class="cart-page__table__total">
+                                                @if($cartItem->course->price * $cartItem->quantity == 0)
+                                                    Rp0 (Free Course)
+                                                @else
+                                                    Rp{{ number_format($cartItem->course->price * $cartItem->quantity, 0, ',', '.') }}
+                                                @endif
+                                            </td>
                                             <td>
                                                 <form action="{{ route('app.cart.remove', $cartItem->id) }}" method="POST">
                                                     @csrf
@@ -79,18 +82,21 @@
                                 </li>
                                 <li class="cart-page__cart-total__amount cart-page__cart-total__amount--1">
                                     <span class="cart-page__cart-total__amount__title">Subtotal</span>
-                                    <span class="cart-page__cart-total__amount__text">Rp{{ number_format($totalPrice, 0, ',', '.') }}</span>
+                                    <span class="cart-page__cart-total__amount__text">
+                                        @if($totalPrice == 0)
+                                            Rp0 (Free Courses)
+                                        @else
+                                            Rp{{ number_format($totalPrice, 0, ',', '.') }}
+                                        @endif
+                                    </span>
                                 </li>
                                 <li class="cart-page__cart-total__address">
                                     <h4 class="cart-page__cart-total__address__title">Courses Selected</h4>
                                     <ul class="cart-page__cart-total__address__list list-unstyled">
-                                        @foreach ($cartItems as $cartItem)
-                                            <li class="cart-page__cart-total__address__list__item">{{ $cartItem->course->title }}</li>
+                                        @foreach ($cartItems as $index => $cartItem)
+                                            <li class="cart-page__cart-total__address__list__item">{{ $index + 1 }}. {{ $cartItem->course->title }}</li>
                                         @endforeach
                                     </ul>
-                                </li>
-                                <li class="cart-page__cart-total__amount cart-page__cart-total__amount--2">
-                                    <span>Total</span><span class="cart-page__cart-total__amount__text">Rp{{ number_format($totalPrice, 0, ',', '.') }}</span>
                                 </li>
                             </ul>
                             <div class="cart-page__button">
