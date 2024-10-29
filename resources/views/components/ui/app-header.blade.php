@@ -16,7 +16,7 @@
                             <a href="#home">Home</a>
                         </li>
                         <li class="scrollToLink"><a href="#about">About</a></li>
-                        <li class="scrollToLink"><a href="#courses">Courses</a></li>
+                        <li class="scrollToLink"><a href="{{ route('app.course.index') }}">Courses</a></li>
                         <li class="scrollToLink"><a href="#testimonials">Testimonials</a></li>
                         <li class="scrollToLink"><a href="#instructors">Instructors</a></li>
                         <li class="scrollToLink"><a href="#blog">Blog</a></li>

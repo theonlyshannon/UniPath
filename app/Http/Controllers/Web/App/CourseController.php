@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\CourseRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -26,11 +27,19 @@ class CourseController extends Controller
     }
 
     public function show($slug)
-    {
-        $course = $this->courseRepository->getCourseBySlug($slug);
+{
+    $course = $this->courseRepository->getCourseBySlug($slug);
 
-        return view('pages.app.course.show', compact('course'));
+    $user = Auth::user();
+    $hasAccess = false;
+
+    if ($user) {
+        $hasAccess = $user->hasPurchasedCourse($course->id);
     }
+
+    return view('pages.app.course.show', compact('course', 'hasAccess'));
+}
+
 
 
 }

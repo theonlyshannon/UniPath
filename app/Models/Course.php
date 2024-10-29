@@ -52,4 +52,6 @@ class Course extends Model
     {
         return number_format($this->price, 0, ',', '.');
     }
+
+    
 }

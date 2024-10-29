@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Course;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -70,7 +73,9 @@ class CartController extends Controller
     public function checkout()
     {
         $user = Auth::user();
-        $cartItems = Cart::where('user_id', $user->id)->with('course')->get();
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with('course')
+            ->get();
 
         if ($cartItems->isEmpty()) {
             return redirect()->route('app.cart.index')->with('message', 'Keranjang Anda kosong.');

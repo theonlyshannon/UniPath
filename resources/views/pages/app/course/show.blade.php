@@ -69,8 +69,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab fadeInUp animated" data-wow-delay="200ms" id="curriculum"
-                                    style="display: none;">
+                                <div class="tab active-tab fadeInUp animated" data-wow-delay="200ms" id="curriculum"
+                                    style="display: block;">
                                     <div class="course-details__accordion">
                                         <div class="eduhive-accordion" data-grp-name="eduhive-accordion">
                                             <div class="accordion active">
@@ -82,31 +82,46 @@
                                                     <div class="inner">
                                                         <div class="course-details__accordion__inner">
                                                             @foreach ($course->syllabus as $syllabus)
-                                                                <a href="{{ $syllabus->video }}"
-                                                                    class="course-details__accordion__class video-popup"
-                                                                    onclick="markAsComplete('{{ $syllabus->id }}', 'video')">
-                                                                    <span
-                                                                        class="course-details__accordion__class__title">
+                                                                @if ($hasAccess)
+                                                                    <!-- Materi dapat diakses -->
+                                                                    <a href="{{ $syllabus->video }}"
+                                                                        class="course-details__accordion__class video-popup"
+                                                                        onclick="markAsComplete('{{ $syllabus->id }}', 'video')">
                                                                         <span
-                                                                            class="course-details__accordion__class__icon">
-                                                                            <i class="icon-files"></i>
+                                                                            class="course-details__accordion__class__title">
+                                                                            <span
+                                                                                class="course-details__accordion__class__icon">
+                                                                                <i class="icon-files"></i>
+                                                                            </span>
+                                                                            {{ $syllabus->title }}
                                                                         </span>
-                                                                        {{ $syllabus->title }}
-                                                                    </span>
-                                                                    <span
-                                                                        class="course-details__accordion__class__right">
-                                                                        <x-ui.base-button
-                                                                            onclick="markAsComplete('{{ $syllabus->id }}', 'file'); window.location.href='{{ asset('storage/' . $syllabus->file) }}';"
-                                                                            download>
-                                                                            File Materi
-                                                                        </x-ui.base-button>
-                                                                    </span>
-                                                                    <span
-                                                                        class="course-details__accordion__class__check {{ $syllabus->is_complete ? 'complete' : '' }}">
-                                                                        <i class="icon-check"></i>
-                                                                    </span>
-                                                                    </span>
-                                                                </a>
+                                                                        <span
+                                                                            class="course-details__accordion__class__right">
+                                                                            <x-ui.base-button
+                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'file'); window.location.href='{{ asset('storage/' . $syllabus->file) }}';"
+                                                                                download>
+                                                                                File Materi
+                                                                            </x-ui.base-button>
+                                                                        </span>
+                                                                        <span
+                                                                            class="course-details__accordion__class__check {{ $syllabus->is_complete ? 'complete' : '' }}">
+                                                                            <i class="icon-check"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                @else
+                                                                    <!-- Materi terkunci -->
+                                                                    <div
+                                                                        class="course-details__accordion__class locked">
+                                                                        <span
+                                                                            class="course-details__accordion__class__title">
+                                                                            <span
+                                                                                class="course-details__accordion__class__icon">
+                                                                                <i class="icon-lock"></i>
+                                                                            </span>
+                                                                            {{ $syllabus->title }}
+                                                                        </span>
+                                                                    </div>
+                                                                @endif
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -155,43 +170,6 @@
                                                         vitae dicta sunt explicabo. Aelltes port lacus quis enim var sed
                                                         efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is
                                                         simply dummy</p>
-                                                </div>
-                                            </li>
-                                            <li class="comments-one__card">
-                                                <div class="comments-one__card__image">
-                                                    <img src="assets/images/courses/course-c-1-2.png"
-                                                        alt="Sarah albert">
-                                                </div>
-                                                <div class="comments-one__card__content">
-                                                    <div class="comments-one__card__top">
-                                                        <div class="comments-one__card__info">
-                                                            <h3 class="comments-one__card__title">Sarah albert</h3>
-                                                            <p class="comments-one__card__date">June 10, 2023 At 10:00
-                                                                AM</p>
-                                                        </div>
-                                                        <div class="eduhive-ratings">
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="comments-one__card__text">Moving the goalposts sorry i
-                                                        was triple muted, so what do you feel you would bring to the
-                                                        table if you were hired for this position. A better
-                                                        understanding of usage can aid in prioritizing future efforts
-                                                        window of opportunity building</p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -276,28 +254,59 @@
                                     <span>{{ $course->syllabus->count() }}</span>
                                 </div>
                             </li>
+                            <li>
+                                <div class="course-details__info__text">
+                                    <div class="course-details__info__text__title">
+                                        <span class="course-details__info__icon"><i
+                                            class="icon-multiple-users"></i></span>
+                                        Favourite Class:
+                                    </div>
+                                    <span>{{ $course->is_favourite ? 'Yes' : 'No' }}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course-details__info__text">
+                                    <div class="course-details__info__text__title">
+                                        <span class="course-details__info__icon"><i class="icon-medal"></i></span>
+                                        Certifications:
+                                    </div>
+                                    <span>Yes</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course-details__info__text">
+                                    <div class="course-details__info__text__title">
+                                        <span class="course-details__info__icon"><i class="icon-globe"></i></span>
+                                        Language:
+                                    </div>
+                                    <span>Indonesian</span>
+                                </div>
+                            </li>
                         </ul>
                         <div class="course-details__info__price">This course Fee
                             Rp{{ number_format($course->price, 0, ',', '.') }}</div>
-                        @auth
-                            <form action="{{ route('app.cart.add', $course->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="course-details__info__btn eduhive-btn">
-                                    <span class="eduhive-btn__text">Join This course</span>
+                            @if(!$hasAccess)
+                            @auth
+                                <!-- Tambahkan ke keranjang (baik kursus gratis maupun berbayar) -->
+                                <form action="{{ route('app.cart.add', $course->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="course-details__info__btn eduhive-btn">
+                                        <span class="eduhive-btn__text">Join This Course</span>
+                                        <span class="eduhive-btn__icon">
+                                            <span class="eduhive-btn__icon__inner"><i class="icon-arrow-right"></i></span>
+                                        </span>
+                                    </button>
+                                </form>
+                            @else
+                                <!-- Tampilkan tombol login -->
+                                <a href="{{ route('login') }}" class="course-details__info__btn eduhive-btn">
+                                    <span class="eduhive-btn__text">Login untuk Bergabung</span>
                                     <span class="eduhive-btn__icon">
                                         <span class="eduhive-btn__icon__inner"><i class="icon-arrow-right"></i></span>
                                     </span>
-                                </button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="course-details__info__btn eduhive-btn">
-                                <span class="eduhive-btn__text">Login untuk Bergabung</span>
-                                <span class="eduhive-btn__icon">
-                                    <span class="eduhive-btn__icon__inner"><i class="icon-arrow-right"></i></span>
-                                </span>
-                            </a>
-                        @endauth
-
+                                </a>
+                            @endauth
+                        @endif
                     </div>
                 </div>
             </div>
