@@ -1,10 +1,9 @@
-<x-layouts.admin title="Article">
+<x-layouts.admin title="Artikel">
 
     <x-ui.breadcumb-admin>
         <li class="breadcrumb-item " aria-current="page">Manajemen Artikel</li>
         <li class="breadcrumb-item active" aria-current="page">Artikel</li>
     </x-ui.breadcumb-admin>
-
 
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -23,6 +22,7 @@
                             <th>Kategori</th>
                             <th>Tagar</th>
                             <th>Thumbnail</th>
+                            <th>Pengunjung</th>
                             <th>Aksi</th>
                         </tr>
                     </x-slot>
@@ -46,7 +46,7 @@
                                     <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
                                         width="100">
                                 </td>
-
+                                <td>{{ $article->visitor->count() ?? 0 }}</td>
                                 <td>
                                     <x-ui.base-button color="primary" type="button"
                                         href="{{ route('admin.article.show', $article->id) }}">

@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('chat_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id'); // Foreign key ke tabel users
-            $table->enum('sender', ['user', 'ai']); // Menandai pengirim pesan
+
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->enum('sender', ['user', 'ai']);
             $table->text('message');
-            // softdelete
+
             $table->softDeletes();
             $table->timestamps();
-
-            // Foreign key constraint
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

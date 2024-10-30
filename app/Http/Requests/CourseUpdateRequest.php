@@ -17,16 +17,18 @@ class CourseUpdateRequest extends FormRequest
             'mentor_id' => 'required|exists:mentors,id',
             'course_category_id' => 'required|exists:course_categories,id',
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:courses,slug,' . $this->route('course'),
+            'slug' => 'required|string|max:255|unique:courses,slug,' . $this->route('course'), 
             'description' => 'required|string',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'trailer' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
-            'syllabus' => 'nullable|array',
+            'syllabus' => 'required|array',
             'syllabus.*.sort' => 'required|integer',
-            'is_favourite' => 'nullable|in:0,1',
             'syllabus.*.title' => 'required|string|max:255',
             'syllabus.*.file' => 'nullable|file|mimes:doc,docx,pdf|max:5120',
             'syllabus.*.video' => ['nullable', 'regex:/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$/'],
+            'is_favourite' => 'nullable|in:0,1',
+            'is_free' => 'nullable|boolean',
+            'price' => 'nullable|numeric|min:0',
         ];
     }
 
@@ -51,6 +53,8 @@ class CourseUpdateRequest extends FormRequest
             'syllabus.*.file' => 'File Silabus',
             'syllabus.*.video' => 'Link Video Silabus',
             'is_favourite' => 'Favorit',
+            'is_free' => 'Gratis',
+            'price' => 'Harga Kelas',
         ];
     }
 

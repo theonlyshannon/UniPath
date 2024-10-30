@@ -19,6 +19,10 @@ class Article extends Model
         'writer_id'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
+
     public function writer()
     {
         return $this->belongsTo(Writer::class);
@@ -47,5 +51,10 @@ class Article extends Model
     public function getExcerptAttribute()
     {
         return substr(strip_tags($this->content), 0, 100) . '...';
+    }
+
+    public function visitor()
+    {
+        return $this->hasMany(ArticleVisitor::class);
     }
 }

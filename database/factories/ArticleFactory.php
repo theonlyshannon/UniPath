@@ -17,6 +17,8 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
+        static $counter = 1;
+
         $articleTitles = [
             'Panduan Masuk Universitas',
             'Memilih Jurusan Tepat',
@@ -62,10 +64,10 @@ class ArticleFactory extends Factory
         ];
 
         return [
-            'thumbnail' => UploadedFile::fake()->image('thumbnail.jpg'),
-            'title' => $this->faker->unique()->randomElement($articleTitles),
-            'content' => $this->faker->unique()->randomElement($articleContents),
-            'slug' => $this->faker->unique()->slug,
+           'thumbnail' => UploadedFile::fake()->image('thumbnail.jpg'),
+            'title' => $this->faker->randomElement($articleTitles) . " #$counter", // Tambahkan counter untuk membuat unik
+            'content' => $this->faker->paragraphs(3, true),
+            'slug' => 'article-' . $counter++, // Pastikan slug unik dengan menambah counter
         ];
     }
 }

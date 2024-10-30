@@ -29,7 +29,7 @@ Route::name('app.')->group(function () {
 
     Route::prefix('artikel')->name('article.')->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('index');
-        Route::get('/detail', [ArticleController::class, 'show'])->name('show');
+        Route::get('/{slug}', [ArticleController::class, 'show'])->name('show');
     });
 
     Route::prefix('kelas')->name('course.')->group(function () {
@@ -37,25 +37,22 @@ Route::name('app.')->group(function () {
         Route::get('/detail/{slug}', [CourseController::class, 'show'])->name('show');
     });
 
-    // Tambahkan middleware auth di sini
-    Route::middleware('auth')->group(function () {
-        Route::prefix('cart')->name('cart.')->group(function () {
-            Route::get('/', [CartController::class, 'index'])->name('index');
-            Route::post('/add/{courseId}', [CartController::class, 'add'])->name('add');
-            Route::post('/remove/{cartItemId}', [CartController::class, 'remove'])->name('remove');
-        });
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add/{courseId}', [CartController::class, 'add'])->name('add');
+        Route::post('/remove/{cartItemId}', [CartController::class, 'remove'])->name('remove');
+    });
 
-        Route::prefix('transaction')->name('transaction.')->group(function () {
-            Route::get('/checkout', [TransactionController::class, 'checkout'])->name('checkout');
-            Route::post('/process-checkout', [TransactionController::class, 'processCheckout'])->name('processCheckout');
-            Route::get('/payment/{transactionCode}', [TransactionController::class, 'payment'])->name('payment.page');
-            Route::get('/payment/success/{transactionCode}', [TransactionController::class, 'success'])->name('payment.success');
-            Route::get('/success', [TransactionController::class, 'success'])->name('success');
-            Route::get('/error', [TransactionController::class, 'error'])->name('error');
-        });
+    Route::prefix('transaction')->name('transaction.')->group(function () {
+        Route::get('/checkout', [TransactionController::class, 'checkout'])->name('checkout');
+        Route::post('/process-checkout', [TransactionController::class, 'processCheckout'])->name('processCheckout');
+        Route::get('/payment/{transactionCode}', [TransactionController::class, 'payment'])->name('payment.page');
+        Route::get('/payment/success/{transactionCode}', [TransactionController::class, 'success'])->name('payment.success');
+        Route::get('/success', [TransactionController::class, 'success'])->name('success');
+        Route::get('/error', [TransactionController::class, 'error'])->name('error');
     });
 });
 
-// Route untuk menerima notifikasi dari Midtrans (harus dapat diakses publik tanpa middleware auth)
+
 Route::post('/midtrans/notification', [TransactionController::class, 'receiveNotification'])->name('midtrans.notification');
 

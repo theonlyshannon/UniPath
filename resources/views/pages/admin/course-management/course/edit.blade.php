@@ -27,8 +27,8 @@
                     <x-forms.input label="Slug" name="slug" id="slug"
                         value="{{ old('slug', $course->slug) }}" />
 
-                    <x-forms.textarea label="Deskripsi" name="description"
-                        id="description">{{ old('description', $course->description) }}</x-forms.textarea>
+                    <x-forms.textarea label="Deskripsi" name="description" id="description"
+                        value="{{ old('description', $course->description) }}" />
 
                     <img id="thumbnail-preview"
                         src="{{ $course->thumbnail ? asset('storage/' . $course->thumbnail) : '#' }}"
@@ -51,9 +51,13 @@
                         value="{{ old('trailer', $course->trailer) }}" />
 
                     <div class="mb-3">
-                        <input type="hidden" name="is_favourite" value="0">
-                        <x-forms.checkbox label="Kelas Favourite" id="is_favourite" name="is_favourite"
-                            :checked="old('is_favourite', $course->is_favourite)" />
+                        <input type="hidden" name="is_free" value="0">
+                        <x-forms.checkbox label="Kelas Gratis" id="is_free" name="is_free" :checked="old('is_free', $course->is_free)" />
+                    </div>
+
+                    <div class="mb-3" id="price-container" style="{{ $course->is_free ? 'display: none;' : '' }}">
+                        <x-forms.input label="Harga Kelas" name="price" id="price" type="number"
+                            value="{{ old('price', $course->formatted_price) }}" />
                     </div>
 
                     <div id="syllabus" class="mb-3">
@@ -267,8 +271,46 @@
         </script>
 
         <script>
-            $('#is_favourite').change(function() {
-                $(this).val(this.checked ? 1 : 0);
+            document.addEventListener('DOMContentLoaded', function() {
+                const isFreeCheckbox = document.getElementById('is_free');
+                const priceContainer = document.getElementById('price-container');
+                const priceInput = document.getElementById('price');
+                const isFavouriteCheckbox = document.getElementById('is_favourite');
+
+                // Event listener for is_free checkbox
+                isFreeCheckbox.addEventListener('change', function() {
+                    isFreeCheckbox.value = this.checked ? 1 : 0;
+
+                    if (this.checked) {
+                        priceContainer.style.display = 'none';
+                        priceInput.value = 0;
+                    } else {
+                        priceContainer.style.display = 'block';
+                    }
+                });
+
+                // Initial setup if is_free is checked on page load
+                if (isFreeCheckbox.checked) {
+                    priceContainer.style.display = 'none';
+                    priceInput.value = 0;
+                }
+
+                // Event listener for is_favourite checkbox
+                $('#is_favourite').change(function() {
+                    $(this).val(this.checked ? 1 : 0);
+                });
+
+                // Format input price on keyup event
+                priceInput.addEventListener('keyup', function(e) {
+                    // Remove non-numeric characters
+                    let value = e.target.value.replace(/\D/g, '');
+
+                    // Format value with thousand separators (dot as separator)
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                    // Set formatted value back to input
+                    e.target.value = value;
+                });
             });
         </script>
     @endpush

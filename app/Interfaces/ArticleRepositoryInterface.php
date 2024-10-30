@@ -4,13 +4,15 @@ namespace App\Interfaces;
 
 interface ArticleRepositoryInterface
 {
-    public function getAllArticle(?int $perPage = null, ?string $search = null, ?string $category = null, ?string $tag = null);
+    public function getAllArticle(?int $perPage = null, ?string $category = null, ?string $tag = null);
 
     public function getArticleById(string $id);
 
     public function getArticleBySlug(string $slug);
 
     public function getArticleByCategory(string $category);
+
+    public function getArticlesCountByDate();
 
     public function getArticleByTag(string $tag);
 

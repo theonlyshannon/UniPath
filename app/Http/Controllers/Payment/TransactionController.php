@@ -15,11 +15,12 @@ use App\Models\Cart;
 
 class TransactionController extends Controller
 {
-    // Halaman checkout
     public function checkout()
     {
         $user = Auth::user();
-        $cartItems = Cart::where('user_id', $user->id)->with('course')->get();
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with('course')
+            ->get();
 
         if ($cartItems->isEmpty()) {
             return redirect()->route('app.cart.index')->with('message', 'Keranjang Anda kosong.');
@@ -32,11 +33,12 @@ class TransactionController extends Controller
         return view('pages.app.transaction.checkout', compact('cartItems', 'totalPrice'));
     }
 
-    // Memproses checkout dan mengintegrasikan dengan Midtrans
     public function processCheckout(Request $request)
     {
         $user = Auth::user();
-        $cartItems = Cart::where('user_id', $user->id)->with('course')->get();
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with('course')
+            ->get();
 
         if ($cartItems->isEmpty()) {
             return redirect()->route('app.cart.index')->with('message', 'Keranjang Anda kosong.');
@@ -47,16 +49,14 @@ class TransactionController extends Controller
             return $item->course->price * $item->quantity;
         });
 
-        // Simpan transaksi ke database
         $transaction = Transaction::create([
             'transaction_code' => $transactionCode,
             'user_id' => $user->id,
             'amount' => $amount,
-            'status' => 'pending',
+            'status' => $amount == 0 ? 'paid' : 'pending',
             'transaction_date' => now(),
         ]);
 
-        // Simpan detail transaksi
         foreach ($cartItems as $item) {
             TransactionDetail::create([
                 'transaction_id' => $transaction->id,
@@ -66,37 +66,42 @@ class TransactionController extends Controller
             ]);
         }
 
-        // Hapus keranjang setelah transaksi dibuat
         Cart::where('user_id', $user->id)->delete();
 
-        // Redirect ke halaman pembayaran
+        if ($amount == 0) {
+            return redirect()->route('app.transaction.success', $transactionCode)->with('success', 'Transaksi berhasil tanpa pembayaran.');
+        }
+
         return redirect()->route('app.transaction.payment.page', ['transactionCode' => $transactionCode]);
     }
 
-    // Halaman pembayaran
     public function payment($transactionCode)
     {
         $user = Auth::user();
         $transaction = Transaction::where('transaction_code', $transactionCode)
-                                  ->where('user_id', $user->id)
-                                  ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         if (!$transaction) {
             return redirect()->route('app.cart.index')->with('error', 'Transaksi tidak ditemukan.');
         }
 
-        // Konfigurasi Midtrans
+        if ($transaction->amount == 0) {
+            $transaction->status = 'success';
+            $transaction->save();
+
+            return redirect()->route('app.transaction.payment.success', $transactionCode)->with('success', 'Transaksi berhasil tanpa pembayaran.');
+        }
+
         Config::$serverKey = config('midtrans.server_key');
         Config::$isProduction = config('midtrans.is_production');
         Config::$isSanitized = config('midtrans.is_sanitized');
         Config::$is3ds = config('midtrans.is_3ds');
 
-        // Ambil detail transaksi
         $transactionDetails = TransactionDetail::where('transaction_id', $transaction->id)
-                                                ->with('course')
-                                                ->get();
+            ->with('course')
+            ->get();
 
-        // Parameter transaksi ke Midtrans
         $params = [
             'transaction_details' => [
                 'order_id' => $transaction->transaction_code,
@@ -107,14 +112,16 @@ class TransactionController extends Controller
                 'email' => $user->email,
                 'phone' => $user->phone,
             ],
-            'item_details' => $transactionDetails->map(function ($item) {
-                return [
-                    'id' => $item->course->id,
-                    'price' => $item->price,
-                    'quantity' => $item->quantity,
-                    'name' => $item->course->title,
-                ];
-            })->toArray(),
+            'item_details' => $transactionDetails
+                ->map(function ($item) {
+                    return [
+                        'id' => $item->course->id,
+                        'price' => $item->price,
+                        'quantity' => $item->quantity,
+                        'name' => $item->course->title,
+                    ];
+                })
+                ->toArray(),
         ];
 
         try {
@@ -122,17 +129,18 @@ class TransactionController extends Controller
 
             return view('pages.app.transaction.payment', compact('snapToken', 'transaction'));
         } catch (\Exception $e) {
-            return redirect()->route('app.transaction.error')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()
+                ->route('app.transaction.error')
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
-    // Halaman sukses
     public function success($transactionCode = null)
     {
         $user = Auth::user();
         $transaction = Transaction::where('transaction_code', $transactionCode)
-                                  ->where('user_id', $user->id)
-                                  ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         if (!$transaction) {
             return redirect()->route('app.dashboard')->with('error', 'Transaksi tidak ditemukan.');
@@ -141,16 +149,13 @@ class TransactionController extends Controller
         return view('pages.app.transaction.success', compact('transaction'));
     }
 
-    // Halaman error
     public function error()
     {
         return view('pages.app.transaction.error');
     }
 
-    // Menerima notifikasi dari Midtrans
     public function receiveNotification(Request $request)
     {
-        // Konfigurasi Midtrans
         Config::$serverKey = config('midtrans.server_key');
         Config::$isProduction = config('midtrans.is_production');
         Config::$isSanitized = config('midtrans.is_sanitized');
@@ -161,19 +166,17 @@ class TransactionController extends Controller
         $transactionStatus = $notification->transaction_status;
         $orderId = $notification->order_id;
 
-        // Cari transaksi berdasarkan order_id
         $transaction = Transaction::where('transaction_code', $orderId)->first();
 
         if (!$transaction) {
             return response()->json(['message' => 'Transaksi tidak ditemukan'], 404);
         }
 
-        // Update status transaksi berdasarkan status dari Midtrans
         if ($transactionStatus == 'capture' || $transactionStatus == 'settlement') {
             $transaction->status = 'paid';
-        } else if ($transactionStatus == 'pending') {
+        } elseif ($transactionStatus == 'pending') {
             $transaction->status = 'pending';
-        } else if ($transactionStatus == 'deny' || $transactionStatus == 'cancel' || $transactionStatus == 'expire') {
+        } elseif ($transactionStatus == 'deny' || $transactionStatus == 'cancel' || $transactionStatus == 'expire') {
             $transaction->status = 'failed';
         }
 

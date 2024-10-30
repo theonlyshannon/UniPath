@@ -23,12 +23,14 @@ class Course extends Model
         'meetings',
         'trailer',
         'is_favourite',
+        'is_free',
         'is_active'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
         'is_favourite' => 'boolean',
+        'is_free' => 'boolean',
     ];
 
     public function mentor()
@@ -45,4 +47,11 @@ class Course extends Model
     {
         return $this->hasMany(CourseSyllabus::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return number_format($this->price, 0, ',', '.');
+    }
+
+    
 }

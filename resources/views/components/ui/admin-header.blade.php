@@ -19,9 +19,7 @@
                                 alt="">
                         </div>
                         <div class="text-center">
-                            <p class="tx-12 text-muted">
-                                {{-- {{ auth()->user()->email }} --}}
-                            </p>
+                            <span class="badge custom-badge m-1">{{ auth()->user()->email }}</span>
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">

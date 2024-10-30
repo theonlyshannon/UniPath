@@ -1,6 +1,6 @@
 <nav class="sidebar">
     <div class="sidebar-header">
-        <img src="{{ asset('') }}" class="sidebar-brand" width="40">
+        <img src="{{ asset('admin/assets/images/Unipath.png') }}" class="sidebar-brand" width="150">
         <div class="sidebar-toggler not-active">
             <span></span>
             <span></span>
