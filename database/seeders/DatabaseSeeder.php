@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
                 ArticleTagSeeder::class,
                 ArticleCategorySeeder::class,
                 ArticleSeeder::class,
+                ArticleVisitorSeeder::class,
 
                 UniversitySeeder::class,
                 FacultySeeder::class,

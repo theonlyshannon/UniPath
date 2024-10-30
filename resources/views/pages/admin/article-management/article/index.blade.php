@@ -22,6 +22,7 @@
                             <th>Kategori</th>
                             <th>Tagar</th>
                             <th>Thumbnail</th>
+                            <th>Pengunjung</th>
                             <th>Aksi</th>
                         </tr>
                     </x-slot>
@@ -45,7 +46,7 @@
                                     <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
                                         width="100">
                                 </td>
-
+                                <td>{{ $article->visitor->count() ?? 0 }}</td>
                                 <td>
                                     <x-ui.base-button color="primary" type="button"
                                         href="{{ route('admin.article.show', $article->id) }}">

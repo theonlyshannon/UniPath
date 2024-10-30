@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 /**
- *Interface Register
+ *Import Interface
  *
  */
 use App\Interfaces\AuthRepositoryInterface;
@@ -19,12 +19,16 @@ use App\Interfaces\ArticleTagRepositoryInterface;
 use App\Interfaces\ArticleRepositoryInterface;
 use App\Interfaces\UniversityRepositoryInterface;
 use App\Interfaces\FacultyRepositoryInterface;
+use App\Interfaces\AIRepositoryInterface;
 use App\Interfaces\CourseCategoryRepositoryInterface;
 use App\Interfaces\CourseRepositoryInterface;
 use App\Interfaces\InterestRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
+use App\Interfaces\ArticleVisitorRepositoryInterface;
+
 
 /**
- *Repository Register
+ *Import Repository
  *
  */
 use App\Repositories\AuthRepository;
@@ -41,11 +45,11 @@ use App\Repositories\FacultyRepository;
 use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\InterestRepository;
-
-use App\Interfaces\AIRepositoryInterface;
-use App\Repositories\AIRepository;
-use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\ArticleVisitorRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\AIRepository;
+
+
 use App\Services\AIService;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -75,6 +79,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(InterestRepositoryInterface::class, InterestRepository::class);
+        $this->app->bind(ArticleVisitorRepositoryInterface::class, ArticleVisitorRepository::class);
     }
 
     /**

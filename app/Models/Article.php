@@ -53,4 +53,8 @@ class Article extends Model
         return substr(strip_tags($this->content), 0, 100) . '...';
     }
 
+    public function visitor()
+    {
+        return $this->hasMany(ArticleVisitor::class);
+    }
 }

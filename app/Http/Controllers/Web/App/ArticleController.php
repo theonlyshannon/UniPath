@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\App;
 
 use Illuminate\Http\Request;
+use App\Models\ArticleVisitor;
 use App\Http\Controllers\Controller;
 use App\Interfaces\WriterRepositoryInterface;
 use App\Interfaces\ArticleRepositoryInterface;
@@ -50,6 +51,20 @@ class ArticleController extends Controller
         $categories = $this->articleCategoryRepository->getAllArticleCategory();
         $tags = $this->articleTagRepository->getAllArticleTag();
         $recentArticles = $this->articleRepository->getAllArticle(3);
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $viewer = ArticleVisitor::where([['visitor_ip', $ip], ['article_id', $article->id]])->first();
+
+        if (!$viewer) {
+            ArticleVisitor::create([
+                'visitor_ip' => $ip,
+                'article_id' => $article->id,
+            ]);
+        }
+
+        if (!$article) {
+            abort(404);
+        }
 
         return view('pages.app.article.show', compact('article', 'categories', 'tags', 'recentArticles'));
     }
