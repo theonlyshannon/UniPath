@@ -1,34 +1,72 @@
-<x-layouts.auth title="Masuk">
-    <div class="page-content d-flex align-items-center justify-content-center">
-        <div class="row w-100 mx-0 auth-page">
-            <div class="col-md-12 col-xl-4 mx-auto">
-                <div class="card">
-                    <div class="row flex-column-reverse flex-md-row">
-                        <div class="col-md-12 ps-md-0">
-                            <div class="auth-form-wrapper px-4 py-5">
-                                <a href="#"
-                                    class="noble-ui-logo d-block mb-2">
-                                    {{ config('app.name') }}
-                                </a>
-                                <h5 class="text-muted fw-normal mb-4">Silahkan Login Dengan Akun Anda</h5>
-                                <form action="{{ route('login') }}" method="POST">
-                                    @csrf
-                                    <x-forms.input type="email" name="email" label="Email" placeholder="Masukkan email"
-                                        required autofocus />
+<x-layouts.app title="Login">
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header__content">
+                <ul class="eduhive-breadcrumb list-unstyled">
+                    <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="{{ url('/') }}">Home</a></li>
+                    <li><span>Log in</span></li>
+                </ul>
+                <h2 class="page-header__title">Log in</h2>
+            </div>
+        </div>
+        <img src="assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
+        <img src="assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+        <div class="page-header__shape-three"></div>
+        <div class="page-header__shape-four"></div>
+    </section>
 
-                                    <x-forms.input type="password" name="password" label="Password"
-                                        placeholder="Masukkan password" required />
-
-
-                                    <x-ui.base-button type="submit" class="w-100" color="primary">
-                                        Masuk
-                                    </x-ui.base-button>
-                                </form>
-                            </div>
+    <section class="login-page section-space">
+        <div class="container">
+            <div class="row gutter-y-50 align-items-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+                    <div class="login-page__image">
+                        <div class="login-page__image__inner">
+                            <img src="assets/images/resources/login-1-1.jpg" alt="login">
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+                    <form action="{{ route('login') }}" method="POST" class="login-page__form">
+                        @csrf
+                        <div class="login-page__form__inner">
+                            <div class="login-page__form__top">
+                                <img src="assets/images/resources/login-logo-1-1.png" alt="logo" width="167" class="login-page__form__logo">
+                                <h3 class="login-page__form__title">Nice to see you again</h3>
+                            </div>
+                            
+                            <div class="login-page__form__wrapp">
+                                <div class="login-page__form__input-box">
+                                    <label for="email" class="login-page__form__label">Login</label>
+                                    <input type="text" id="email" name="email" placeholder="Email" required autofocus>
+                                </div>
+                                <div class="login-page__form__input-box">
+                                    <label for="password" class="login-page__form__label">Password</label>
+                                    <div class="login-page__form__input-box__inner">
+                                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                                        <i class="toggle-password-icon fa fa-fw fa-eye-slash"></i>
+                                    </div>
+                                </div>
+                                <div class="login-page__form__input-box login-page__form__input-box--3">
+                                    <label class="login-page__form__checked-box" for="remember">
+                                        <input type="checkbox" name="remember" id="remember">
+                                        <span></span>
+                                        Remember me
+                                    </label>
+                                    <a href="" class="login-page__form__forgot">Forgot password?</a>
+                                </div>
+                                <div class="login-page__form__input-box login-page__form__input-box--4">
+                                    <button type="submit" class="login-page__form__btn eduhive-btn eduhive-btn--normal">Sign in</button>
+                                </div>
+                            </div>
+                            
+                            <div class="login-page__form__bottom">
+                                <p class="login-page__form__register-text">Don’t have an account? <a href="{{ route('register') }}">Sign up now</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</x-layouts.auth>
+    </section>
+</x-layouts.app>
