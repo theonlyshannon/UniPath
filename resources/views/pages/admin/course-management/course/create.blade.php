@@ -44,7 +44,8 @@
                     <x-forms.input label="Trailer" name="trailer" id="trailer" value="{{ old('trailer') }}" />
 
                     <div class="mb-3" id="price-container">
-                        <x-forms.input label="Harga Kelas" name="price" id="price" type="text" value="{{ old('price', 0) }}" />
+                        <x-forms.input label="Harga Kelas" name="price" id="price" type="text"
+                            value="{{ old('price') }}" />
                     </div>
 
                     <div class="mb-3">
@@ -213,39 +214,49 @@
                 const priceInput = document.getElementById('price');
                 const isFreeCheckbox = document.getElementById('is_free');
                 const isFavouriteCheckbox = document.getElementById('is_favourite');
+                const form = document.querySelector('form'); // Ambil form utama
 
                 priceInput.addEventListener('keyup', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
+                    let value = e.target.value.replace(/\D/g, ''); // Hanya ambil angka
 
-                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Tambah titik pemisah ribuan
                     e.target.value = value;
                 });
 
+                // Ubah checkbox isFavourite value
                 if (isFavouriteCheckbox) {
                     isFavouriteCheckbox.addEventListener('change', function() {
                         this.value = this.checked ? 1 : 0;
                     });
                 }
 
+                // Ubah checkbox isFree dan sembunyikan harga jika gratis
                 if (isFreeCheckbox) {
                     isFreeCheckbox.addEventListener('change', function() {
                         this.value = this.checked ? 1 : 0;
 
                         if (this.checked) {
-                            priceInput.value = 0;
-                            priceInput.dispatchEvent(new Event('keyup')); 
+                            priceInput.value = '0';
+                            priceInput.dispatchEvent(new Event('keyup'));
                             document.getElementById('price-container').style.display = 'none';
                         } else {
                             document.getElementById('price-container').style.display = 'block';
                         }
                     });
+
+                    // Jika isFree sudah diceklis saat halaman dimuat
+                    if (isFreeCheckbox.checked) {
+                        priceInput.value = '0';
+                        priceInput.dispatchEvent(new Event('keyup'));
+                        document.getElementById('price-container').style.display = 'none';
+                    }
                 }
 
-                if (isFreeCheckbox && isFreeCheckbox.checked) {
-                    priceInput.value = 0;
-                    priceInput.dispatchEvent(new Event('keyup'));
-                    document.getElementById('price-container').style.display = 'none';
+                // Pastikan harga dikirim tanpa format pemisah ribuan saat submit
+                if (form) {
+                    form.addEventListener('submit', function() {
+                        priceInput.value = priceInput.value.replace(/\./g, ''); // Hapus semua titik
+                    });
                 }
             });
         </script>

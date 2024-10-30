@@ -12,6 +12,8 @@ interface ArticleRepositoryInterface
 
     public function getArticleByCategory(string $category);
 
+    public function getArticlesCountByDate();
+
     public function getArticleByTag(string $tag);
 
     public function createArticle(array $data);

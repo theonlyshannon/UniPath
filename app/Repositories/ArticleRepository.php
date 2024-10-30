@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\ArticleRepositoryInterface;
 use App\Models\Article;
+use Illuminate\Support\Facades\DB;
+use App\Interfaces\ArticleRepositoryInterface;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
@@ -43,6 +44,15 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getArticleByCategory(string $category)
     {
         return Article::where('category', $category)->get();
+    }
+
+    public function getArticlesCountByDate()
+    {
+        return DB::table('articles')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as count'))
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
     }
 
     public function getArticleByTag(string $tag)

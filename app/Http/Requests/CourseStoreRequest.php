@@ -54,7 +54,7 @@ class CourseStoreRequest extends FormRequest
             'syllabus.*.video' => 'Link Video Silabus',
             'is_favourite' => 'Favorit',
             'is_free' => 'Gratis',
-            'price' => 'Harga Kelas',   
+            'price' => 'Harga Kelas',
         ];
     }
 

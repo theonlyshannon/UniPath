@@ -191,7 +191,25 @@ a:hover {
 }
 
 .custom-badge-danger {
-    background-color: var(--danger); /* Warna custom untuk 'Tidak ada hak akses' */
+    background-color: var(--danger);
     color: var(--white);
 }
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary);
+}
+
+.icon-white {
+    font-size: 30px;
+    color: #ffffff;
+}
+
+
+
 
