@@ -207,9 +207,39 @@ a:hover {
 
 .icon-white {
     font-size: 30px;
-    color: #ffffff;
+    color: var(--white);
 }
 
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;  /* Jarak antar chart */
+    width: 100%;
+    margin: auto;
+    padding-top: 30px;
+}
+
+/* Chart pengunjung lebih besar */
+.chart-item-large {
+    width: 65%;
+}
+
+/* Card untuk chart tag */
+.chart-card {
+    width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Shadow untuk card */
+    padding: 20px;
+    text-align: center;
+}
+
+.category-container {
+    width: 90%;
+    margin: auto;
+    padding-top: 30px;
+}
 
 
 

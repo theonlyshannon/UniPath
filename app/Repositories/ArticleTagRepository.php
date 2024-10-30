@@ -17,6 +17,13 @@ class ArticleTagRepository implements ArticleTagRepositoryInterface
         return ArticleTag::findOrFail($id);
     }
 
+    public function getArticleCountByTag()
+    {
+        return ArticleTag::withCount('articles')  
+            ->orderBy('articles_count', 'DESC')
+            ->get(['name', 'articles_count']);
+    }
+
     public function createArticleTag(array $data)
     {
         return ArticleTag::create($data);

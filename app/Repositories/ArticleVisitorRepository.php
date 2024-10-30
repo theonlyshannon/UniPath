@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Repositories;
-
 use App\Interfaces\ArticleVisitorRepositoryInterface;
 use Illuminate\Support\Facades\DB;
-
 class ArticleVisitorRepository implements ArticleVisitorRepositoryInterface
 {
     public function getVisitorCountsByDate()

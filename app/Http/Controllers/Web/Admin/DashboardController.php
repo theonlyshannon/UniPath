@@ -4,24 +4,32 @@ namespace App\Http\Controllers\Web\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Interfaces\ArticleTagRepositoryInterface;
 use App\Interfaces\ArticleVisitorRepositoryInterface;
 
 class DashboardController extends Controller
 {
     private $articleVisitorRepository;
+    private $articleTagRepository;
 
-    public function __construct(ArticleVisitorRepositoryInterface $articleVisitorRepository)
+    public function __construct(ArticleVisitorRepositoryInterface $articleVisitorRepository, ArticleTagRepositoryInterface $articleTagRepository)
     {
         $this->articleVisitorRepository = $articleVisitorRepository;
+        $this->articleTagRepository = $articleTagRepository;
     }
 
     public function index()
     {
+        $tagsData = $this->articleTagRepository->getArticleCountByTag();
+
         $visitors = $this->articleVisitorRepository->getVisitorCountsByDate();
 
-        $labels = $visitors->pluck('date');   
-        $data = $visitors->pluck('count');
+        $articleDate = $visitors->pluck('date');
+        $dataVisitor = $visitors->pluck('count');
 
-        return view('pages.admin.dashboard', compact('labels', 'data'));
+        $labels = $tagsData->pluck('name'); // Nama tag
+        $data = $tagsData->pluck('articles_count'); // Jumlah artikel per tag
+
+        return view('pages.admin.dashboard', compact('articleDate', 'dataVisitor','labels', 'data'));
     }
 }

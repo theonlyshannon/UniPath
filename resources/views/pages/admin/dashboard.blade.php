@@ -110,25 +110,31 @@
 
             </div>
 
-            <div style="width: 100%; margin: auto; padding-top: 50px;">
-                <h4>Jumlah Pengunjung Artikel</h4>
-                <canvas id="visitorChart"></canvas>
+            <div class="chart-container">
+                <div class="chart-item-large">
+                    <h4>Jumlah Pengunjung Artikel</h4>
+                    <canvas id="visitorChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h4>Artikel Berdasarkan Tag</h4>
+                    <canvas id="tagChart"></canvas>
+                </div>
             </div>
         @endcan
 
         @push('plugin-scripts')
             <script>
-                const ctx = document.getElementById('visitorChart').getContext('2d');
-
-                const visitorChart = new Chart(ctx, {
+                const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+                const visitorChart = new Chart(visitorCtx, {
                     type: 'line',
                     data: {
-                        labels: @json($labels),
+                        labels: @json($articleDate), // Data tanggal
                         datasets: [{
-                            label: 'Jumlah Pengunjung',
-                            data: @json($data),
-                            fill: false,
+                            label: 'Pengunjung',
+                            data: @json($dataVisitor), // Data pengunjung
                             borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderWidth: 2,
                             tension: 0.4
                         }]
@@ -137,32 +143,39 @@
                         responsive: true,
                         animation: {
                             duration: 2000,
-                            easing: 'easeInOutQuad',
-                            delay: (context) => context.dataIndex * 300,
-                            onComplete: function() {
-                                console.log('Animasi selesai!');
-                            }
+                            easing: 'easeInOutQuad'
                         },
                         scales: {
                             y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                }
+                                beginAtZero: true
                             }
-                        },
+                        }
+                    }
+                });
+
+                const tagCtx = document.getElementById('tagChart').getContext('2d');
+                const tagChart = new Chart(tagCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: @json($labels),
+                        datasets: [{
+                            data: @json($data),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(153, 102, 255, 0.6)',
+                                'rgba(255, 159, 64, 0.6)'
+                            ],
+                            borderWidth: 0 // Tidak ada outline
+                        }]
+                    },
+                    options: {
+                        responsive: true,
                         plugins: {
                             legend: {
-                                display: true,
                                 position: 'top'
-                            },
-                            tooltip: {
-                                enabled: true,
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        return `Pengunjung: ${tooltipItem.raw}`;
-                                    }
-                                }
                             }
                         }
                     }

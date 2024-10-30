@@ -8,6 +8,8 @@ interface ArticleTagRepositoryInterface
 
     public function getArticleTagById(string $id);
 
+    public function getArticleCountByTag();
+
     public function createArticleTag(array $data);
 
     public function updateArticleTag(array $data, string $id);
