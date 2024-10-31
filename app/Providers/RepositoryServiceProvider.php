@@ -25,6 +25,7 @@ use App\Interfaces\CourseRepositoryInterface;
 use App\Interfaces\InterestRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\ArticleVisitorRepositoryInterface;
+use App\Interfaces\TransactionRepositoryInterface;
 
 
 /**
@@ -48,6 +49,7 @@ use App\Repositories\InterestRepository;
 use App\Repositories\ArticleVisitorRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\AIRepository;
+use App\Repositories\TransactionRepository;
 
 
 use App\Services\AIService;
@@ -80,6 +82,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(InterestRepositoryInterface::class, InterestRepository::class);
         $this->app->bind(ArticleVisitorRepositoryInterface::class, ArticleVisitorRepository::class);
+        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
     }
 
     /**

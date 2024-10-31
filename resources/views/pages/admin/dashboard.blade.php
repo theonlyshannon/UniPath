@@ -61,6 +61,21 @@
                     </div>
                 </div>
             </div>
+            <div class="admin-container-chart">
+                <div class="chart-item">
+                    <h4>Jumlah Siswa Aktif Harian</h4>
+                    <canvas id="dailyActiveStudentChart"></canvas>
+                </div>
+                <div class="chart-item card">
+                    <h4>Jumlah Penjualan Kelas</h4>
+                    <canvas id="classSalesChart"></canvas>
+                </div>
+                <div class="chart-item">
+                    <h4>Jumlah Pengunjung Artikel</h4>
+                    <canvas id="visitorChart"></canvas>
+                </div>
+            </div>
+
         @endcan
 
         @can('dashboard-writer-view')
@@ -146,7 +161,8 @@
                             </div>
                             <div class="information">
                                 <h5 class="text-muted mb-2">Jumlah Kelas</h5>
-                                <h4 class="mb-0"> {{ \App\Models\Course::where('mentor_id', auth()->user()->mentor->id)->count() }}</h4>
+                                <h4 class="mb-0">
+                                    {{ \App\Models\Course::where('mentor_id', auth()->user()->mentor->id)->count() }}</h4>
                             </div>
                         </div>
                     </div>
@@ -183,7 +199,7 @@
                         data: {
                             labels: @json($articleDate),
                             datasets: [{
-                                label: 'Pengunjung',
+                                label: 'Pengunjung Artikel',
                                 data: @json($dataVisitor),
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -206,7 +222,6 @@
                     });
                 }
 
-                // Chart untuk Tag
                 const tagCtx = document.getElementById('tagChart')?.getContext('2d');
                 if (tagCtx) {
                     const tagChart = new Chart(tagCtx, {
@@ -263,15 +278,81 @@
                                     beginAtZero: true
                                 },
                                 x: {
-                                    type: 'time', // Mengatur tipe sumbu X sebagai waktu
+                                    type: 'time',
                                     time: {
                                         unit: 'day'
-                                    } // Unit waktu yang akan ditampilkan
+                                    }
                                 }
                             }
                         }
                     });
                 }
+
+                const dailyActiveCtx = document.getElementById('dailyActiveStudentChart').getContext('2d');
+                const dailyActiveChart = new Chart(dailyActiveCtx, {
+                    type: 'line',
+                    data: {
+                        labels: @json($activeDates),
+                        datasets: [{
+                            label: 'Jumlah Siswa Aktif',
+                            data: @json($activeCounts),
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Jumlah Siswa Aktif'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Tanggal'
+                                },
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const ctxClassSales = document.getElementById('classSalesChart').getContext('2d');
+                    new Chart(ctxClassSales, {
+                        type: 'doughnut',
+                        data: {
+                            labels: @json($courseNames),
+                            datasets: [{
+                                label: 'Quantity Sold',
+                                data: @json($quantities),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top'
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return `Class: ${context.label}, Sold: ${context.raw}`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
             </script>
         @endpush
     </x-layouts.admin>

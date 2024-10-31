@@ -24,7 +24,7 @@ use App\Http\Controllers\Web\App\TransactionController as AppTransactionControll
 
 // routes/web.php
 
-Route::name('app.')->group(function () {
+Route::name('app.')->middleware(['update.last.active'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('artikel')->name('article.')->group(function () {
@@ -52,6 +52,7 @@ Route::name('app.')->group(function () {
         Route::get('/error', [TransactionController::class, 'error'])->name('error');
     });
 });
+
 
 
 Route::post('/midtrans/notification', [TransactionController::class, 'receiveNotification'])->name('midtrans.notification');

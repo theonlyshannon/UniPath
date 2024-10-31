@@ -34,8 +34,9 @@ return new class extends Migration
             $table->foreign('faculty_main_id')->references('id')->on('faculties')->onDelete('set null');
 
             $table->uuid('faculty_second_id')->nullable();
-            $table->foreign('faculty_second_id')->references('id')->on('faculties')->onDelete('set null');  
+            $table->foreign('faculty_second_id')->references('id')->on('faculties')->onDelete('set null');
 
+            $table->timestamp('last_active_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

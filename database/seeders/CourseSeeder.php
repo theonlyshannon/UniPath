@@ -26,8 +26,16 @@ class CourseSeeder extends Seeder
                 ->for($mentor)
                 ->for($courseCategory)
                 ->create([
-                    'thumbnail' => $imageHelper->createDummyImageWithTextSizeAndPosition(1920, 1080, 'center', 'center', 'random', 'medium')->store('assets/course/thumbnail', 'public'),
+                    'thumbnail' => $imageHelper->createDummyImageWithTextSizeAndPosition(
+                        1920,
+                        1080,
+                        'center',
+                        'center',
+                        'random',
+                        'medium'
+                    )->store('assets/course/thumbnail', 'public'),
                 ]);
         }
     }
+
 }

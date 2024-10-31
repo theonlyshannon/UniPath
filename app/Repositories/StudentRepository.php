@@ -24,6 +24,15 @@ class StudentRepository implements StudentRepositoryInterface
         return DB::table('students')->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as count'))->groupBy('date')->orderBy('date', 'ASC')->get();
     }
 
+    public function getActiveStudentsByDay()
+    {
+        return Student::select(DB::raw('DATE(last_active_at) as date'), DB::raw('COUNT(*) as count'))
+            ->whereNotNull('last_active_at') 
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
+    }
+
     public function createStudent(array $data)
     {
         DB::beginTransaction();
