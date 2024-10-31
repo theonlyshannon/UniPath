@@ -36,12 +36,6 @@
                                 <li>
                                     <a href="#">01</a>
                                 </li>
-                                <li>
-                                    <a href="#">02</a>
-                                </li>
-                                <li>
-                                    <a href="#">03</a>
-                                </li>
                                 <li class="active">
                                     <a href="#"><span class="post-pagination__icon"><i
                                                 class="icon-right-arrow"></i></span></a>
@@ -77,7 +71,7 @@
                                             {{ $tag->name }}
                                         </a>
                                     @endforeach
-    
+
                                 </div>
                             </div>
                         </aside>

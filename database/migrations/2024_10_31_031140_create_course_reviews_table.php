@@ -12,7 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('course_reviews', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+
+            $table->uuid('course_id');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+
+            $table->uuid('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
+            $table->integer('rating');
+
+            $table->string('review');
+
+            $table->boolean('is_approved')->default(false);
+
             $table->timestamps();
         });
     }
