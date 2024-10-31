@@ -10,61 +10,8 @@
                 <nav class="main-header__nav main-menu">
                     <ul class="main-menu__list">
 
-                        <li class="dropdown megamenu">
+                        <li>
                             <a href="index.html">Home</a>
-                            <ul>
-                                <li>
-                                    
-                                </li>
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <a href="about.html">About Us</a>
-                        </li>
-                      
-                        <li>
-                            <a href="#">courses</a>
-                          
-                        </li>
-                        <li>
-                            <a href="#">Scholarship</a>
-                           
-                        </li>
-                        <li class="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                                <li class="dropdown">
-                                    <a href="#">Blog grid</a>
-                                    <ul>
-                                        <li><a href="blog-grid.html">No sidebar</a></li>
-                                        <li><a href="blog-grid-left.html">Left sidebar</a></li>
-                                        <li><a href="blog-grid-right.html">Right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#">Blog list</a>
-                                    <ul>
-                                        <li><a href="blog-list.html">No sidebar</a></li>
-                                        <li><a href="blog-list-left.html">Left sidebar</a></li>
-                                        <li><a href="blog-list-right.html">Right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog-carousel.html">Blog carousel 01</a></li>
-                                <li><a href="blog-carousel-2.html">Blog carousel 02</a></li>
-                                <li class="dropdown">
-                                    <a href="#">Blog details</a>
-                                    <ul>
-                                        <li><a href="blog-details.html">No sidebar</a></li>
-                                        <li><a href="blog-details-left.html">Left sidebar</a></li>
-                                        <li><a href="blog-details-right.html">Right sidebar</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact</a>
                         </li>
                         <li class="scrollToLink"><a href="#about">About</a></li>
                         <li class="scrollToLink"><a href="{{ route('app.course.index') }}">Courses</a></li>

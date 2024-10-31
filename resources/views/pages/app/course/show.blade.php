@@ -63,14 +63,14 @@
                                         <h3 class="course-details__title course-details__title--description">Course
                                             Descriptions</h3>
                                         <div class="course-details__description__inner">
-                                            <p>
+                                            <p class="course-details__description__text">
                                                 {!! $course->description !!}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab active-tab fadeInUp animated" data-wow-delay="200ms" id="curriculum"
-                                    style="display: block;">
+                                    style="display: none;">
                                     <div class="course-details__accordion">
                                         <div class="eduhive-accordion" data-grp-name="eduhive-accordion">
                                             <div class="accordion active">
@@ -87,10 +87,8 @@
                                                                     <a href="{{ $syllabus->video }}"
                                                                         class="course-details__accordion__class video-popup"
                                                                         onclick="markAsComplete('{{ $syllabus->id }}', 'video')">
-                                                                        <span
-                                                                            class="course-details__accordion__class__title">
-                                                                            <span
-                                                                                class="course-details__accordion__class__icon">
+                                                                        <span class="course-details__accordion__class__title">
+                                                                            <span bclass="course-details__accordion__class__icon">
                                                                                 <i class="icon-files"></i>
                                                                             </span>
                                                                             {{ $syllabus->title }}
@@ -258,7 +256,7 @@
                                 <div class="course-details__info__text">
                                     <div class="course-details__info__text__title">
                                         <span class="course-details__info__icon"><i
-                                            class="icon-multiple-users"></i></span>
+                                                class="icon-multiple-users"></i></span>
                                         Favourite Class:
                                     </div>
                                     <span>{{ $course->is_favourite ? 'Yes' : 'No' }}</span>
@@ -285,7 +283,7 @@
                         </ul>
                         <div class="course-details__info__price">This course Fee
                             Rp{{ number_format($course->price, 0, ',', '.') }}</div>
-                            @if(!$hasAccess)
+                        @if (!$hasAccess)
                             @auth
                                 <!-- Tambahkan ke keranjang (baik kursus gratis maupun berbayar) -->
                                 <form action="{{ route('app.cart.add', $course->id) }}" method="POST">
