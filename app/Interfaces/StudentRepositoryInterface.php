@@ -8,6 +8,8 @@ interface StudentRepositoryInterface
 
     public function getStudentById(string $id);
 
+    public function getStudentData();
+
     public function createStudent(array $data);
 
     public function updateStudent(array $data, string $id);

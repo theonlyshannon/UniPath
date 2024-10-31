@@ -19,9 +19,13 @@ class StudentRepository implements StudentRepositoryInterface
         return Student::findOrFail($id);
     }
 
+    public function getStudentData()
+    {
+        return DB::table('students')->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as count'))->groupBy('date')->orderBy('date', 'ASC')->get();
+    }
+
     public function createStudent(array $data)
     {
-
         DB::beginTransaction();
 
         $user = User::create($data);
@@ -63,6 +67,6 @@ class StudentRepository implements StudentRepositoryInterface
 
     private function generateUsername(string $email)
     {
-        return strstr($email, '@', true).Student::count();
+        return strstr($email, '@', true) . Student::count();
     }
 }
