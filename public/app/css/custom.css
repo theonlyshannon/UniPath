@@ -1,1 +1,10 @@
 
+<style>
+    .eduhive-ratings__icon i {
+        color: #ccc; /* warna default */
+        cursor: pointer;
+    }
+    .eduhive-ratings__icon i.active {
+        color: #ffc107; /* warna bintang aktif */
+    }
+</style>

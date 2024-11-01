@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web\App;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseReviewStoreRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Interfaces\CourseRepositoryInterface;
-use App\Http\Requests\CourseReviewStoreRequest;
 use Illuminate\Support\Facades\DB;;
 use App\Interfaces\CourseReviewRepositoryInterface;
 
@@ -26,6 +26,7 @@ class CourseController extends Controller
 
         $courses = $this->courseRepository->getAllCourse(8, $category);
 
+
         return view('pages.app.course.index', compact('courses'));
     }
 
@@ -41,6 +42,7 @@ class CourseController extends Controller
         DB::beginTransaction();
 
         try {
+
             $this->courseReviewRepository->createCourseReview($data);
 
             DB::commit();
@@ -56,6 +58,7 @@ class CourseController extends Controller
     public function show($slug)
     {
         $course = $this->courseRepository->getCourseBySlug($slug);
+        $reviews = $this->courseReviewRepository->getCourseReviewByCourseId($course->id);
 
         $user = Auth::user();
         $hasAccess = false;
@@ -64,6 +67,6 @@ class CourseController extends Controller
             $hasAccess = $user->hasPurchasedCourse($course->id);
         }
 
-        return view('pages.app.course.show', compact('course', 'hasAccess'));
+        return view('pages.app.course.show', compact('course', 'hasAccess', 'reviews'));
     }
 }
