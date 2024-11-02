@@ -30,6 +30,7 @@ Route::name('app.')->middleware(['update.last.active'])->group(function () {
     Route::prefix('artikel')->name('article.')->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('index');
         Route::get('/{slug}', [ArticleController::class, 'show'])->name('show');
+        Route::post('/{slug}/komentar', [ArticleController::class, 'comment'])->name('comment.store');
     });
 
     Route::prefix('kelas')->name('course.')->group(function () {
