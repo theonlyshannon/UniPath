@@ -50,6 +50,7 @@
     </a>
 
     {{-- navbar --}}
+    <div class="page-wrapper">
     <x-ui.app-header/>
 
     <main>
@@ -58,6 +59,9 @@
 
     {{-- footer --}}
     <x-ui.app-footer/>
+    </div>
+
+    <x-ui.app-header-mobile/>
 
     <script src="{{ asset('app/vendors/jquery/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('app/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
