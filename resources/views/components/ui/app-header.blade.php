@@ -1,4 +1,4 @@
-<header class="main-header sticky-header sticky-header--normal">
+<header class="main-header main-header--two main-header--three sticky-header sticky-header--three sticky-header--normal">
     <div class="container-fluid">
         <div class="main-header__inner">
             <div class="main-header__logo logo-retina">
@@ -42,3 +42,4 @@
         </div>
     </div>
 </header>
+
