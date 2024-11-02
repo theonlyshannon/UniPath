@@ -43,7 +43,13 @@
     @stack('app-style')
 </head>
 
-<body>
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+    <div class="preloader">
+        <div class="preloader__image" style="background-image: url(assets/images/loader.png);"></div>
+    </div>
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
         <span class="scroll-to-top__text">back top</span>
         <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
@@ -82,6 +88,7 @@
     <script src="{{ asset('app/vendors/jquery-circleType/jquery.circleType.js') }}"></script>
     <script src="{{ asset('app/vendors/jquery-lettering/jquery.lettering.min.js') }}"></script>
     <script src="{{ asset('app/js/eduhive.js') }}"></script>
+    
 
     @stack('script-app')
 </body>
