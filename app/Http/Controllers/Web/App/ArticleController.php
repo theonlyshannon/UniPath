@@ -61,10 +61,7 @@ class ArticleController extends Controller
         $recentArticles = $this->articleRepository->getAllArticle(3);
 
         $ip = $_SERVER['REMOTE_ADDR'];
-        $viewer = ArticleVisitor::where([
-            ['visitor_ip', $ip],
-            ['article_id', $article->id]
-        ])->first();
+        $viewer = ArticleVisitor::where([['visitor_ip', $ip], ['article_id', $article->id]])->first();
 
         if (!$viewer) {
             ArticleVisitor::create([
@@ -81,7 +78,12 @@ class ArticleController extends Controller
         $article = $this->articleRepository->getArticleBySlug($slug);
 
         if (!$article) {
-            abort(404);
+            return response()->json(
+                [
+                    'message' => 'Artikel tidak ditemukan',
+                ],
+                404,
+            );
         }
 
         $data = $request->validated();
@@ -91,19 +93,26 @@ class ArticleController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->articleCommentRepository->createArticleComment($data);
+            $comment = $this->articleCommentRepository->createArticleComment($data);
 
             DB::commit();
 
-            return redirect()
-                ->route('app.article.show', ['slug' => $article->slug])
-                ->with('message', 'Komentar berhasil ditambahkan');
+            return response()->json(
+                [
+                    'message' => 'Komentar berhasil ditambahkan',
+                    'comment' => $comment,
+                ],
+                201,
+            );
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return redirect()
-                ->route('app.article.show', ['slug' => $article->slug])
-                ->with('error', 'Terjadi kesalahan saat menambahkan komentar');
+            return response()->json(
+                [
+                    'message' => 'Terjadi kesalahan saat menambahkan komentar: ' . $e->getMessage(),
+                ],
+                500,
+            );
         }
     }
 }
