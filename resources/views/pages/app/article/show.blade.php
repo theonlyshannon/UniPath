@@ -6,13 +6,11 @@
             <div class="row gutter-y-60">
                 <div class="col-lg-8">
                     <div class="blog-details">
-                        <div class="blog-card blog-card--three wow fadeInUp" data-wow-delay="00ms"
-                            data-wow-duration="1500ms">
+                        <div class="blog-card blog-card--three">
                             <div class="blog-card__image">
                                 <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}">
                                 <div class="blog-card__date">
-                                    <span class="blog-card__date__day"></span>
-                                    <span class="blog-card__date__month">June</span>
+                                    <span class="blog-card__date__month">{{ $article->created_at }}</span>
                                 </div>
                             </div>
                             <div class="blog-card__content">
@@ -62,12 +60,14 @@
                     <div class="comments-one">
                         <h3 class="comments-one__title">02 Comments</h3>
                         <ul class="list-unstyled comments-one__list">
-                            <x-ui.article-comment-card />
+                            @foreach ($comments as $comment)
+                                <x-ui.article-comment-card :comment="$comment" />
+                            @endforeach
                         </ul>
                     </div>
 
                     <div class="comments-form">
-                        <h3 class="comments-form__title">Leave a Comment</h3>
+                        <h3 class="comments-form__title">Berikan Komentar</h3>
                         <x-ui.article-comment-form :article="$article"/>
 
                     </div>

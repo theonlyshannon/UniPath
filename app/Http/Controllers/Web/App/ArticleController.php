@@ -51,12 +51,20 @@ class ArticleController extends Controller
     {
         $article = $this->articleRepository->getArticleBySlug($slug);
 
+        if (!$article) {
+            abort(404);
+        }
+
+        $comments = $this->articleCommentRepository->getArticleCommentByArticleId($article->id);
         $categories = $this->articleCategoryRepository->getAllArticleCategory();
         $tags = $this->articleTagRepository->getAllArticleTag();
         $recentArticles = $this->articleRepository->getAllArticle(3);
 
         $ip = $_SERVER['REMOTE_ADDR'];
-        $viewer = ArticleVisitor::where([['visitor_ip', $ip], ['article_id', $article->id]])->first();
+        $viewer = ArticleVisitor::where([
+            ['visitor_ip', $ip],
+            ['article_id', $article->id]
+        ])->first();
 
         if (!$viewer) {
             ArticleVisitor::create([
@@ -65,11 +73,7 @@ class ArticleController extends Controller
             ]);
         }
 
-        if (!$article) {
-            abort(404);
-        }
-
-        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'recentArticles'));
+        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'recentArticles', 'comments'));
     }
 
     public function comment(ArticleCommentStoreRequest $request, $slug)

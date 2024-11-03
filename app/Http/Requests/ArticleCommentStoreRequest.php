@@ -4,16 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleCommentStoreRequest extends FormRequest
+class ArticleCommentstoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +14,39 @@ class ArticleCommentStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'comment' => 'required|string',
+        ];
+    }
+
+    /**
+     * Get the validation attributes that apply to the request.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => 'Nama',
+            'email' => 'Email',
+            'comment' => 'Komentar',
+        ];
+    }
+
+    /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'required' => ':attribute tidak boleh kosong',
+            'string' => ':attribute harus berupa string',
+            'max' => ':attribute tidak boleh lebih dari :max karakter',
+            'email' => ':attribute harus berupa email',
+            'exists' => ':attribute tidak ditemukan',
         ];
     }
 }

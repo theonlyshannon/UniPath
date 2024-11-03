@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-    <div class="course-card course-card--two wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='00ms'>
+    <div class="course-card course-card--two">
         <div class="course-card__image">
             <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}">
         </div>

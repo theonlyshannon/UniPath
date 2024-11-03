@@ -18,7 +18,7 @@
 
     <section class="courses-three section-space2" id="courses">
         <div class="container">
-            <div class="sec-title sec-title--center wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
+            <div class="sec-title sec-title--center">
                 <h6 class="sec-title__tagline">our courses</h6>
                 <h3 class="sec-title__title"><span>Our</span><span>Popular</span> <span class="sec-title__title__text">Courses</span></h3>
             </div>
