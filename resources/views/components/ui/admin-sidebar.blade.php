@@ -116,14 +116,14 @@
             @endcan
 
             @can('course-management')
-                <li class="nav-item {{ request()->is('admin/course-category*', 'admin/course*') ? ' active' : '' }}">
+                <li class="nav-item {{ request()->is('admin/course-category*', 'admin/course*', 'admin/course-review*') ? ' active' : '' }}">
                     <a class="nav-link" data-bs-toggle="collapse" href="#course-management" role="button"
-                        aria-expanded="{{ request()->is('admin/course-category*', 'admin/course*') ? 'true' : 'false' }}">
+                        aria-expanded="{{ request()->is('admin/course-category*', 'admin/course*', 'admin/course-review*') ? 'true' : 'false' }}">
                         <i class="link-icon" data-feather="layers"></i>
                         <span class="link-title">Manajemen Kelas</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
-                    <div class="collapse {{ request()->is('admin/course-category*', 'admin/course*') ? 'show' : '' }}"
+                    <div class="collapse {{ request()->is('admin/course-category*', 'admin/course*', 'admin/course-review*') ? 'show' : '' }}"
                         id="course-management">
                         <ul class="nav sub-menu">
 
@@ -141,6 +141,15 @@
                                     <a href="{{ route('admin.course.index') }}"
                                         class="nav-link {{ request()->is('admin/course*') && !request()->is('admin/course-category') ? ' active' : '' }}">
                                         Kelas
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('course-review-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.course-review.index') }}"
+                                        class="nav-link {{ request()->is('admin/course-review*') && request()->is('admin/course*') && request()->is('admin/course-category') ? ' active' : '' }}">
+                                        Review Kelas
                                     </a>
                                 </li>
                             @endcan

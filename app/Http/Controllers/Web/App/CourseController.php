@@ -37,7 +37,7 @@ class CourseController extends Controller
 
         $data['student_id'] = Auth::user()->student->id;
         $data['course_id'] = $id;
-        $data['is_approved'] = false;
+        $data['is_active'] = false;
 
         DB::beginTransaction();
 

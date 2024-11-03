@@ -59,14 +59,12 @@ class CourseController extends Controller
     {
         $data = $request->validated();
 
-        // Log data yang divalidasi
         Log::info('CourseStoreRequest validated data:', $data);
 
         if ($request->hasFile('thumbnail')) {
             $thumbnailPath = $request->file('thumbnail')->storeAs('assets/images/course/thumbnail', Str::random(40) . '.' . $request->file('thumbnail')->extension(), 'public');
             $data['thumbnail'] = $thumbnailPath;
 
-            // Log path thumbnail
             Log::info('Thumbnail stored at:', ['path' => $thumbnailPath]);
         }
 
@@ -75,7 +73,7 @@ class CourseController extends Controller
             Swal::toast('Course berhasil ditambahkan', 'success');
             Log::info('Course created successfully.');
         } catch (\Exception $e) {
-            // Log exception
+
             Log::error('Error creating course:', ['message' => $e->getMessage()]);
             Swal::toast('Course gagal ditambahkan', 'error');
         }

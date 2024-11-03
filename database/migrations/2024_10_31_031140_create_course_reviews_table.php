@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->string('review');
 
-            $table->boolean('is_approved')->default(false);
+            $table->boolean('is_active')->default(false);
 
             $table->timestamps();
         });

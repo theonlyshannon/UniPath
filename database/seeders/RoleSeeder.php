@@ -88,6 +88,16 @@ class RoleSeeder extends Seeder
             'course-edit',
             'course-delete',
 
+            'course-review-list',
+            'course-review-create',
+            'course-review-edit',
+            'course-review-delete',
+
+            'article-comment-list',
+            'article-comment-create',
+            'article-comment-edit',
+            'article-comment-delete',
+
             'transaction-management',
 
             'transaction-edit',
@@ -181,6 +191,16 @@ class RoleSeeder extends Seeder
             'transaction-management',
 
             'transaction-edit',
+
+            'course-review-list',
+            'course-review-create',
+            'course-review-edit',
+            'course-review-delete',
+
+            'article-comment-list',
+            'article-comment-create',
+            'article-comment-edit',
+            'article-comment-delete',
         ]);
 
         $writer->syncPermissions([

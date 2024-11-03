@@ -46,11 +46,13 @@ class CourseReviewRepository implements CourseReviewRepositoryInterface
         return CourseReview::create($data);
     }
 
-    public function updateCourseReview(array $data, string $id)
+    public function updateStatusIsActive($courseReviewId, $isActive)
     {
-        $review = CourseReview::findOrFail($id);
-        $review->update($data);
-        return $review;
+        $course = CourseReview::findOrFail($courseReviewId);
+
+        $course->is_active = $isActive;
+
+        $course->save();
     }
 
     public function deleteCourseReview(string $id)

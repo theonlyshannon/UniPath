@@ -10,9 +10,7 @@ interface CourseReviewRepositoryInterface
 
     public function getCourseReviewById(string $id);
 
-    public function createCourseReview(array $data);
-
-    public function updateCourseReview(array $data, string $id);
+    public function updateStatusIsActive(string $courseReviewId, bool $isActive);
 
     public function deleteCourseReview(string $id);
 }
