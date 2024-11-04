@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Chatbot | CodingNepal</title>
+    <title>AI Chatbot | unipath AI</title>
     <!-- Linking Google fonts for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="style.css" />
@@ -39,7 +39,7 @@
             />
           </svg>
           <!-- prettier-ignore -->
-          <div class="message-text"> Hey there  <br /> How can I help you today? </div>
+          <div class="message-text"> Hello  <br /> Ada yang bisa saya bantu hari ini? </div>
         </div>
       </div>
 
@@ -65,6 +65,6 @@
     <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
 
     <!-- Linking custom script -->
-    <script src="script.js"></script>
+    <script src="{{ asset('app/js/custom.js') }}"></script>
   </body>
 </html>

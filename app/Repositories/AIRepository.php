@@ -94,7 +94,7 @@ class AIRepository implements AIRepositoryInterface
 
             $openAIResponse = $this->openAIClient->chatCompletions()->create(
                 new CreateRequest([
-                    'model' => 'gpt-4-turbo',
+                    'model' => 'gpt-4o',
                     'messages' => $messages,
                 ])
             )->toModel();

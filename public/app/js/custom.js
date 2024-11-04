@@ -7,10 +7,6 @@ const fileCancelButton = fileUploadWrapper.querySelector("#file-cancel");
 const chatbotToggler = document.querySelector("#chatbot-toggler");
 const closeChatbot = document.querySelector("#close-chatbot");
 
-// API setup
-const API_KEY = "PASTE-YOUR-API-KEY";
-const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
 // Initialize user message and file data
 const userData = {
   message: null,
@@ -20,8 +16,6 @@ const userData = {
   },
 };
 
-// Store chat history
-const chatHistory = [];
 const initialInputHeight = messageInput.scrollHeight;
 
 // Create message element with dynamic classes and return it
@@ -32,40 +26,36 @@ const createMessageElement = (content, ...classes) => {
   return div;
 };
 
-// Generate bot response using API
+// Generate bot response by making a POST request to the backend
 const generateBotResponse = async (incomingMessageDiv) => {
   const messageElement = incomingMessageDiv.querySelector(".message-text");
 
-  // Add user message to chat history
-  chatHistory.push({
-    role: "user",
-    parts: [{ text: userData.message }, ...(userData.file.data ? [{ inline_data: userData.file }] : [])],
-  });
+  // Get CSRF token
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
   // API request options
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-TOKEN": csrfToken,
+      "Accept": "application/json",
+    },
     body: JSON.stringify({
-      contents: chatHistory,
+      message: userData.message,
     }),
   };
 
   try {
-    // Fetch bot response from API
-    const response = await fetch(API_URL, requestOptions);
+    // Fetch bot response from backend
+    const response = await fetch('/student/chat', requestOptions);
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error.message);
+    if (!response.ok) throw new Error(data.response || 'Error fetching response from server.');
 
     // Extract and display bot's response text
-    const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+    const apiResponseText = data.response; // Assuming the Laravel controller returns {'response': '...'}
     messageElement.innerText = apiResponseText;
 
-    // Add bot response to chat history
-    chatHistory.push({
-      role: "model",
-      parts: [{ text: apiResponseText }],
-    });
   } catch (error) {
     // Handle error in API response
     console.log(error);
