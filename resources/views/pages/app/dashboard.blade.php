@@ -1,3 +1,4 @@
+
 <x-layouts.app title="Edu">
     <section class="main-slider-three" id="home">
         <div class="main-slider-three__carousel eduhive-owl__carousel owl-carousel owl-theme">
@@ -532,7 +533,7 @@
         <div class="instructors-two__shape-box-one"></div><!-- /.instructors-two__shape-box-one -->
         <div class="instructors-two__shape-box-two"></div><!-- /.instructors-two__shape-box-two -->
     </section>
-
+    
 
     @push('script-app')
         <script>
@@ -553,5 +554,9 @@
                 });
             });
         </script>
+
+        
+       
+        
     @endpush
 </x-layouts.app>

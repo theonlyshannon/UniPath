@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController as ControllersAboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Payment\CartController;
 use App\Http\Controllers\Payment\TransactionController;
 use App\Http\Controllers\Web\App\CourseController;
 use App\Http\Controllers\Web\App\ArticleController;
+use App\Http\Controllers\Web\App\AboutController;
 use App\Http\Controllers\Web\App\DashboardController;
 use App\Http\Controllers\Web\App\CartController as AppCartController;
 use App\Http\Controllers\Web\App\TransactionController as AppTransactionController;
@@ -26,6 +28,9 @@ use App\Http\Controllers\Web\App\TransactionController as AppTransactionControll
 
 Route::name('app.')->middleware(['update.last.active'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/about-us', [ControllersAboutController::class, 'index'])->name('about');
+
 
     Route::prefix('artikel')->name('article.')->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('index');
