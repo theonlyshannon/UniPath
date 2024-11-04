@@ -39,7 +39,7 @@
             />
           </svg>
           <!-- prettier-ignore -->
-          <div class="message-text"> Hello  <br /> Ada yang bisa saya bantu hari ini? </div>
+          <div class="message-text"> Hello Aku Ai Assistant. Namaku Zifa <br /> Ada yang bisa saya bantu hari ini? </div>
         </div>
       </div>
 
