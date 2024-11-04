@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 
 class StudentSeeder extends Seeder
 {
-     /**
+    /**
      * Run the database seeds.
      */
     public function run(): void
@@ -37,9 +37,11 @@ class StudentSeeder extends Seeder
 
         for ($j = 0; $j < 5; $j++) {
             $randomStudent = User::role('student')->inRandomOrder()->first();
-            $randomStudent->student->update([
-                'last_active_at' => Carbon::now()->subHours(rand(0, 23))->subMinutes(rand(0, 59)),
-            ]);
+            if ($randomStudent && $randomStudent->student) { 
+                $randomStudent->student->update([
+                    'last_active_at' => Carbon::now()->subHours(rand(0, 23))->subMinutes(rand(0, 59)),
+                ]);
+            }
         }
     }
 }

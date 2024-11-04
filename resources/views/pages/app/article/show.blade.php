@@ -6,13 +6,11 @@
             <div class="row gutter-y-60">
                 <div class="col-lg-8">
                     <div class="blog-details">
-                        <div class="blog-card blog-card--three wow fadeInUp" data-wow-delay="00ms"
-                            data-wow-duration="1500ms">
+                        <div class="blog-card blog-card--three">
                             <div class="blog-card__image">
                                 <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}">
                                 <div class="blog-card__date">
-                                    <span class="blog-card__date__day"></span>
-                                    <span class="blog-card__date__month">June</span>
+                                    <span class="blog-card__date__month">{{ $article->created_at }}</span>
                                 </div>
                             </div>
                             <div class="blog-card__content">
@@ -60,15 +58,33 @@
                     </div>
 
                     <div class="comments-one">
-                        <h3 class="comments-one__title">02 Comments</h3>
+                        <h3 class="comments-one__title">{{ $comments->count() }} Comments</h3>
                         <ul class="list-unstyled comments-one__list">
-                            <x-ui.article-comment-card />
+                            @foreach ($comments as $comment)
+                                <li class="comments-one__card">
+                                    <div class="comments-one__card__image">
+                                        <img src="{{ asset('app/images/blog/blog-comment-1-1.png') }}"
+                                            alt="Profile Picture">
+                                    </div>
+                                    <div class="comments-one__card__content">
+                                        <div class="comments-one__card__top">
+                                            <div class="comments-one__card__info">
+                                                <h3 class="comments-one__card__title">{{ $comment->name }}</h3>
+                                                <p class="comments-one__card__date">
+                                                    {{ $comment->created_at->format('d M Y, H:i') }}</p>
+                                            </div>
+                                        </div>
+                                        <p class="comments-one__card__text">{{ $comment->comment }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
 
+
                     <div class="comments-form">
-                        <h3 class="comments-form__title">Leave a Comment</h3>
-                        <x-ui.article-comment-form :article="$article"/>
+                        <h3 class="comments-form__title">Berikan Komentar</h3>
+                        <x-ui.article-comment-form :article="$article" id="commentForm"/>
 
                     </div>
                 </div>
@@ -81,7 +97,8 @@
                                     @foreach ($recentArticles as $article)
                                         <li class="sidebar__posts__item">
                                             <div class="sidebar__posts__image">
-                                                <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}">
+                                                <img src="{{ asset($article->thumbnail) }}"
+                                                    alt="{{ $article->title }}">
                                             </div>
                                             <div class="sidebar__posts__content">
                                                 <div class="sidebar__posts__meta">
@@ -134,4 +151,61 @@
             </div>
         </div>
     </section>
+    @push('script-app')
+        <script>
+            document.getElementById("commentForm")?.addEventListener("submit", function(e) {
+                e.preventDefault(); // Mencegah submit form secara tradisional
+
+                const formData = new FormData(this);
+                const url = this.action;
+
+                fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.comment) {
+                            // Membuat HTML komentar baru menggunakan innerHTML
+                            const commentList = document.querySelector(".comments-one__list");
+                            const newComment = `
+                        <li class="comments-one__card">
+                            <div class="comments-one__card__image">
+                                <img src="{{ asset('app/images/blog/blog-comment-1-1.png') }}" alt="Profile Picture">
+                            </div>
+                            <div class="comments-one__card__content">
+                                <div class="comments-one__card__top">
+                                    <div class="comments-one__card__info">
+                                        <h3 class="comments-one__card__title">${data.comment.name}</h3>
+                                        <p class="comments-one__card__date">${new Date(data.comment.created_at).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                                <p class="comments-one__card__text">${data.comment.comment}</p>
+                            </div>
+                        </li>
+                    `;
+                            // Menambahkan komentar baru di atas komentar lainnya
+                            commentList.insertAdjacentHTML('afterbegin', newComment);
+
+                            // Reset form setelah komentar ditambahkan
+                            document.getElementById("commentForm").reset();
+                        } else if (data.message) {
+                            alert(data.message);
+                        } else {
+                            alert("Terjadi kesalahan, silakan coba lagi.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Terjadi kesalahan, silakan coba lagi.");
+                    });
+            });
+        </script>
+    @endpush
+
+
 </x-layouts.app>

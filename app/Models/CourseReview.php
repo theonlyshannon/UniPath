@@ -15,7 +15,7 @@ class CourseReview extends Model
         'course_id',
         'student_id',
         'review',
-        'is_approved',
+        'is_active',
         'rating'
     ];
 

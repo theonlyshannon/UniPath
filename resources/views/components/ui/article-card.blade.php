@@ -1,9 +1,8 @@
 <div class="col-md-12">
-    <div class="blog-card blog-card--three fadeInUp" data-wow-duration='1500ms'>
+    <div class="blog-card blog-card--three">
         <div class="blog-card__image">
             <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}">
             <div class="blog-card__date">
-                <span class="blog-card__date__day">{{ $article->created_at }}</span>
                 <span class="blog-card__date__month">{{ $article->created_at }}</span>
             </div>
         </div>

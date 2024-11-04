@@ -2,15 +2,7 @@
     <section class="login-page section-space">
         <div class="container">
             <div class="row gutter-y-50 align-items-center">
-                <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
-                    <div class="login-page__image">
-                        <div class="login-page__image__inner">
-                            <img src="{{ asset('app/images/resources/login-1-1.jpg') }}" alt="login">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+                <div class="col-lg-6">
                     <form action="{{ route('login') }}" method="POST" class="login-page__form">
                         @csrf
                         <div class="login-page__form__inner">
@@ -28,7 +20,7 @@
                                     <label for="password" class="login-page__form__label">Password</label>
                                     <div class="login-page__form__input-box__inner">
                                         <input type="password" id="password" name="password" placeholder="Enter password" required>
-                                        <i class="toggle-password-icon fa fa-fw fa-eye-slash"></i>
+                                        <i class="toggle-password-icon fa fa-fw fa-eye-slash" onclick="togglePassword()"></i>
                                     </div>
                                 </div>
                                 <div class="login-page__form__input-box login-page__form__input-box--3">
@@ -53,4 +45,21 @@
             </div>
         </div>
     </section>
+    @push('script-app')
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password-icon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+    @endpush
 </x-layouts.auth>

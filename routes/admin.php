@@ -11,9 +11,11 @@ use App\Http\Controllers\Web\Admin\studentController;
 use App\Http\Controllers\Web\Admin\ArticleTagController;
 use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\UniversityController;
+use App\Http\Controllers\Web\Admin\TransactionController;
+use App\Http\Controllers\Web\Admin\CourseReviewController;
+use App\Http\Controllers\Web\Admin\ArticleCommentController;
 use App\Http\Controllers\Web\Admin\CourseCategoryController;
 use App\Http\Controllers\Web\Admin\ArticleCategoryController;
-use App\Http\Controllers\Web\Admin\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,7 @@ Route::resource('role', RoleController::class);
 Route::resource('permission', PermissionController::class);
 
 Route::resource('article-category', ArticleCategoryController::class);
+Route::resource('article-commentar', ArticleCommentController::class);
 Route::resource('article-tag', ArticleTagController::class);
 Route::resource('article', ArticleController::class);
 
@@ -43,6 +46,8 @@ Route::resource('faculty', FacultyController::class);
 
 Route::resource('course-category', CourseCategoryController::class);
 Route::resource('course', CourseController::class);
+Route::resource('course-review', CourseReviewController::class);
+Route::post('/course-review/{courseReviewId}/update-status', [CourseReviewController::class, 'updateStatusIsActive']);
 Route::post('/course/{courseId}/update-status', [CourseController::class, 'updateStatusIsActive']);
 Route::post('/course/{courseId}/update-favourite', [CourseController::class, 'updateStatusIsFavourite']);
 

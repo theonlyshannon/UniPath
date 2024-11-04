@@ -131,10 +131,16 @@
                                 <div class="tab fadeInUp animated" data-wow-delay="200ms" id="reviews"
                                     style="display: none;">
                                     <div class="comments-one course-details__comments">
-                                        <h3 class="comments-one__title">02 Reviews, Web Development Course</h3>
-                                        @foreach ($reviews as $review)
-                                            <x-ui.course-review-card :review="$review"/>
-                                        @endforeach
+                                        <h3 class="comments-one__title">Apa Kata Mereka</h3>
+                                        @if ($reviews->isEmpty() || !$reviews->where('is_active', true)->count())
+                                            <p>Tidak ada commentar</p>
+                                        @else
+                                            @foreach ($reviews as $review)
+                                                @if ($review->is_active)
+                                                    <x-ui.course-review-card :review="$review"/>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
                                     <div class="course-review-form mt-5">
                                         <x-ui.course-review-form :course="$course"/>

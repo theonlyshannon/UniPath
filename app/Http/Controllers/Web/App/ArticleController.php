@@ -51,6 +51,11 @@ class ArticleController extends Controller
     {
         $article = $this->articleRepository->getArticleBySlug($slug);
 
+        if (!$article) {
+            abort(404);
+        }
+
+        $comments = $this->articleCommentRepository->getArticleCommentByArticleId($article->id);
         $categories = $this->articleCategoryRepository->getAllArticleCategory();
         $tags = $this->articleTagRepository->getAllArticleTag();
         $recentArticles = $this->articleRepository->getAllArticle(3);
@@ -65,11 +70,7 @@ class ArticleController extends Controller
             ]);
         }
 
-        if (!$article) {
-            abort(404);
-        }
-
-        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'recentArticles'));
+        return view('pages.app.article.show', compact('article', 'categories', 'tags', 'recentArticles', 'comments'));
     }
 
     public function comment(ArticleCommentStoreRequest $request, $slug)
@@ -77,7 +78,12 @@ class ArticleController extends Controller
         $article = $this->articleRepository->getArticleBySlug($slug);
 
         if (!$article) {
-            abort(404);
+            return response()->json(
+                [
+                    'message' => 'Artikel tidak ditemukan',
+                ],
+                404,
+            );
         }
 
         $data = $request->validated();
@@ -87,19 +93,26 @@ class ArticleController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->articleCommentRepository->createArticleComment($data);
+            $comment = $this->articleCommentRepository->createArticleComment($data);
 
             DB::commit();
 
-            return redirect()
-                ->route('app.article.show', ['slug' => $article->slug])
-                ->with('message', 'Komentar berhasil ditambahkan');
+            return response()->json(
+                [
+                    'message' => 'Komentar berhasil ditambahkan',
+                    'comment' => $comment,
+                ],
+                201,
+            );
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return redirect()
-                ->route('app.article.show', ['slug' => $article->slug])
-                ->with('error', 'Terjadi kesalahan saat menambahkan komentar');
+            return response()->json(
+                [
+                    'message' => 'Terjadi kesalahan saat menambahkan komentar: ' . $e->getMessage(),
+                ],
+                500,
+            );
         }
     }
 }
