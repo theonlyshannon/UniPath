@@ -7,10 +7,6 @@ const fileCancelButton = fileUploadWrapper.querySelector("#file-cancel");
 const chatbotToggler = document.querySelector("#chatbot-toggler");
 const closeChatbot = document.querySelector("#close-chatbot");
 
-// API setup
-const API_KEY = "PASTE-YOUR-API-KEY";
-const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
 // Initialize user message and file data
 const userData = {
   message: null,
@@ -20,8 +16,6 @@ const userData = {
   },
 };
 
-// Store chat history
-const chatHistory = [];
 const initialInputHeight = messageInput.scrollHeight;
 
 // Create message element with dynamic classes and return it
@@ -32,52 +26,60 @@ const createMessageElement = (content, ...classes) => {
   return div;
 };
 
-// Generate bot response using API
 const generateBotResponse = async (incomingMessageDiv) => {
-  const messageElement = incomingMessageDiv.querySelector(".message-text");
+    const messageElement = incomingMessageDiv.querySelector(".message-text");
 
-  // Add user message to chat history
-  chatHistory.push({
-    role: "user",
-    parts: [{ text: userData.message }, ...(userData.file.data ? [{ inline_data: userData.file }] : [])],
-  });
+    // Mendapatkan CSRF token
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-  // API request options
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: chatHistory,
-    }),
+    // Opsi permintaan API
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+        message: userData.message,
+      }),
+    };
+
+    try {
+      const response = await fetch('/student/chat', requestOptions);
+
+      if (response.status === 401) {
+        const data = await response.json();
+        messageElement.innerHTML = data.response;
+        messageElement.style.color = "#ff0000";
+        incomingMessageDiv.classList.remove("thinking");
+        return;
+      }
+
+      if (!response.ok) {
+        // Jika respons bukan JSON, ambil teks respons
+        const errorText = await response.text();
+        messageElement.innerText = `Server Error: ${errorText}`;
+        messageElement.style.color = "#ff0000";
+        incomingMessageDiv.classList.remove("thinking");
+        return;
+      }
+
+      const data = await response.json();
+      messageElement.innerText = data.response;
+
+    } catch (error) {
+      console.error(error);
+      messageElement.innerText = error.message;
+      messageElement.style.color = "#ff0000";
+    } finally {
+      userData.file = {};
+      incomingMessageDiv.classList.remove("thinking");
+      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
+    }
   };
 
-  try {
-    // Fetch bot response from API
-    const response = await fetch(API_URL, requestOptions);
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error.message);
 
-    // Extract and display bot's response text
-    const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
-    messageElement.innerText = apiResponseText;
-
-    // Add bot response to chat history
-    chatHistory.push({
-      role: "model",
-      parts: [{ text: apiResponseText }],
-    });
-  } catch (error) {
-    // Handle error in API response
-    console.log(error);
-    messageElement.innerText = error.message;
-    messageElement.style.color = "#ff0000";
-  } finally {
-    // Reset user's file data, removing thinking indicator and scroll chat to bottom
-    userData.file = {};
-    incomingMessageDiv.classList.remove("thinking");
-    chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
-  }
-};
 
 // Handle outgoing user messages
 const handleOutgoingMessage = (e) => {
