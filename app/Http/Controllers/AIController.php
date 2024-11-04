@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\AIService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class AIController extends Controller
 {
@@ -29,6 +30,13 @@ class AIController extends Controller
      */
     public function chat(Request $request)
     {
+        if (!Auth::check()) {
+            $loginUrl = URL::route('login');
+            return response()->json([
+                'response' => "Mohon Login terlebih dahulu sebelum menggunakan AI, Login klik disini: <a href='$loginUrl'>Login</a>"
+            ], 401);
+        }
+
         $validated = $request->validate([
             'message' => 'required|string',
         ]);

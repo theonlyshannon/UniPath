@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
         {{ $title ?? 'No Page' }}
     </title>
@@ -50,7 +51,7 @@
     <div class="preloader">
         <div class="preloader__image" style="background-image: url(assets/images/loader.png);"></div>
     </div>
-   
+
     {{-- navbar --}}
     <div class="page-wrapper">
     <x-ui.app-header/>
@@ -91,7 +92,7 @@
     <script src="{{ asset('app/js/eduhive.js') }}"></script>
     <script src="{{ asset('app/js/custom.js') }}"></script>
 
-    
+
 
     @stack('script-app')
 </body>
