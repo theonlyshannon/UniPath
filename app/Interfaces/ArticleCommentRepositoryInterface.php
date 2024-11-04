@@ -12,7 +12,7 @@ interface ArticleCommentRepositoryInterface
 
     public function createArticleComment(array $data);
 
-    public function updateArticleComment(array $data, string $id);
+    public function updateStatusIsActive(string $articleCommentId, bool $isActive);
 
     public function deleteArticleComment(string $id);
 }

@@ -43,7 +43,7 @@ class CourseReviewController extends Controller
     }
 
     /**
-     * Approve the specified resource from storage.
+     * update status function 
      */
     public function updateStatusIsActive(Request $request, $courseReviewId)
     {

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('comment');
 
-            $table->boolean('is_approved')->default(true);
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
             $table->softDeletes();

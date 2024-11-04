@@ -17,7 +17,7 @@ class ArticleComment extends Model
         'name',
         'email',
         'comment',
-        'is_approved',
+        'is_active',
     ];
 
     public function article()

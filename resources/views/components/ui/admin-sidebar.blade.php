@@ -199,6 +199,15 @@
                                     </a>
                                 </li>
                             @endcan
+
+                            @can('article-comment-list')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.article-commentar.index') }}"
+                                        class="nav-link {{ request()->is('admin/article*') && !request()->is('admin/article-tag') && !request()->is('admin/article-category') ? ' active' : '' }}">
+                                        Artikel
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>

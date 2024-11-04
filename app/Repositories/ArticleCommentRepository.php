@@ -27,11 +27,13 @@ class ArticleCommentRepository implements ArticleCommentRepositoryInterface
         return ArticleComment::create($data);
     }
 
-    public function updateArticleComment(array $data, string $id)
+    public function updateStatusIsActive($articleCommentId, $isActive)
     {
-        $comment = ArticleComment::findOrFail($id);
-        $comment->update($data);
-        return $comment;
+        $course = ArticleComment::findOrFail($articleCommentId);
+
+        $course->is_active = $isActive;
+
+        $course->save();
     }
 
     public function deleteArticleComment(string $id)
