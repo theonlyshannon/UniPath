@@ -1,11 +1,12 @@
-<header class="main-header main-header--two main-header--three sticky-header sticky-header--three sticky-header--normal">
+
+<header class="main-header sticky-header sticky-header--normal">
     <div class="container-fluid">
         <div class="main-header__inner">
             <div class="main-header__logo logo-retina">
                 <a href="index.html">
                     <img src="assets/images/logo-dark.png" alt="eduhive HTML" width="209">
                 </a>
-            </div>
+            </div><!-- /.main-header__logo -->
             <div class="main-header__right">
                 <nav class="main-header__nav main-menu">
                     <ul class="main-menu__list">
@@ -32,14 +33,47 @@
                     <i class="icon-cart" aria-hidden="true"></i>
                     <span class="sr-only">Shopping Cart</span>
                 </a>
-                <a href="contact.html" class="main-header__btn eduhive-btn eduhive-btn--border">
-                    <span>Apply now</span>
+
+                @php
+                // Cek apakah pengguna sudah login dan merupakan student
+                $student = Auth::check() ? \App\Models\Student::where('user_id', Auth::id())->first() : null;
+            @endphp
+            
+            @if ($student)
+                <!-- Tampilkan nama student dengan dropdown saat hover -->
+                <li class="dropdown">
+                    <a href="#" class="main-header__btn eduhive-btn eduhive-btn--border">
+                        <span>{{ $student->name ?? Auth::user()->email }}</span>
+                        <span class="eduhive-btn__icon">
+                            <span class="eduhive-btn__icon__inner"><i class="icon-right-arrow"></i></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="dropdown-item">User Profile</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}" class="dropdown-item"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                               Log Out
+                            </a>
+                        </li>
+                    </ul>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            @else
+                <!-- Tampilkan tombol Log In untuk guest atau admin -->
+                <a href="{{ route('login') }}" class="main-header__btn eduhive-btn eduhive-btn--border">
+                    <span>Log In</span>
                     <span class="eduhive-btn__icon">
                         <span class="eduhive-btn__icon__inner"><i class="icon-right-arrow"></i></span>
                     </span>
                 </a>
+            @endif                 
             </div>
-        </div>
-    </div>
-</header>
+        </div><!-- /.main-header__inner -->
+    </div><!-- /.container-fluid -->
+</header><!-- /.main-header -->
 
+<!-- Tambahkan script Bootstrap jika belum ada -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
