@@ -9,16 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 class WriterRepository implements WriterRepositoryInterface
 {
+    /**
+     * Retrieve all writers.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getAllWriter()
     {
         return Writer::all();
     }
 
+    /**
+     * Retrieve a writer by their ID.
+     *
+     * @param string $id
+     * @return Writer
+     */
     public function getWriterById(string $id)
     {
         return Writer::findOrFail($id);
     }
 
+    /**
+     * Create a new writer and their profile.
+     *
+     * @param array $data
+     * @return User
+     */
     public function createWriter(array $data)
     {
         DB::beginTransaction();
@@ -32,6 +49,13 @@ class WriterRepository implements WriterRepositoryInterface
         return $user;
     }
 
+    /**
+     * Update an existing writer's information.
+     *
+     * @param array $data
+     * @param string $id
+     * @return Writer
+     */
     public function updateWriter(array $data, string $id)
     {
         $writer = Writer::findOrFail($id);
@@ -40,6 +64,12 @@ class WriterRepository implements WriterRepositoryInterface
         return $writer;
     }
 
+    /**
+     * Delete a writer by their ID.
+     *
+     * @param string $id
+     * @return Writer
+     */
     public function deleteWriter(string $id)
     {
         $writer = Writer::findOrFail($id);

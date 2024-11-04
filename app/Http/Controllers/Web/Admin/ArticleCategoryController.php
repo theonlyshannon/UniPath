@@ -8,7 +8,6 @@ use App\Http\Requests\ArticleCategoryUpdateRequest;
 use App\Interfaces\ArticleCategoryRepositoryInterface;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 
-
 class ArticleCategoryController extends Controller
 {
     private $articleCategoryRepository;
@@ -57,14 +56,6 @@ class ArticleCategoryController extends Controller
         }
 
         return redirect()->route('admin.article-category.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**

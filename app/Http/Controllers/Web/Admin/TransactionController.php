@@ -14,7 +14,11 @@ class TransactionController extends Controller
         $this->middleware('permission:transaction-management');
     }
 
-    // Menampilkan daftar transaksi
+    /**
+     * Display a listing of transactions.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $transactions = Transaction::with('user')->orderBy('transaction_date', 'desc')->get();
@@ -22,7 +26,12 @@ class TransactionController extends Controller
         return view('pages.admin.transaction-management.index', compact('transactions'));
     }
 
-    // Menampilkan detail transaksi
+    /**
+     * Display the specified transaction details.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
         $transaction = Transaction::with('transactionDetails.course', 'user')->findOrFail($id);
@@ -30,7 +39,12 @@ class TransactionController extends Controller
         return view('pages.admin.transaction-management.show', compact('transaction'));
     }
 
-    // Menampilkan form edit transaksi
+    /**
+     * Show the form for editing the specified transaction.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $this->middleware('permission:transaction-edit');
@@ -40,7 +54,13 @@ class TransactionController extends Controller
         return view('pages.admin.transaction-management.edit', compact('transaction'));
     }
 
-    // Memproses update transaksi
+    /**
+     * Update the specified transaction in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $this->middleware('permission:transaction-edit');
@@ -53,10 +73,15 @@ class TransactionController extends Controller
 
         $transaction->update($validatedData);
 
-        return redirect()->route('admin.transaction.index')->with('message', 'Transaksi berhasil diupdate');
+        return redirect()->route('admin.transaction.index')->with('message', 'Transaction successfully updated');
     }
 
-    // Menghapus transaksi
+    /**
+     * Remove the specified transaction from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $this->middleware('permission:transaction-delete');
@@ -65,26 +90,32 @@ class TransactionController extends Controller
 
         $transaction->delete();
 
-        return redirect()->route('admin.transaction.index')->with('message', 'Transaksi berhasil dihapus');
+        return redirect()->route('admin.transaction.index')->with('message', 'Transaction successfully deleted');
     }
 
-    // Update status transaksi via AJAX
+    /**
+     * Update transaction status via AJAX.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateStatus(Request $request, $id)
-{
-    $this->middleware('permission:transaction-edit');
+    {
+        $this->middleware('permission:transaction-edit');
 
-    $transaction = Transaction::findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
 
-    $status = $request->input('status');
+        $status = $request->input('status');
 
-    // Validasi status
-    if (!in_array($status, ['pending', 'paid', 'failed', 'expired', 'canceled'])) {
-        return response()->json(['success' => false, 'message' => 'Status tidak valid'], 400);
+        // Validate status
+        if (!in_array($status, ['pending', 'paid', 'failed', 'expired', 'canceled'])) {
+            return response()->json(['success' => false, 'message' => 'Invalid status'], 400);
+        }
+
+        $transaction->status = $status;
+        $transaction->save();
+
+        return response()->json(['success' => true]);
     }
-
-    $transaction->status = $status;
-    $transaction->save();
-
-    return response()->json(['success' => true]);
-}
 }

@@ -8,8 +8,21 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Interfaces\CourseRepositoryInterface;
 
+/**
+ * Class CourseRepository
+ *
+ * This class implements the CourseRepositoryInterface and provides methods
+ * to manage courses and their syllabi in the application.
+ */
 class CourseRepository implements CourseRepositoryInterface
 {
+    /**
+     * Retrieve all courses with optional pagination and search functionality.
+     *
+     * @param int|null $perPage The number of courses per page.
+     * @param string|null $search The search term to filter courses by title.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
+     */
     public function getAllCourse(?int $perPage = null, ?string $search = null)
     {
         $courses = Course::query();
@@ -27,21 +40,45 @@ class CourseRepository implements CourseRepositoryInterface
         return $courses->latest()->get();
     }
 
+    /**
+     * Retrieve a limited number of favorite courses.
+     *
+     * @param int $limit The maximum number of favorite courses to retrieve.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getAllFavouriteCourses(int $limit = 2)
     {
         return Course::where('is_favourite', true)->take($limit)->get();
     }
 
+    /**
+     * Retrieve a course by its ID.
+     *
+     * @param string $id The ID of the course.
+     * @return Course
+     */
     public function getCourseById(string $id)
     {
         return Course::findOrFail($id);
     }
 
+    /**
+     * Retrieve a course by its slug.
+     *
+     * @param string $slug The slug of the course.
+     * @return Course|null
+     */
     public function getCourseBySlug(string $slug)
     {
         return Course::where('slug', $slug)->first();
     }
 
+    /**
+     * Create a new course with its syllabus.
+     *
+     * @param array $data The data for the new course.
+     * @return Course
+     */
     public function createCourse(array $data)
     {
         return DB::transaction(function () use ($data) {
@@ -68,6 +105,13 @@ class CourseRepository implements CourseRepositoryInterface
         });
     }
 
+    /**
+     * Update an existing course and its syllabus.
+     *
+     * @param array $data The updated data for the course.
+     * @param string $id The ID of the course to update.
+     * @return Course
+     */
     public function updateCourse(array $data, string $id)
     {
         return DB::transaction(function () use ($data, $id) {
@@ -97,6 +141,13 @@ class CourseRepository implements CourseRepositoryInterface
         });
     }
 
+    /**
+     * Update the active status of a course.
+     *
+     * @param mixed $courseId The ID of the course.
+     * @param bool $isActive The new active status.
+     * @return void
+     */
     public function updateStatusIsActive($courseId, $isActive)
     {
         $course = Course::findOrFail($courseId);
@@ -106,6 +157,13 @@ class CourseRepository implements CourseRepositoryInterface
         $course->save();
     }
 
+    /**
+     * Update the favorite status of a course.
+     *
+     * @param mixed $courseId The ID of the course.
+     * @param bool $isFavourite The new favorite status.
+     * @return void
+     */
     public function updateStatusIsFavourite($courseId, $isFavourite)
     {
         $course = Course::findOrFail($courseId);
@@ -115,6 +173,12 @@ class CourseRepository implements CourseRepositoryInterface
         $course->save();
     }
 
+    /**
+     * Delete a course by its ID.
+     *
+     * @param string $id The ID of the course to delete.
+     * @return Course
+     */
     public function deleteCourse(string $id)
     {
         return DB::transaction(function () use ($id) {
@@ -124,6 +188,12 @@ class CourseRepository implements CourseRepositoryInterface
         });
     }
 
+    /**
+     * Retrieve the syllabus for a specific course by its ID.
+     *
+     * @param string $courseId The ID of the course.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getSyllabusByCourseId(string $courseId)
     {
         return CourseSyllabus::where('course_id', $courseId)->get();
