@@ -34,7 +34,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('/student/select-interests', [InterestController::class, 'store'])->name('student.select-interests.store');
 
     Route::get('/student/chatbot', [AIController::class, 'showChatbot'])->name('student.chatbot');
-    Route::post('/student/chat', [AIController::class, 'chat'])->name('student.chat');
 });
+
 
 

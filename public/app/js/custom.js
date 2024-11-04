@@ -26,48 +26,60 @@ const createMessageElement = (content, ...classes) => {
   return div;
 };
 
-// Generate bot response by making a POST request to the backend
 const generateBotResponse = async (incomingMessageDiv) => {
-  const messageElement = incomingMessageDiv.querySelector(".message-text");
+    const messageElement = incomingMessageDiv.querySelector(".message-text");
 
-  // Get CSRF token
-  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // Mendapatkan CSRF token
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-  // API request options
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-TOKEN": csrfToken,
-      "Accept": "application/json",
-    },
-    body: JSON.stringify({
-      message: userData.message,
-    }),
+    // Opsi permintaan API
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+        message: userData.message,
+      }),
+    };
+
+    try {
+      const response = await fetch('/student/chat', requestOptions);
+
+      if (response.status === 401) {
+        const data = await response.json();
+        messageElement.innerHTML = data.response;
+        messageElement.style.color = "#ff0000";
+        incomingMessageDiv.classList.remove("thinking");
+        return;
+      }
+
+      if (!response.ok) {
+        // Jika respons bukan JSON, ambil teks respons
+        const errorText = await response.text();
+        messageElement.innerText = `Server Error: ${errorText}`;
+        messageElement.style.color = "#ff0000";
+        incomingMessageDiv.classList.remove("thinking");
+        return;
+      }
+
+      const data = await response.json();
+      messageElement.innerText = data.response;
+
+    } catch (error) {
+      console.error(error);
+      messageElement.innerText = error.message;
+      messageElement.style.color = "#ff0000";
+    } finally {
+      userData.file = {};
+      incomingMessageDiv.classList.remove("thinking");
+      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
+    }
   };
 
-  try {
-    // Fetch bot response from backend
-    const response = await fetch('/student/chat', requestOptions);
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.response || 'Error fetching response from server.');
 
-    // Extract and display bot's response text
-    const apiResponseText = data.response; // Assuming the Laravel controller returns {'response': '...'}
-    messageElement.innerText = apiResponseText;
-
-  } catch (error) {
-    // Handle error in API response
-    console.log(error);
-    messageElement.innerText = error.message;
-    messageElement.style.color = "#ff0000";
-  } finally {
-    // Reset user's file data, removing thinking indicator and scroll chat to bottom
-    userData.file = {};
-    incomingMessageDiv.classList.remove("thinking");
-    chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
-  }
-};
 
 // Handle outgoing user messages
 const handleOutgoingMessage = (e) => {

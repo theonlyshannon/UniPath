@@ -9,6 +9,8 @@ use Tectalic\OpenAi\Authentication;
 use Tectalic\OpenAi\Models\ChatCompletions\CreateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ChatLog;
+use Illuminate\Support\Facades\URL;
+
 
 class AIRepository implements AIRepositoryInterface
 {
@@ -26,6 +28,10 @@ class AIRepository implements AIRepositoryInterface
     public function getResponse(array $data): string
     {
         try {
+            if (!Auth::check()) {
+                $loginUrl = URL::route('login');
+                return "Mohon Login terlebih dahulu sebelum menggunakan AI, Login klik disini: $loginUrl";
+            }
             // Mengambil data minat dari student
             $user = Auth::user();
             $student = $user->student;

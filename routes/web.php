@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController as ControllersAboutController;
+use App\Http\Controllers\AIController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Web\App\AboutController;
 use App\Http\Controllers\Web\App\DashboardController;
 use App\Http\Controllers\Web\App\CartController as AppCartController;
 use App\Http\Controllers\Web\App\TransactionController as AppTransactionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +65,4 @@ Route::name('app.')->middleware(['update.last.active'])->group(function () {
 
 
 Route::post('/midtrans/notification', [TransactionController::class, 'receiveNotification'])->name('midtrans.notification');
-
+Route::post('/student/chat', [AIController::class, 'chat'])->name('chat');
