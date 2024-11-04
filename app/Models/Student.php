@@ -20,6 +20,7 @@ class Student extends Model
         'occupation',
         'phone',
         'city',
+        'last_active_at',
         'asal_sekolah',
         'university_main_id',
         'university_second_id',

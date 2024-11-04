@@ -50,20 +50,21 @@
     <div class="preloader">
         <div class="preloader__image" style="background-image: url(assets/images/loader.png);"></div>
     </div>
-    <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
-        <span class="scroll-to-top__text">back top</span>
-        <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
-    </a>
-
+   
     {{-- navbar --}}
+    <div class="page-wrapper">
     <x-ui.app-header/>
 
     <main>
         {{ $slot }}
     </main>
-
+   {{-- Chatbot --}}
+   <x-ui.chatbot />
     {{-- footer --}}
     <x-ui.app-footer/>
+    </div>
+
+    <x-ui.app-header-mobile/>
 
     <script src="{{ asset('app/vendors/jquery/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('app/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -88,6 +89,8 @@
     <script src="{{ asset('app/vendors/jquery-circleType/jquery.circleType.js') }}"></script>
     <script src="{{ asset('app/vendors/jquery-lettering/jquery.lettering.min.js') }}"></script>
     <script src="{{ asset('app/js/eduhive.js') }}"></script>
+    <script src="{{ asset('app/js/custom.js') }}"></script>
+
     
 
     @stack('script-app')

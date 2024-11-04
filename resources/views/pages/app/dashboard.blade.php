@@ -1,18 +1,4 @@
 
-
-<div id="chatbot-popup" style="position: fixed; bottom: 20px; right: 20px; width: 300px; display: none; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); border-radius: 8px;">
-    <div id="chatbot-header" style="padding: 10px; background-color: #39D4D6; color: white; cursor: pointer; border-top-left-radius: 8px; border-top-right-radius: 8px;">
-        Chatbot
-        <button id="close-chatbot" style="float: right; background: none; border: none; color: white;">&times;</button>
-    </div>
-    <div id="chatbot-body" style="padding: 10px; max-height: 300px; overflow-y: auto;">
-        <!-- Isi chatbot akan ditampilkan di sini -->
-        <p>Hai! Ada yang bisa saya bantu?</p>
-    </div>
-</div>
-<button id="chatbot-toggle" style="position: fixed; bottom: 20px; right: 20px; background-color: #39D4D6; color: white; border: none; padding: 10px; border-radius: 50%; cursor: pointer;">
-    💬
-</button>
 <x-layouts.app title="Edu">
     <section class="main-slider-three" id="home">
         <div class="main-slider-three__carousel eduhive-owl__carousel owl-carousel owl-theme">
@@ -547,7 +533,7 @@
         <div class="instructors-two__shape-box-one"></div><!-- /.instructors-two__shape-box-one -->
         <div class="instructors-two__shape-box-two"></div><!-- /.instructors-two__shape-box-two -->
     </section>
-
+    
 
     @push('script-app')
         <script>
@@ -568,25 +554,9 @@
                 });
             });
         </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const chatbotPopup = document.getElementById('chatbot-popup');
-                const chatbotToggle = document.getElementById('chatbot-toggle');
-                const closeChatbot = document.getElementById('close-chatbot');
+
         
-                // Fungsi untuk toggle chatbot
-                chatbotToggle.addEventListener('click', function() {
-                    chatbotPopup.style.display = chatbotPopup.style.display === 'none' ? 'block' : 'none';
-                    chatbotToggle.style.display = 'none';
-                });
-        
-                // Fungsi untuk close chatbot
-                closeChatbot.addEventListener('click', function() {
-                    chatbotPopup.style.display = 'none';
-                    chatbotToggle.style.display = 'block';
-                });
-            });
-        </script>
+       
         
     @endpush
 </x-layouts.app>

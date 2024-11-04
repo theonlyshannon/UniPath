@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController as ControllersAboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Payment\CartController;
 use App\Http\Controllers\Payment\TransactionController;
 use App\Http\Controllers\Web\App\CourseController;
 use App\Http\Controllers\Web\App\ArticleController;
+use App\Http\Controllers\Web\App\AboutController;
 use App\Http\Controllers\Web\App\DashboardController;
 use App\Http\Controllers\Web\App\CartController as AppCartController;
 use App\Http\Controllers\Web\App\TransactionController as AppTransactionController;
@@ -24,17 +26,22 @@ use App\Http\Controllers\Web\App\TransactionController as AppTransactionControll
 
 // routes/web.php
 
-Route::name('app.')->group(function () {
+Route::name('app.')->middleware(['update.last.active'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/about-us', [ControllersAboutController::class, 'index'])->name('about');
+
 
     Route::prefix('artikel')->name('article.')->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('index');
         Route::get('/{slug}', [ArticleController::class, 'show'])->name('show');
+        Route::post('/{slug}/komentar', [ArticleController::class, 'comment'])->name('comment.store');
     });
 
     Route::prefix('kelas')->name('course.')->group(function () {
         Route::get('/', [CourseController::class, 'index'])->name('index');
-        Route::get('/detail/{slug}', [CourseController::class, 'show'])->name('show');
+        Route::get('/{slug}', [CourseController::class, 'show'])->name('show');
+        Route::post('/{id}/review', [CourseController::class, 'review'])->name('review.store');
     });
 
     Route::prefix('cart')->name('cart.')->group(function () {
@@ -52,6 +59,7 @@ Route::name('app.')->group(function () {
         Route::get('/error', [TransactionController::class, 'error'])->name('error');
     });
 });
+
 
 
 Route::post('/midtrans/notification', [TransactionController::class, 'receiveNotification'])->name('midtrans.notification');

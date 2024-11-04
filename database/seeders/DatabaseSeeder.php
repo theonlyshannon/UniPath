@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             AccountSeeder::class,
             MentorSeeder::class,
             WriterSeeder::class,
-            // StudentSeeder::class
+            StudentSeeder::class
         ]);
 
         if ($env === 'local') {
@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
                 FacultySeeder::class,
 
                 CourseCategorySeeder::class,
-                // CourseSeeder::class
+                CourseSeeder::class,
+                TransactionSeeder::class
             ]);
         }
 

@@ -1,40 +1,24 @@
-<x-layouts.app title="Login">
-    <section class="page-header">
-        <div class="container">
-            <div class="page-header__content">
-                <ul class="eduhive-breadcrumb list-unstyled">
-                    <li><span class="eduhive-breadcrumb__icon"><i class="icon-home"></i></span><a href="{{ url('/') }}">Home</a></li>
-                    <li><span>Log in</span></li>
-                </ul>
-                <h2 class="page-header__title">Log in</h2>
-            </div>
-        </div>
-        <img src="assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
-        <img src="assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
-        <div class="page-header__shape-three"></div>
-        <div class="page-header__shape-four"></div>
-    </section>
-
+<x-layouts.auth title="Login">
     <section class="login-page section-space">
         <div class="container">
             <div class="row gutter-y-50 align-items-center">
                 <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
                     <div class="login-page__image">
                         <div class="login-page__image__inner">
-                            <img src="assets/images/resources/login-1-1.jpg" alt="login">
+                            <img src="{{ asset('app/images/resources/login-1-1.jpg') }}" alt="login">
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-6 wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
                     <form action="{{ route('login') }}" method="POST" class="login-page__form">
                         @csrf
                         <div class="login-page__form__inner">
                             <div class="login-page__form__top">
-                                <img src="assets/images/resources/login-logo-1-1.png" alt="logo" width="167" class="login-page__form__logo">
+                            <img src="{{ asset('app/images/resources/login-logo-1-1.png') }}" alt="logo" width="167" class="login-page__form__logo">
                                 <h3 class="login-page__form__title">Nice to see you again</h3>
                             </div>
-                            
+
                             <div class="login-page__form__wrapp">
                                 <div class="login-page__form__input-box">
                                     <label for="email" class="login-page__form__label">Login</label>
@@ -59,7 +43,7 @@
                                     <button type="submit" class="login-page__form__btn eduhive-btn eduhive-btn--normal">Sign in</button>
                                 </div>
                             </div>
-                            
+
                             <div class="login-page__form__bottom">
                                 <p class="login-page__form__register-text">Don’t have an account? <a href="{{ route('register') }}">Sign up now</a></p>
                             </div>
@@ -69,4 +53,4 @@
             </div>
         </div>
     </section>
-</x-layouts.app>
+</x-layouts.auth>

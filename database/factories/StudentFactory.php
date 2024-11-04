@@ -15,7 +15,8 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            // Define your default state here
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => bcrypt('password'), 
         ];
     }
 }

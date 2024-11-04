@@ -88,11 +88,6 @@ class RoleSeeder extends Seeder
             'course-edit',
             'course-delete',
 
-            'course-subject-list',
-            'course-subject-create',
-            'course-subject-edit',
-            'course-subject-delete',
-
             'transaction-management',
 
             'transaction-edit',
@@ -218,7 +213,7 @@ class RoleSeeder extends Seeder
         $mentor->syncPermissions([
             'dashboard-view',
 
-            'dashboard-admin-view',
+            'dashboard-mentor-view',
 
             'course-management',
 
@@ -231,11 +226,6 @@ class RoleSeeder extends Seeder
             'course-create',
             'course-edit',
             'course-delete',
-
-            'course-subject-list',
-            'course-subject-create',
-            'course-subject-edit',
-            'course-subject-delete'
         ]);
     }
 }

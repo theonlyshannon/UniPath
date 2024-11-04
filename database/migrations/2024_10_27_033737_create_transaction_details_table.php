@@ -19,13 +19,12 @@ return new class extends Migration
 
                 $table->uuid('course_id');
                 $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+
                 $table->integer('quantity')->default(1);
                 $table->decimal('price', 15, 2);
 
                 $table->softDeletes();
                 $table->timestamps();
-
-
 
             });
     }

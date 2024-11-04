@@ -16,6 +16,11 @@ class ArticleCategory extends Model
         'slug',
     ];
 
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class, 'article_category_pivot');
+    }
+
     public function getArticleCountAttribute()
     {
         return $this->articles->count();

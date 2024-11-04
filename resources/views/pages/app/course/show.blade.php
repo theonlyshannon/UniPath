@@ -63,14 +63,14 @@
                                         <h3 class="course-details__title course-details__title--description">Course
                                             Descriptions</h3>
                                         <div class="course-details__description__inner">
-                                            <p>
+                                            <p class="course-details__description__text">
                                                 {!! $course->description !!}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab active-tab fadeInUp animated" data-wow-delay="200ms" id="curriculum"
-                                    style="display: block;">
+                                    style="display: none;">
                                     <div class="course-details__accordion">
                                         <div class="eduhive-accordion" data-grp-name="eduhive-accordion">
                                             <div class="accordion active">
@@ -87,10 +87,8 @@
                                                                     <a href="{{ $syllabus->video }}"
                                                                         class="course-details__accordion__class video-popup"
                                                                         onclick="markAsComplete('{{ $syllabus->id }}', 'video')">
-                                                                        <span
-                                                                            class="course-details__accordion__class__title">
-                                                                            <span
-                                                                                class="course-details__accordion__class__icon">
+                                                                        <span class="course-details__accordion__class__title">
+                                                                            <span bclass="course-details__accordion__class__icon">
                                                                                 <i class="icon-files"></i>
                                                                             </span>
                                                                             {{ $syllabus->title }}
@@ -134,97 +132,12 @@
                                     style="display: none;">
                                     <div class="comments-one course-details__comments">
                                         <h3 class="comments-one__title">02 Reviews, Web Development Course</h3>
-                                        <ul class="list-unstyled comments-one__list">
-                                            <li class="comments-one__card">
-                                                <div class="comments-one__card__image">
-                                                    <img src="assets/images/courses/course-c-1-1.png"
-                                                        alt="Kevin martin">
-                                                </div>
-                                                <div class="comments-one__card__content">
-                                                    <div class="comments-one__card__top">
-                                                        <div class="comments-one__card__info">
-                                                            <h3 class="comments-one__card__title">Kevin martin</h3>
-                                                            <p class="comments-one__card__date">March 20, 2023 at 2:37
-                                                                PM</p>
-                                                        </div>
-                                                        <div class="eduhive-ratings">
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                            <span class="eduhive-ratings__icon">
-                                                                <i class="fa fa-star"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="comments-one__card__text">Neque porro est qui dolorem
-                                                        ipsum quia quaed inventor veritatis et quasi architecto beatae
-                                                        vitae dicta sunt explicabo. Aelltes port lacus quis enim var sed
-                                                        efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is
-                                                        simply dummy</p>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        @foreach ($reviews as $review)
+                                            <x-ui.course-review-card :review="$review"/>
+                                        @endforeach
                                     </div>
-                                    <div class="course-details__form">
-                                        <div class="course-details__form__top">
-                                            <h3 class="course-details__form__title">Add a Review</h3>
-                                            <p class="course-details__form__text">Your Email Address Will Not Be
-                                                Published. Required Fields Are Marked *</p>
-                                            <div class="course-details__form__ratings">
-                                                <h5 class="course-details__form__ratings__text">Rate this course? *
-                                                </h5>
-                                                <div class="eduhive-ratings">
-                                                    <span class="eduhive-ratings__icon">
-                                                        <i class="fa fa-star"></i>
-                                                    </span>
-                                                    <span class="eduhive-ratings__icon">
-                                                        <i class="fa fa-star"></i>
-                                                    </span>
-                                                    <span class="eduhive-ratings__icon">
-                                                        <i class="fa fa-star"></i>
-                                                    </span>
-                                                    <span class="eduhive-ratings__icon">
-                                                        <i class="fa fa-star"></i>
-                                                    </span>
-                                                    <span class="eduhive-ratings__icon">
-                                                        <i class="fa fa-star"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <form action="assets/inc/sendemail.php"
-                                            class="course-details__form__form contact-form-validated">
-                                            <div class="course-details__form__group">
-                                                <div class="course-details__form__control wow fadeInUp"
-                                                    data-wow-duration="1500ms" data-wow-delay="00ms">
-                                                    <input type="text" name="name" placeholder="Your Name">
-                                                </div>
-                                                <div class="course-details__form__control wow fadeInUp"
-                                                    data-wow-duration="1500ms" data-wow-delay="50ms">
-                                                    <input type="email" name="email" placeholder="Your Email">
-                                                </div>
-                                                <div class="course-details__form__control course-details__form__control--full wow fadeInUp"
-                                                    data-wow-duration="1500ms" data-wow-delay="100ms">
-                                                    <textarea name="message" placeholder="Write Message . ."></textarea>
-                                                </div>
-                                                <div class="course-details__form__control course-details__form__control--full wow fadeInUp"
-                                                    data-wow-duration="1500ms" data-wow-delay="150ms">
-                                                    <button type="submit"
-                                                        class="course-details__form__btn eduhive-btn eduhive-btn--normal"><span>Post
-                                                            Comment</span></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="result"></div>
+                                    <div class="course-review-form mt-5">
+                                        <x-ui.course-review-form :course="$course"/>
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +171,7 @@
                                 <div class="course-details__info__text">
                                     <div class="course-details__info__text__title">
                                         <span class="course-details__info__icon"><i
-                                            class="icon-multiple-users"></i></span>
+                                                class="icon-multiple-users"></i></span>
                                         Favourite Class:
                                     </div>
                                     <span>{{ $course->is_favourite ? 'Yes' : 'No' }}</span>
@@ -285,7 +198,7 @@
                         </ul>
                         <div class="course-details__info__price">This course Fee
                             Rp{{ number_format($course->price, 0, ',', '.') }}</div>
-                            @if(!$hasAccess)
+                        @if (!$hasAccess)
                             @auth
                                 <!-- Tambahkan ke keranjang (baik kursus gratis maupun berbayar) -->
                                 <form action="{{ route('app.cart.add', $course->id) }}" method="POST">
@@ -330,6 +243,21 @@
                         location.reload();
                     }
                 });
+            }
+        </script>
+        <script>
+            function setRating(rating) {
+                document.getElementById('rating').value = rating;
+
+                for (let i = 1; i <= 5; i++) {
+                    const star = document.getElementById(`star-${i}`);
+                    if (i <= rating) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                }
+                console.log("Rating selected:", rating);
             }
         </script>
     @endpush

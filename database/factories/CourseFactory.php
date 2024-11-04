@@ -3,9 +3,10 @@
 namespace Database\Factories;
 
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Http\UploadedFile;
+use App\Models\Course;
 use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CourseFactory extends Factory
 {
@@ -14,17 +15,22 @@ class CourseFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Course::class;
+
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(),
-            'slug' => $this->faker->unique()->slug,
-            'description' => $this->faker->paragraph(),
-            'thumbnail' => UploadedFile::fake()->image('thumbnail.jpg'),
-            'trailer' => $this->faker->url(),
-            'is_favourite' => $this->faker->boolean(),
-            'is_active' => $this->faker->boolean(true),
-            'price' => $this->faker->numberBetween(10000, 100000),
+            'mentor_id' => Str::uuid(),
+            'course_category_id' => Str::uuid(),
+            'title' => $this->faker->sentence,
+            'slug' => $this->faker->slug,
+            'price' => $this->faker->randomFloat(2, 10, 200),
+            'description' => $this->faker->paragraph,
+            'thumbnail' => $this->faker->imageUrl(640, 480, 'education', true, 'Faker'),
+            'trailer' => 'https://www.youtube.com/watch?v=' . Str::random(10),
+            'is_favourite' => $this->faker->boolean,
+            'is_free' => $this->faker->boolean,
+            'is_active' => $this->faker->boolean,
         ];
     }
 }
