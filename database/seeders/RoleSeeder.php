@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
             'dashboard-admin-view',
             'dashboard-writer-view',
             'dashboard-mentor-view',
+            'dashboard-user-view',
 
             'account-management',
 
@@ -101,6 +102,8 @@ class RoleSeeder extends Seeder
             'transaction-management',
 
             'transaction-edit',
+
+            'course-transaction-list'
         ];
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -228,6 +231,10 @@ class RoleSeeder extends Seeder
 
         $student->syncPermissions([
             'dashboard-view',
+
+            'dashboard-user-view',
+
+            'course-transaction-list'
         ]);
 
         $mentor->syncPermissions([

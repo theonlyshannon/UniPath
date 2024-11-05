@@ -4,6 +4,7 @@ namespace App\Interfaces;
 
 interface TransactionRepositoryInterface
 {
-    public function getMonthlyTransaction();
+    public function getAllTransaction(?int $perPage = null, ?string $search = null);
 
+    public function getMonthlyTransaction();
 }

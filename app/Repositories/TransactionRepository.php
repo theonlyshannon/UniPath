@@ -8,6 +8,27 @@ use App\Interfaces\TransactionRepositoryInterface;
 
 class TransactionRepository implements TransactionRepositoryInterface
 {
+    public function getAllTransaction(?int $perPage = null, ?string $search = null)
+    {
+        $transactions = Transaction::query();
+
+        if (auth()->user()->hasRole('student')) {
+            $student = auth()->user()->student;
+            if ($student) {
+                $transactions->where('user_id', $student->id);
+            }
+        }
+
+        if ($search) {
+            $transactions->where('transaction_code', 'like', '%' . $search . '%');
+        }
+
+        if ($perPage) {
+            return $transactions->latest()->paginate($perPage);
+        }
+
+        return $transactions->latest()->get();
+    }
     /**
      * Retrieve monthly transactions that are paid, grouped by course name.
      *

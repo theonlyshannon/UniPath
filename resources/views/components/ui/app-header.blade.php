@@ -13,7 +13,9 @@
                         <li>
                             <a class="nav-link {{ request()->routeIs('app.dashboard') ? 'active' : '' }}" href="{{ route('app.dashboard') }}">Home</a>
                         </li>
-                        <li class="scrollToLink"><a href="#about">About</a></li>
+                        <li>
+                            <a class="nav-link {{ request()->routeIs('app.about') ? 'active' : '' }}" href="{{ route('app.about') }}">About</a>
+                        </li>
                         <li class="scrollToLink">
                             <a class="nav-link {{ request()->routeIs('app.course.index') ? 'active' : '' }}" href="{{ route('app.course.index') }}">Kelas</a>
                         </li>
@@ -38,7 +40,7 @@
                 // Cek apakah pengguna sudah login dan merupakan student
                 $student = Auth::check() ? \App\Models\Student::where('user_id', Auth::id())->first() : null;
             @endphp
-            
+
             @if ($student)
                 <!-- Tampilkan nama student dengan dropdown saat hover -->
                 <li class="dropdown">
@@ -49,11 +51,11 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="dropdown-item">User Profile</a></li>
+                        <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a></li>
                         <li>
                             <a href="{{ route('logout') }}" class="dropdown-item"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                               Log Out
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Log Out
                             </a>
                         </li>
                     </ul>
@@ -69,7 +71,7 @@
                         <span class="eduhive-btn__icon__inner"><i class="icon-right-arrow"></i></span>
                     </span>
                 </a>
-            @endif                 
+            @endif
             </div>
         </div><!-- /.main-header__inner -->
     </div><!-- /.container-fluid -->
