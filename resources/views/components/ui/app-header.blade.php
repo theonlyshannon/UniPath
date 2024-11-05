@@ -4,7 +4,7 @@
         <div class="main-header__inner">
             <div class="main-header__logo logo-retina">
                 <a href="index.html">
-                    <img src="assets/images/logo-dark.png" alt="eduhive HTML" width="209">
+                    <img src="{{ asset('admin/assets/images/Unipath.png') }}" alt="eduhive HTML" width="135">
                 </a>
             </div><!-- /.main-header__logo -->
             <div class="main-header__right">
@@ -13,7 +13,7 @@
                         <li>
                             <a class="nav-link {{ request()->routeIs('app.dashboard') ? 'active' : '' }}" href="{{ route('app.dashboard') }}">Home</a>
                         </li>
-                        <li class="scrollToLink"><a href="#about">About</a></li>
+                        <li class="scrollToLink"><a href="/about-us">About</a></li>
                         <li class="scrollToLink">
                             <a class="nav-link {{ request()->routeIs('app.course.index') ? 'active' : '' }}" href="{{ route('app.course.index') }}">Kelas</a>
                         </li>
