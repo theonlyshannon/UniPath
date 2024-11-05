@@ -1,6 +1,6 @@
 <x-layouts.auth title="Login">
     <section class="login-page">
-        <div class="container">
+        <div class="container-login">
             <form action="{{ route('login') }}" method="POST" class="login-page__form">
                 @csrf
                 <div class="login-page__form__inner">
