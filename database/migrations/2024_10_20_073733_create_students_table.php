@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
-            $table->string('phone');
-            $table->string('city');
+            $table->string('phone')->nullable();
+            $table->string('city')->nullable();
             $table->string('asal_sekolah')->nullable();
 
             $table->uuid('university_main_id')->nullable();

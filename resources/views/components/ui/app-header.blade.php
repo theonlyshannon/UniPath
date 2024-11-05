@@ -22,6 +22,16 @@
                         <li class="scrollToLink">
                             <a class="nav-link {{ request()->routeIs('app.article.index') ? 'active' : '' }}" href="{{ route('app.article.index') }}">Artikel</a>
                         </li>
+                        <li class="scrollToLink d-block d-md-none">
+                            @if (Auth::check())
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                            @else
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            @endif
+                        </li>
                     </ul>
                 </nav>
                 <div class="mobile-nav__btn mobile-nav__toggler">
@@ -29,7 +39,7 @@
                     <span></span>
                     <span></span>
                 </div>
-                <a href="{{ route('app.cart.index') }}" class="main-header__cart">
+                <a href="{{ Auth::check() ? route('app.cart.index') : '#' }}" class="main-header__cart" onclick="event.preventDefault(); @if (!Auth::check()) Swal.fire({ icon: 'warning', title: 'Akses Ditolak', text: 'Anda harus login untuk mengakses keranjang belanja.' }); @endif">
                     <i class="icon-cart" aria-hidden="true"></i>
                     <span class="sr-only">Shopping Cart</span>
                 </a>

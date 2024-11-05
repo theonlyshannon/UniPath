@@ -14,6 +14,7 @@
         <img src="{{ asset('app/images/shapes/page-header-shape-2.png') }}" alt="shape" class="page-header__shape-two">
         <div class="page-header__shape-three"></div>
         <div class="page-header__shape-four"></div>
+        
     </section>
 
     <section class="courses-three section-space2" id="courses">

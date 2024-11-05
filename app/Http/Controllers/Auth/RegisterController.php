@@ -28,7 +28,7 @@ class RegisterController extends Controller
 
         $request->merge(['role' => 'student']);
 
-        $data = $request->only('name', 'email', 'password', 'role');
+        $data = $request->only('name', 'email', 'password', 'role', 'phone');
 
         $user = $this->authRepository->register($data);
 

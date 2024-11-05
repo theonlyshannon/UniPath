@@ -44,7 +44,6 @@ class InterestController extends Controller
             return redirect()->back()->withInput();
         }
 
-        // Redirect ke dashboard student jika berhasil
-        return redirect()->route('student.dashboard');
+        return redirect()->route('app.dashboard');
     }
 }

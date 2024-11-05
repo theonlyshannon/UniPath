@@ -33,6 +33,7 @@ class AuthRepository implements AuthRepositoryInterface
             $user->student()->create([
                 'name' => $data['name'],
                 'username' => $username,
+                'phone' => $data['phone'],
             ]);
         }
 

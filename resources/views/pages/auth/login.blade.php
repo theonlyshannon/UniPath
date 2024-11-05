@@ -4,10 +4,10 @@
             <form action="{{ route('login') }}" method="POST" class="login-page__form">
                 @csrf
                 <div class="login-page__form__inner">
-                    <div class="login-page__form__top">
+                    <div class="login-page__form__top text-center">
                         <img src="{{ asset('admin/assets/images/Unipath.png') }}" alt="logo" width="100"
-                            class="login-page__form__logo d-flex">
-                        <h3 class="login-page__form__title text-center">Nice to see you again</h3>
+                            class="login-page__form__logo mx-auto d-block">
+                        <h3 class="login-page__form__title">Nice to see you again</h3>
                     </div>
 
                     <div class="login-page__form__wrapp">
@@ -29,11 +29,9 @@
                                 <span></span>
                                 Remember me
                             </label>
-                            <a href="" class="login-page__form__forgot">Lupa Password?</a>
                         </div>
                         <div class="login-page__form__input-box login-page__form__input-box--4">
-                            <button type="submit" class="login-page__form__btn eduhive-btn eduhive-btn--normal">Sign
-                                in</button>
+                            <button type="submit" class="login-page__form__btn eduhive-btn eduhive-btn--normal">Login</button>
                         </div>
                     </div>
 
@@ -44,6 +42,16 @@
                 </div>
             </form>
         </div>
+
+        <img src="{{ asset('app/images/shapes/page-header-shape-1.png') }}" alt="shape" class="page-header__shape-one">
+        <img src="{{ asset('app/images/shapes/page-header-shape-2.png') }}" alt="shape" class="page-header__shape-two">
+
+        <div class="page-header__shape-three"></div>
+        <div class="page-header__shape-four"></div>
+        <img src="{{ asset('app/images/shapes/main-slider-shape-3-2.png') }}" alt="shape"
+            class="main-slider-three__shape-one slider-image">
+        <div class="main-slider-three__box-one"></div>
+        <div class="main-slider-three__box-two"></div>
     </section>
 
     @push('script-app')
