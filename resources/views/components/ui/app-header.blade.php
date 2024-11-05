@@ -19,8 +19,6 @@
                         <li class="scrollToLink">
                             <a class="nav-link {{ request()->routeIs('app.course.index') ? 'active' : '' }}" href="{{ route('app.course.index') }}">Kelas</a>
                         </li>
-                        <li class="scrollToLink"><a href="#testimonials">Testimonials</a></li>
-                        <li class="scrollToLink"><a href="#instructors">Instructors</a></li>
                         <li class="scrollToLink">
                             <a class="nav-link {{ request()->routeIs('app.article.index') ? 'active' : '' }}" href="{{ route('app.article.index') }}">Artikel</a>
                         </li>
