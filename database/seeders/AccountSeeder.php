@@ -14,13 +14,13 @@ class AccountSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password'),
+            'email' => 'admin@unipath-academy.sch.id',
+            'password' => bcrypt('UnipathAdmin12'),
         ])->assignRole('admin');
 
-        User::create([
-            'email' => 'student@gmail.com',
-            'password' => bcrypt('password'),
-        ])->assignRole('student');
+        // User::create([
+        //     'email' => 'student@gmail.com',
+        //     'password' => bcrypt('password'),
+        // ])->assignRole('student');
     }
 }
