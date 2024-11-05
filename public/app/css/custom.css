@@ -120,7 +120,7 @@
         z-index: 9998; /* Sedikit di bawah tombol */
         /* Pastikan ini lebih tinggi dari elemen lain, tapi sedikit di bawah #chatbot-toggler */
       }
-      
+
       /* Tambahkan shadow untuk keseluruhan pop-up chatbot */
       .chatbot-popup {
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
@@ -402,6 +402,23 @@
       body.show-emoji-picker em-emoji-picker {
         visibility: visible;
       }
+
+      /* .login-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    } */
+
+
       /* Responsive media query for mobile screens */
       @media (max-width: 520px) {
         #chatbot-toggler {
@@ -429,4 +446,4 @@
           opacity: 0;
         }
       }
-    
+

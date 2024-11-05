@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\StudentRepositoryInterface;
@@ -38,6 +39,9 @@ class DashboardController extends Controller
         $registrations = $this->studentRepository->getStudentData();
         $activeStudentsByDay = $this->studentRepository->getActiveStudentsByDay();
 
+        // Student Transaction
+        $transactions = $this->transactionRepository->getAllTransaction();
+
         // Transaction Data
         $monthlyTransactions = $this->transactionRepository->getMonthlyTransaction();
         $classSales = $this->transactionRepository->getMonthlyTransaction();
@@ -67,7 +71,7 @@ class DashboardController extends Controller
             'articleDate', 'dataVisitor', 'tagLabels', 'tagData',
             'studentLabels', 'studentData', 'activeDates', 'activeCounts',
             'months', 'transactionCounts', 'totalAmounts',
-            'courseNames', 'quantities'
+            'courseNames', 'quantities', 'transactions'
         ));
     }
 }

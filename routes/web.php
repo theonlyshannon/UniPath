@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AboutController as ControllersAboutController;
 use App\Http\Controllers\AIController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -31,7 +30,7 @@ use App\Http\Controllers\Web\App\TransactionController as AppTransactionControll
 Route::name('app.')->middleware(['update.last.active'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/about-us', [AboutController::class, 'index'])->name('app.about');
+    Route::get('/about-us', [AboutController::class, 'index'])->name('about');
 
 
     Route::prefix('artikel')->name('article.')->group(function () {

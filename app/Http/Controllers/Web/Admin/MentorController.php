@@ -87,8 +87,6 @@ class MentorController extends Controller
 
         $this->mentorRepository->updateMentor($data, $id);
 
-
-
         return redirect()->route('admin.mentor.index');
     }
 

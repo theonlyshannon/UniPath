@@ -24,6 +24,12 @@
                     </div>
                     <ul class="list-unstyled p-1">
                         <li class="dropdown-item py-2">
+                            <a href="{{ route('app.dashboard') }}" class="btn btn-link text-body m-0 p-0">
+                                <i class="me-2 icon-md" data-feather="home"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item py-2">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-link text-body m-0 p-0">
