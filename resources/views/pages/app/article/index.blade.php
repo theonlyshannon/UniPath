@@ -11,8 +11,8 @@
                 <h2 class="page-header__title">List Article</h2>
             </div>
         </div>
-        <img src="assets/images/shapes/page-header-shape-1.png" alt="shape" class="page-header__shape-one">
-        <img src="assets/images/shapes/page-header-shape-2.png" alt="shape" class="page-header__shape-two">
+        <img src="{{asset('app/images/shapes/page-header-shape-1.png')}}" alt="shape" class="page-header__shape-one">
+        <img src="{{asset('app/images/shapes/page-header-shape-2.png')}}" alt="shape" class="page-header__shape-two">
         <div class="page-header__shape-three"></div>
         <div class="page-header__shape-four"></div>
     </section>
