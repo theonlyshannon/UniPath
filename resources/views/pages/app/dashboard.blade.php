@@ -1,5 +1,5 @@
 
-<x-layouts.app title="Edu">
+<x-layouts.app title="Home Unipath">
     <section class="main-slider-three" id="home">
         <div class="main-slider-three__carousel eduhive-owl__carousel eduhive-owl__carousel--basic-nav owl-carousel owl-theme" data-owl-options='{
     "items": 1,
@@ -336,9 +336,9 @@
                     <div class="faq-one__content">
                         <div class="sec-title wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
                             <h6 class="sec-title__tagline">faq’s</h6><!-- /.sec-title__tagline -->
-                            <h3 class="sec-title__title">We Are Always Ensure <span
-                                    class="sec-title__title__text">Best <br> Course</span> For
-                                    <span>Your Learning</span>
+                            <h3 class="sec-title__title">Kami Selalu Memastikan <span
+                                    class="sec-title__title__text">Kelas <br> Terbaik</span> Untuk
+                                    <span>Pembelajaran Anda</span>
                             </h3>
                             <!-- /.sec-title__title -->
                         </div><!-- /.sec-title -->
@@ -346,43 +346,40 @@
                             <div class="eduhive-accordion" data-grp-name="eduhive-accordion">
                                 <div class="accordion wow fadeInUp" data-wow-duration="1500ms">
                                     <div class="accordion-title">
-                                        <h4>How long should a business plan be?</h4>
+                                        <h4>Berapa lama seharusnya sebuah persiapan untuk kuliah?</h4>
                                         <span class="accordion-title__icon">
                                             <i class="icon-double-arrow"></i>
                                         </span>
                                     </div><!-- /.accordion-title -->
                                     <div class="accordion-content">
                                         <div class="inner">
-                                            <p>Bring to the table win-win survival strategies to ensure proactive
-                                                domination. At the end of the day, going forward, a new normal.</p>
+                                            <p>Persiapan kuliah idealnya dimulai 6 bulan sebelumnya, mencakup pemilihan jurusan, pendaftaran, dan persiapan akademik serta mental.</p>
                                         </div><!-- /.inner -->
                                     </div><!-- /.accordion-content -->
                                 </div><!-- /.accordion-item -->
                                 <div class="accordion active wow fadeInUp" data-wow-duration="1500ms">
                                     <div class="accordion-title">
-                                        <h4>What is included in your services?</h4>
+                                        <h4>Apa yang bisa dilakukan di web Unipath ini?</h4>
                                         <span class="accordion-title__icon">
                                             <i class="icon-double-arrow"></i>
                                         </span>
                                     </div><!-- /.accordion-title -->
                                     <div class="accordion-content">
                                         <div class="inner">
-                                            <p>There are many variations of passages Lorem Ipsum but the majority have
-                                                suffered alteration in some form, by injected humour.</p>
+                                            <p>Di sini ada banyak fitur yaitu ada kelas sesuai peminatan dan AI yang siap membantu kamu</p>
                                         </div><!-- /.inner -->
                                     </div><!-- /.accordion-content -->
                                 </div><!-- /.accordion-item -->
                                 <div class="accordion wow fadeInUp" data-wow-duration="1500ms">
                                     <div class="accordion-title">
-                                        <h4>What type of company is measured?</h4>
+                                        <h4>Apakah Website ini juga bisa memaparkan persiapan beasiswa?</h4>
                                         <span class="accordion-title__icon">
                                             <i class="icon-double-arrow"></i>
                                         </span>
                                     </div><!-- /.accordion-title -->
                                     <div class="accordion-content">
                                         <div class="inner">
-                                            <p>Prior to joining company, she spent 20+ years at Inmosys, where he held a
-                                                wide range of global leadership roles, from services to products.</p>
+                                            <p>Tentu saja bisa website ini menyajikan banyak informasi mengenai beasiswa sampai dengan cara agar lolos beasiswa</p>
                                         </div><!-- /.inner -->
                                     </div><!-- /.accordion-content -->
                                 </div><!-- /.accordion-item -->
@@ -393,9 +390,8 @@
             </div><!-- /.row gutter-y-50 -->
         </div><!-- /.container -->
         <div class="faq-one__image-inner">
-            <img src="assets/images/faq/faq-2-1.jpg" alt="faq">
         </div><!-- /.faq-one__image-inner -->
-        <img src="assets/images/shapes/faq-shape-1-5.png" alt="shape" class="faq-one__shape-three">
+        <img src="{{asset('app/images/shapes/faq-shape-1-5.png')}}" alt="shape" class="faq-one__shape-three">
     </section>
 
     <section class="offer-one section-space-top">
@@ -411,8 +407,8 @@
                 <div class="col-lg-6">
                     <div class="offer-one__content">
                         <div class="sec-title wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
-                            <h6 class="sec-title__tagline">who we are</h6><!-- /.sec-title__tagline -->
-                            <h3 class="sec-title__title"><span class="sec-title__title__shape">We Offer</span> The <span class="sec-title__title__text">Best Carrier</span></h3><!-- /.sec-title__title -->
+                            <h6 class="sec-title__tagline">Keunggulan Unipath</h6><!-- /.sec-title__tagline -->
+                            <h3 class="sec-title__title"><span class="">Kita Memberikan</span> Pengalaman Belajar <span class="sec-title__title__text">Sesuai Dengan Minat Kuliah Anda</span></h3><!-- /.sec-title__title -->
                         </div><!-- /.sec-title -->
                         <div class="offer-one__inner">
                             <div class="offer-one__item wow fadeInUp" data-wow-duration="1500ms">
@@ -420,8 +416,8 @@
                                     <i class="icon-instructors"></i>
                                 </div><!-- /.offer-one__item__icon -->
                                 <div class="offer-one__item__content">
-                                    <h4 class="offer-one__item__title">Industry Expert Instructor</h4>
-                                    <p class="offer-one__item__text">Aonsectetur adipiscing elit Aenean scelerisque augue vitae consequat Juisque eget congue velit in cursus leo</p>
+                                    <h4 class="offer-one__item__title">Expert Instructor</h4>
+                                    <p class="offer-one__item__text">Di unipath semua instructor telah teruji dan pastinya ahli di bidang masing masing</p>
                                 </div><!-- /.offer-one__item__content -->
                             </div><!-- /.offer-one__item -->
                             <div class="offer-one__item wow fadeInUp" data-wow-duration="1500ms">
@@ -430,7 +426,7 @@
                                 </div><!-- /.offer-one__item__icon -->
                                 <div class="offer-one__item__content">
                                     <h4 class="offer-one__item__title">Up-to-Date Course Content</h4>
-                                    <p class="offer-one__item__text">Hammer out we need to socialize the comms with the wider stakeholder community exposing new ways to evolve</p>
+                                    <p class="offer-one__item__text">Semua course up-to-date dengan materi terbaru</p>
                                 </div><!-- /.offer-one__item__content -->
                             </div><!-- /.offer-one__item -->
                             <div class="offer-one__item wow fadeInUp" data-wow-duration="1500ms">
@@ -439,7 +435,7 @@
                                 </div><!-- /.offer-one__item__icon -->
                                 <div class="offer-one__item__content">
                                     <h4 class="offer-one__item__title">Biggest Student Community</h4>
-                                    <p class="offer-one__item__text">Focus on the customer journey we need to socialize the comms with the wider stakeholder community upsell window-licker</p>
+                                    <p class="offer-one__item__text">Dilengkapi komunitas untuk membahas terkait pembelajaran yang sudah di berikan</p>
                                 </div><!-- /.offer-one__item__content -->
                             </div><!-- /.offer-one__item -->
                         </div><!-- /.offer-one__inner -->

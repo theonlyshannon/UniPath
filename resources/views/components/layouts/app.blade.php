@@ -9,9 +9,9 @@
         {{ $title ?? 'No Page' }}
     </title>
     <!-- favicons Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app/images/favicons/apple-touch-icon.png') }}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('app/images/favicons/favicon-32x32.png') }}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('app/images/favicons/favicon-16x16.png') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" />
     <link rel="manifest" href="{{ asset('app/images/favicons/site.webmanifest') }}" />
     <meta name="description"
         content="Eduhive is a very modern and versatile education & online courses HTML Template. It is specially designed for LMS, online courses, education, learning management, e-learning, online training, zoom classes, and all other education related websites and businesses." />

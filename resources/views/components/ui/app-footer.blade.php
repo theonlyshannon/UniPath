@@ -148,7 +148,7 @@
         <div class="container">
             <div class="main-footer__bottom__inner">
                 <p class="main-footer__copyright">
-                    &copy; Copyright <span class="dynamic-year"></span> by Eduhive HTML Template.
+                    &copy; Copyright <span class="dynamic-year"></span> by Unipath.
                 </p>
             </div><!-- /.main-footer__inner -->
         </div><!-- /.container -->
