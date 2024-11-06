@@ -11,75 +11,73 @@
                     <h6>Detail Kelas</h6>
                 </x-slot>
 
-                <div class="mb-3">
-                    <label>Mentor</label>
-                    <p>{{ $course->mentor->name }}</p>
-                </div>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Mentor</th>
+                        <td>{{ $course->mentor->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Kategori Kelas</th>
+                        <td>{{ $course->category->name ?? 'Tidak ada kategori' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Judul</th>
+                        <td>{{ $course->title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Slug</th>
+                        <td>{{ $course->slug }}</td>
+                    </tr>
+                    <tr>
+                        <th>Deskripsi</th>
+                        <td>{{ $course->description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Thumbnail</th>
+                        <td>
+                            @if ($course->thumbnail)
+                                <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="Thumbnail Kelas"
+                                    class="img-fluid" />
+                            @else
+                                Tidak ada thumbnail
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trailer</th>
+                        <td>
+                            @if ($course->trailer)
+                                <div class="video-container mb-45" id="player">
+                                    <iframe width="560" height="315" src="{{ $course->trailer }}" frameborder="0"
+                                        allowfullscreen></iframe>
+                                </div>
+                            @else
+                                Tidak ada trailer
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Favourite</th>
+                        <td>{{ $course->is_favourite ? 'Ya' : 'Tidak' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Detail Syllabus</th>
+                        <td>
+                            @foreach ($course->syllabus as $syllabus)
+                                <p>
+                                    <strong>{{ $loop->iteration }}. {{ $syllabus->title }}</strong>
+                                </p>
+                            @endforeach
+                        </td>
+                    </tr>
+                </table>
 
-                <div class="mb-3">
-                    <label>Kategori Kelas</label>
-                    {{-- <p>{{ $course->nam }}</p> --}}
-                </div>
-
-                <div class="mb-3">
-                    <label>Judul</label>
-                    <p>{{ $course->title }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label>Slug</label>
-                    <p>{{ $course->slug }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label>Deskripsi</label>
-                    <p>{{ $course->description }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <label>Thumbnail</label>
-                    @if($course->thumbnail)
-                        <img src="{{ asset('storage/'.$course->thumbnail) }}" alt="Thumbnail Kelas" class="img-fluid" />
-                    @else
-                        <p>Tidak ada thumbnail</p>
-                    @endif
-                </div>
-
-                <div class="mb-3">
-                    <label>Trailer</label>
-                    @if($course->trailer)
-                        <div class="video-container mb-45" id="player">
-                            <iframe width="560" height="315" src="{{ $course->trailer }}" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    @else
-                        <p>Tidak ada trailer</p>
-                    @endif
-                </div>
-
-                <div class="mb-3">
-                    <label>Favourite</label>
-                    <p>{{ $course->is_favourite ? 'Ya' : 'Tidak' }}</p>
-                </div>
-
-                <tr>
-                    <th>Detail Syllabus</th>
-                    <td>
-                        @foreach ($course->syllabus as $syllabus)
-                            <p>
-                                <strong>{{ $loop->iteration }}. {{ $syllabus->title }}</strong>
-                            </p>
-                            <p>{{ $syllabus->description }}</p>
-                        @endforeach
-                    </td>
-                </tr>
-
-                <x-ui.base-button color="danger" href="{{ route('admin.course.index') }}">
-                    Kembali
-                </x-ui.base-button>
-
-                <x-ui.base-button color="primary" href="{{ route('admin.course.edit', $course->id) }}">
-                    Edit Kelas
-                </x-ui.base-button>
+                <x-slot name="footer">
+                    <x-ui.base-button color="danger"
+                        href="{{ route('admin.course.index') }}">Kembali</x-ui.base-button>
+                    <x-ui.base-button color="primary" href="{{ route('admin.course.edit', $course->id) }}">Edit
+                        Kelas</x-ui.base-button>
+                </x-slot>
             </x-ui.base-card>
         </div>
     </div>

@@ -1,9 +1,9 @@
 
-<x-layouts.admin title="Detail student">
+<x-layouts.admin title="Detail Siswa">
 
     <x-ui.breadcumb-admin>
-        <li class="breadcrumb-item"><a href="{{ route('admin.student.index') }}">student</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Detail student</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.student.index') }}">Siswa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detail Siswa</li>
     </x-ui.breadcumb-admin>
 
     <div class="row">
@@ -15,7 +15,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>Nama</th>
-                        <td>{{ $student->user->name }}</td>
+                        <td>{{ $student->name }}</td>
                     </tr>
                     <tr>
                         <th>Email</th>
@@ -25,7 +25,6 @@
                 <x-slot name="footer">
                     <x-ui.base-button color="danger" href="{{ route('admin.student.index') }}">Kembali</x-ui.base-button>
                 </x-slot>
-            </x-ui.base-card>
             </x-ui.base-card>
         </div>
     </div>
