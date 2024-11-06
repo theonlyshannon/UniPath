@@ -36,34 +36,9 @@ class UniversitySeeder extends Seeder
                 'description' => 'Universitas dengan reputasi baik di bidang kesehatan dan ilmu sosial.',
             ],
             [
-                'name' => 'Universitas Brawijaya',
-                'location' => 'Malang, Jawa Timur',
-                'description' => 'Universitas yang terkenal dengan program studi teknik dan ekonomi.',
-            ],
-            [
-                'name' => 'Universitas Diponegoro',
-                'location' => 'Semarang, Jawa Tengah',
-                'description' => 'Universitas dengan berbagai program studi unggulan dan fasilitas lengkap.',
-            ],
-            [
-                'name' => 'Universitas Padjadjaran',
-                'location' => 'Bandung, Jawa Barat',
-                'description' => 'Universitas yang fokus pada pengembangan ilmu pengetahuan dan teknologi.',
-            ],
-            [
                 'name' => 'Universitas Sebelas Maret',
                 'location' => 'Surakarta, Jawa Tengah',
                 'description' => 'Universitas dengan beragam fakultas dan program studi.',
-            ],
-            [
-                'name' => 'Universitas Hasanuddin',
-                'location' => 'Makassar, Sulawesi Selatan',
-                'description' => 'Universitas terkemuka di Indonesia bagian timur.',
-            ],
-            [
-                'name' => 'Universitas Andalas',
-                'location' => 'Padang, Sumatera Barat',
-                'description' => 'Universitas yang memiliki reputasi baik di bidang ilmu sosial dan teknik.',
             ],
         ];
 
