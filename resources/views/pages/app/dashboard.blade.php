@@ -100,7 +100,7 @@
         </div>
     </section>
 
-    <section class="course-category course-category--home-3 section-space-bottom">
+    <section class="course-category course-category--home-3 section-space-bottom mb-5">
         <div class="container">
             <div class="row gutter-y-30">
                 <h2 class="main-slider-three__title text-center mb-5">
@@ -115,33 +115,7 @@
                                     <i class="icon-briefcase"></i>
                                 </span>
                             </div>
-                            <h4 class="course-category__card__title">Business <br> Management</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms"
-                    data-wow-delay="100ms">
-                    <div class="course-category__card course-category__card--2">
-                        <div class="course-category__card__content">
-                            <div class="course-category__card__icon-box course-category__card__icon-box--pink">
-                                <span class="course-category__card__icon">
-                                    <i class="icon-art-studies"></i>
-                                </span>
-                            </div>
-                            <h4 class="course-category__card__title">Arts & <br> Design</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms"
-                    data-wow-delay="200ms">
-                    <div class="course-category__card course-category__card--3">
-                        <div class="course-category__card__content">
-                            <div class="course-category__card__icon-box course-category__card__icon-box--secondary">
-                                <span class="course-category__card__icon">
-                                    <i class="icon-self-confidence"></i>
-                                </span>
-                            </div>
-                            <h4 class="course-category__card__title">Personal <br> Development</h4>
+                            <h4 class="course-category__card__title">Sosial Dan Humaniora</h4>
                         </div>
                     </div>
                 </div>
@@ -154,7 +128,7 @@
                                     <i class="icon-setting"></i>
                                 </span>
                             </div>
-                            <h4 class="course-category__card__title">IT & <br> Software</h4>
+                            <h4 class="course-category__card__title">Sains Dan Teknologi</h4>
                         </div>
                     </div>
                 </div>
@@ -167,7 +141,7 @@
                                     <i class="icon-healthcare"></i>
                                 </span>
                             </div>
-                            <h4 class="course-category__card__title">Health & <br> Fitness</h4>
+                            <h4 class="course-category__card__title">Kedokteran Umum</h4>
                         </div>
                     </div>
                 </div>
@@ -180,33 +154,7 @@
                                     <i class="icon-coding-1"></i>
                                 </span>
                             </div>
-                            <h4 class="course-category__card__title">Computer <br> Science</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms"
-                    data-wow-delay="200ms">
-                    <div class="course-category__card course-category__card--7">
-                        <div class="course-category__card__content">
-                            <div class="course-category__card__icon-box course-category__card__icon-box--blue">
-                                <span class="course-category__card__icon">
-                                    <i class="icon-clapperboard"></i>
-                                </span>
-                            </div>
-                            <h4 class="course-category__card__title">Video & <br> Photography</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1500ms"
-                    data-wow-delay="300ms">
-                    <div class="course-category__card course-category__card--8">
-                        <div class="course-category__card__content">
-                            <div class="course-category__card__icon-box course-category__card__icon-box--red">
-                                <span class="course-category__card__icon">
-                                    <i class="icon-megaphone"></i>
-                                </span>
-                            </div>
-                            <h4 class="course-category__card__title">Digital <br> Marketing</h4>
+                            <h4 class="course-category__card__title">Akuntansi</h4>
                         </div>
                     </div>
                 </div>
@@ -386,7 +334,7 @@
                 </div>
             </div>
         </div>
-        <img src="assets/images/shapes/offer-shape-1-3.png" alt="shape" class="offer-one__shape">
+        <img src="{{ asset('app/images/shapes/offer-shape-1-3.png') }}" alt="shape" class="offer-one__shape">
         <div class="offer-one__shape-box"></div>
     </section>
 

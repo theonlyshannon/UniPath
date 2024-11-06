@@ -14,6 +14,11 @@ use RealRashid\SweetAlert\Facades\Alert as Swal;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         // cek user apakah sudah auth, jika belum kasih swal alert

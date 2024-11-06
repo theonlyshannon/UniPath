@@ -116,7 +116,8 @@
             @endcan
 
             @can('course-management')
-                <li class="nav-item {{ request()->is('admin/course-category*', 'admin/course*', 'admin/course-review*') ? ' active' : '' }}">
+                <li
+                    class="nav-item {{ request()->is('admin/course-category*', 'admin/course*', 'admin/course-review*') ? ' active' : '' }}">
                     <a class="nav-link" data-bs-toggle="collapse" href="#course-management" role="button"
                         aria-expanded="{{ request()->is('admin/course-category*', 'admin/course*', 'admin/course-review*') ? 'true' : 'false' }}">
                         <i class="link-icon" data-feather="layers"></i>
@@ -139,7 +140,7 @@
                             @can('course-list')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.course.index') }}"
-                                        class="nav-link {{ request()->is('admin/course*') && !request()->is('admin/course-category') ? ' active' : '' }}">
+                                        class="nav-link {{ request()->is('admin/course*') && !request()->is('admin/course-category') && !request()->is('admin/course-review') ? ' active' : '' }}">
                                         Kelas
                                     </a>
                                 </li>
@@ -148,7 +149,7 @@
                             @can('course-review-list')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.course-review.index') }}"
-                                        class="nav-link {{ request()->is('admin/course-review*') && request()->is('admin/course*') && request()->is('admin/course-category') ? ' active' : '' }}">
+                                        class="nav-link {{ request()->is('admin/course-review*') ? ' active' : '' }}">
                                         Review Kelas
                                     </a>
                                 </li>
@@ -162,14 +163,14 @@
 
             @can('article-management')
                 <li
-                    class="nav-item {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? ' active' : '' }}">
+                    class="nav-item {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*', 'admin/article-commentar*') ? ' active' : '' }}">
                     <a class="nav-link" data-bs-toggle="collapse" href="#article-management" role="button"
-                        aria-expanded="{{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? 'true' : 'false' }}">
+                        aria-expanded="{{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*', 'admin/article-commentar*') ? 'true' : 'false' }}">
                         <i class="link-icon" data-feather="file-text"></i>
                         <span class="link-title">Manajemen Artikel</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
-                    <div class="collapse {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*') ? 'show' : '' }}"
+                    <div class="collapse {{ request()->is('admin/article-category*', 'admin/article-tag*', 'admin/article*', 'admin/article-commentar*') ? 'show' : '' }}"
                         id="article-management">
                         <ul class="nav sub-menu">
 
@@ -194,7 +195,7 @@
                             @can('article-list')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.article.index') }}"
-                                        class="nav-link {{ request()->is('admin/article*') && !request()->is('admin/article-tag') && !request()->is('admin/article-category') ? ' active' : '' }}">
+                                        class="nav-link {{ request()->is('admin/article*') && !request()->is('admin/article-tag') && !request()->is('admin/article-category') && !request()->is('admin/article-commentar') ? ' active' : '' }}">
                                         Artikel
                                     </a>
                                 </li>
@@ -203,14 +204,15 @@
                             @can('article-comment-list')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.article-commentar.index') }}"
-                                        class="nav-link {{ request()->is('admin/article*') && !request()->is('admin/article-tag') && !request()->is('admin/article-category') ? ' active' : '' }}">
-                                        Artikel
+                                        class="nav-link {{ request()->is('admin/article-commentar*') ? ' active' : '' }}">
+                                        Komentar Artikel
                                     </a>
                                 </li>
                             @endcan
                         </ul>
                     </div>
                 </li>
+
             @endcan
 
             @can('transaction-management')
