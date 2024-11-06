@@ -97,7 +97,6 @@ class WriterRepository implements WriterRepositoryInterface
         $user->writer()->create([
             'name' => $data['name'],
             'username' => $this->generateUsername($data['email']),
-            'profile_picture' => $data['profile_picture']->store('assets/writer', 'public'),
         ]);
     }
 }
