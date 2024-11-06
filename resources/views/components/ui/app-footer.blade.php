@@ -69,7 +69,7 @@
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
-                                Matematika
+                                SNBT
                             </a>
                         </li>
                         <li>
@@ -77,7 +77,7 @@
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
-                                Biologi
+                                Ilmu Komputer
                             </a>
                         </li>
                         <li>

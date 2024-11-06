@@ -21,7 +21,7 @@
                         <div class="col-lg-12">
                             <div class="main-slider-three__content">
                                 <div class="main-slider-three__video">
-                                    <a href="https://www.youtube.com/watch?v=h9MbznbxlLc"
+                                    <a href="https://youtu.be/Zl0CPw-yVp8"
                                         class="main-slider-three__video__btn video-btn video-popup">
                                         <i class="icon-play"></i>
                                         <span></span>
@@ -44,7 +44,7 @@
                                 </h2>
                                 <div class="main-slider-three__bottom">
                                     <div class="main-slider-three__bottom__inner">
-                                        <a href="courses.html" class="main-slider-three__btn eduhive-btn">
+                                        <a href="{{ route('app.course.index') }}" class="main-slider-three__btn eduhive-btn">
                                             <span class="eduhive-btn__text">Temukan Kelasmu</span>
                                             <span class="eduhive-btn__icon">
                                                 <span class="eduhive-btn__icon__inner"><i

@@ -27,7 +27,7 @@
                         <h3 class="course-details__title">{{ $course->title }}</h3>
                         <div class="course-details__info-wrapper">
                             <div class="course-details__mentor">
-                                <img src="{{ asset('storage/' . $course->mentor->profile_picture) }}"
+                                <img src="{{ $course->mentor->profile_picture }}"
                                     alt="{{ $course->mentor->name }}" class="course-details__mentor__image">
                                 <h4 class="course-details__mentor__name">
                                     <a href="#">{{ $course->mentor->name }}</a>
@@ -92,14 +92,12 @@
                                                                             </span>
                                                                             {{ $syllabus->title }}
                                                                         </span>
-
-                                                                        <span
-                                                                            class="course-details__accordion__class__right">
-                                                                            <x-ui.base-button
-                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'file'); window.location.href='{{ asset('storage/assets/files/course/syllabus/' . $syllabus->file) }}';"
-                                                                                download>
-                                                                                File Materi
-                                                                            </x-ui.base-button>
+                                                                        <span class="course-details__accordion__class__right">
+                                                                            <a href="{{ asset('storage/' . $syllabus->file) }}"
+                                                                                download
+                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'file');">
+                                                                                 File Materi
+                                                                             </a>
                                                                         </span>
 
                                                                         <span
