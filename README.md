@@ -1,9 +1,9 @@
 # UniPath
+https://unipath.intechsosmed.my.id
 
-# Author
-1. Rasya Dika Pratama 
-2. Sofwan Nuha Al Faruq
-3. Arya Fathdillah Adi Saputra
+1. `Rasya Dika Pratama NISN 0074281555` 
+2. `Sofwan Nuha Al Faruq NISN 0066233171`
+3. `Arya Fathdillah Adi Saputra NISN 0078762624`
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 
 *Unipath* is a Laravel-based web application designed specifically for high school students preparing for university. Unipath provides a comprehensive platform featuring:
 
-- *SNBT Training*: Specialized training programs to help students excel in the SNBT (Seleksi Nasional Berdasarkan Tes) exam.
+- *Training Course*: Specialized training programs to help students excel in the SNBT (Seleksi Nasional Berdasarkan Tes) exam.
 - *Scholarship Articles*: A rich repository of articles and resources about various scholarship opportunities to assist students in funding their higher education.
 
 By integrating modern technologies like OpenAI for intelligent features, Midtrans for secure payment processing, and Chart.js for dynamic data visualization, Unipath offers an engaging and effective learning experience.
@@ -70,3 +70,4 @@ Follow these steps to set up the project on your local environment.
    php artisan serve
 
 ## License
+1. https://theonlyshannon.github.io/license/
