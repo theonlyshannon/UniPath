@@ -338,7 +338,6 @@
         <div class="offer-one__shape-box"></div>
     </section>
 
-
     @push('script-app')
         <script>
             $(document).ready(function() {

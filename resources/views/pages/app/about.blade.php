@@ -70,14 +70,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="about-two__button wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="00ms">
-                            <a href="about.html" class="eduhive-btn">
-                                <span>About us</span>
-                                <span class="eduhive-btn__icon">
-                                    <span class="eduhive-btn__icon__inner"><i class="icon-right-arrow"></i></span>
-                                </span>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
