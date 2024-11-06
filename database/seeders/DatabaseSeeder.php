@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
                 CourseCategorySeeder::class,
                 CourseSeeder::class,
-                TransactionSeeder::class
+                // TransactionSeeder::class
             ]);
         }
 
