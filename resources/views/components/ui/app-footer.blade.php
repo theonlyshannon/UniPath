@@ -26,7 +26,7 @@
                     <h2 class="footer-widget__title">Quick Link</h2>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="about.html">
+                            <a href="{{ route('app.about') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="courses.html">
+                            <a href="{{ route('app.course.index') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
@@ -42,27 +42,11 @@
                             </a>
                         </li>
                         <li>
-                            <a href="instructors.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
-                                Instructors
-                            </a>
-                        </li>
-                        <li>
-                            <a href="instructor-details.html">
+                            <a href="{{ route('app.article.index') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
                                 Artikel
-                            </a>
-                        </li>
-                        <li>
-                            <a href="contact.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
-                                Contact Us
                             </a>
                         </li>
                     </ul>
@@ -73,7 +57,7 @@
                     <h2 class="footer-widget__title">Courses</h2>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="apps-development.html">
+                            <a href="{{ route('app.course.index') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
@@ -81,7 +65,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="digital-marketing.html">
+                            <a href="{{ route('app.course.index') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
@@ -89,7 +73,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="graphics-design.html">
+                            <a href="{{ route('app.course.index') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>
@@ -97,7 +81,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="uiux-design.html">
+                            <a href="{{ route('app.course.index') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>

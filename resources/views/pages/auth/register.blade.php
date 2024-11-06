@@ -12,7 +12,7 @@
                         </div>
                         <div class="login-page__form__input-box">
                             <label for="phone" class="login-page__form__label">Nomor Telepon</label>
-                            <input type="text" id="phone" name="phone" placeholder="Nomor Telepon"
+                            <input type="text" id="phone" name="phone" placeholder="628XXXX"
                                 value="{{ old('phone') }}" required>
                         </div>
                         <div class="login-page__form__input-box">
@@ -25,7 +25,8 @@
                             <div class="login-page__form__input-box__inner">
                                 <input type="password" id="password" name="password" placeholder="Enter password"
                                     class="toggle-password-input" required>
-                                <i class="toggle-password-icon fa fa-fw fa-eye-slash" onclick="togglePassword()"></i>
+                                <i id="toggle-password-icon" class="toggle-password-icon fa fa-fw fa-eye-slash"
+                                    onclick="togglePassword()"></i>
                             </div>
                         </div>
                         <div class="login-page__form__input-box login-page__form__input-box--4">
@@ -58,7 +59,7 @@
         <script>
             function togglePassword() {
                 const passwordInput = document.getElementById('password');
-                const toggleIcon = document.querySelector('.toggle-password-icon');
+                const toggleIcon = document.getElementById('toggle-password-icon'); 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
                     toggleIcon.classList.remove('fa-eye-slash');
