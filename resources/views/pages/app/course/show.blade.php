@@ -83,19 +83,18 @@
                                                         <div class="course-details__accordion__inner">
                                                             @foreach ($course->syllabus as $syllabus)
                                                                 @if ($hasAccess)
-
-                                                                    <a href="{{ $syllabus->video }}"
-                                                                        class="course-details__accordion__class video-popup"
-                                                                        onclick="markAsComplete('{{ $syllabus->id }}', 'video')">
+                                                                    <div class="course-details__accordion__class">
                                                                         <span
                                                                             class="course-details__accordion__class__title">
                                                                             <span
-                                                                                bclass="course-details__accordion__class__icon">
+                                                                                class="course-details__accordion__class__icon">
                                                                                 <i class="icon-files"></i>
                                                                             </span>
                                                                             {{ $syllabus->title }}
                                                                         </span>
-                                                                        <span class="course-details__accordion__class__right">
+
+                                                                        <span
+                                                                            class="course-details__accordion__class__right">
                                                                             <x-ui.base-button
                                                                                 onclick="markAsComplete('{{ $syllabus->id }}', 'file'); window.location.href='{{ asset('storage/assets/files/course/syllabus/' . $syllabus->file) }}';"
                                                                                 download>
@@ -103,9 +102,10 @@
                                                                             </x-ui.base-button>
                                                                         </span>
 
-                                                                        <span class="course-details__accordion__class__right">
+                                                                        <span
+                                                                            class="course-details__accordion__class__right">
                                                                             <x-ui.base-button
-                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'video'); window.open('{{ $syllabus->video }}', '_blank');">
+                                                                                onclick="openVideoModal('{{ $syllabus->video }}'); markAsComplete('{{ $syllabus->id }}', 'video');">
                                                                                 Video Materi
                                                                             </x-ui.base-button>
                                                                         </span>
@@ -114,7 +114,7 @@
                                                                             class="course-details__accordion__class__check {{ $syllabus->is_complete ? 'complete' : '' }}">
                                                                             <i class="icon-check"></i>
                                                                         </span>
-                                                                    </a>
+                                                                    </div>
                                                                 @else
                                                                     <!-- Materi terkunci -->
                                                                     <div
@@ -130,6 +130,17 @@
                                                                     </div>
                                                                 @endif
                                                             @endforeach
+
+                                                            <div id="videoModal" class="modal">
+                                                                <div class="modal-content">
+                                                                    <span class="close"
+                                                                        onclick="closeVideoModal()">&times;</span>
+                                                                    <iframe id="videoIframe" width="100%"
+                                                                        height="400" frameborder="0"
+                                                                        allowfullscreen></iframe>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -273,6 +284,24 @@
                     }
                 }
                 console.log("Rating selected:", rating);
+            }
+        </script>
+    @endpush
+
+    @push('script-app')
+        <script>
+            function openVideoModal(videoUrl) {
+                const modal = document.getElementById('videoModal');
+                const iframe = document.getElementById('videoIframe');
+                iframe.src = videoUrl;
+                modal.style.display = "block";
+            }
+
+            function closeVideoModal() {
+                const modal = document.getElementById('videoModal');
+                const iframe = document.getElementById('videoIframe');
+                iframe.src = ""; 
+                modal.style.display = "none";
             }
         </script>
     @endpush
