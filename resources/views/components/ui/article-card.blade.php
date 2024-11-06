@@ -22,7 +22,7 @@
                     {{ $article->title }}
                 </a>
             </h3>
-            <p class="blog-card__text">{!! $article->content !!}</p>
+            <p class="blog-card__text">{{ Str::words(strip_tags($article->content), 40, '...') }}</p>
             <a href="{{ route('app.article.show', $article->slug) }}" class="blog-card__btn eduhive-btn">
                 <span class="eduhive-btn__text">read more</span>
                 <span class="eduhive-btn__icon">
