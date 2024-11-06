@@ -12,6 +12,7 @@
                     <x-ui.base-button color="primary" type="button" href="{{ route('admin.course.create') }}">
                         Tambah Kelas
                     </x-ui.base-button>
+                    
                 </x-slot>
                 <x-ui.datatables>
                     <x-slot name="thead">

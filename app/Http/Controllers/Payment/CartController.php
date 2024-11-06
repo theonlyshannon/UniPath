@@ -10,11 +10,23 @@ use App\Models\Course;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert as Swal;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+        // cek user apakah sudah auth, jika belum kasih swal alert
+        if (!Auth::check()) {
+            Swal::toast('You need to login first', 'error');
+            return redirect()->route('login');
+        }
+
         $user = Auth::user();
         $cartItems = Cart::where('user_id', $user->id)
             ->with('course')

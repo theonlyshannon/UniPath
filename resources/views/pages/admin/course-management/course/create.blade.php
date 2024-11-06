@@ -25,7 +25,7 @@
                     <x-forms.input label="Slug" name="slug" id="slug" value="{{ old('slug') }}" />
 
                     <x-forms.textarea label="Deskripsi" name="description" id="description"
-                        value="{{ old('description') }}" />
+                        value="{{ old('description') }}" editor="true" />
 
                     <img id="thumbnail-preview" src="#" alt="Thumbnail Preview"
                         style="display:none; max-width: 500px; margin-top: 10px; margin-bottom: 10px;" />
@@ -44,8 +44,10 @@
                     <x-forms.input label="Trailer" name="trailer" id="trailer" value="{{ old('trailer') }}" />
 
                     <div class="mb-3" id="price-container">
-                        <x-forms.input label="Harga Kelas" name="price" id="price" type="text"
+                        <x-forms.input label="Harga Kelas" name="price_display" id="price_display" type="text"
                             value="{{ old('price') }}" />
+                        <input type="hidden" name="price" id="price_numeric" value="{{ old('price') }}">
+
                     </div>
 
                     <div class="mb-3">
@@ -211,16 +213,17 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const priceInput = document.getElementById('price');
+                const priceDisplay = document.getElementById('price_display');
+                const priceNumeric = document.getElementById('price_numeric');
                 const isFreeCheckbox = document.getElementById('is_free');
                 const isFavouriteCheckbox = document.getElementById('is_favourite');
                 const form = document.querySelector('form'); // Ambil form utama
 
-                priceInput.addEventListener('keyup', function(e) {
+                priceDisplay.addEventListener('keyup', function(e) {
                     let value = e.target.value.replace(/\D/g, ''); // Hanya ambil angka
-
                     value = value.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Tambah titik pemisah ribuan
                     e.target.value = value;
+                    priceNumeric.value = value.replace(/\./g, ''); // Update nilai numeric
                 });
 
                 // Ubah checkbox isFavourite value
@@ -236,8 +239,8 @@
                         this.value = this.checked ? 1 : 0;
 
                         if (this.checked) {
-                            priceInput.value = '0';
-                            priceInput.dispatchEvent(new Event('keyup'));
+                            priceDisplay.value = '0';
+                            priceNumeric.value = '0';
                             document.getElementById('price-container').style.display = 'none';
                         } else {
                             document.getElementById('price-container').style.display = 'block';
@@ -246,8 +249,8 @@
 
                     // Jika isFree sudah diceklis saat halaman dimuat
                     if (isFreeCheckbox.checked) {
-                        priceInput.value = '0';
-                        priceInput.dispatchEvent(new Event('keyup'));
+                        priceDisplay.value = '0';
+                        priceNumeric.value = '0';
                         document.getElementById('price-container').style.display = 'none';
                     }
                 }
@@ -255,9 +258,35 @@
                 // Pastikan harga dikirim tanpa format pemisah ribuan saat submit
                 if (form) {
                     form.addEventListener('submit', function() {
-                        priceInput.value = priceInput.value.replace(/\./g, ''); // Hapus semua titik
+                        priceInput.value = priceInput.value.replace(/\./g, '');
                     });
                 }
+            });
+        </script>
+
+        <script src="https://cdn.tiny.cloud/1/{{ env('TINYMCE_API_KEY') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin">
+        </script>
+        <script>
+            tinymce.init({
+                selector: 'textarea.tinymce',
+                width: '100%',
+                height: 300,
+                plugins: [
+                    'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+                    'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen',
+                    'insertdatetime',
+                    'media', 'table', 'emoticons', 'template', 'help'
+                ],
+                toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+                    'forecolor backcolor emoticons | help',
+                menu: {
+                    favs: {
+                        title: 'My Favorites',
+                        items: 'code visualaid | searchreplace | emoticons'
+                    }
+                },
+                menubar: 'favs file edit view insert format tools table help',
             });
         </script>
     @endpush

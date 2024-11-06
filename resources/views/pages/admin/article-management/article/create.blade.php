@@ -32,7 +32,7 @@
 
                     <x-forms.input label="Thumbnail" name="thumbnail" id="thumbnail" type="file" />
 
-                    <x-forms.textarea label="Content" name="content" id="content" />
+                    <x-forms.textarea label="Content" name="content" id="content" editor="true" />
 
                     <x-forms.input label="Slug" name="slug" id="slug" />
 
@@ -60,7 +60,6 @@
                         </select>
                     </div>
 
-
                     <x-ui.base-button color="primary" type="submit">Simpan</x-ui.base-button>
                     <x-ui.base-button color="danger" href="{{ route('admin.article.index') }}">
                         Kembali
@@ -71,6 +70,7 @@
     </div>
 
     @push('custom-scripts')
+        <!-- Inisialisasi Slug Otomatis -->
         <script>
             const title = document.querySelector('#title');
             const slug = document.querySelector('#slug');
@@ -80,9 +80,33 @@
                 slug.value = titleValue.toLowerCase().split(' ').join('-');
             });
         </script>
+
+        <!-- Inisialisasi Select2 -->
         <script>
             $(document).ready(function() {
                 $('.js-example-basic-multiple').select2();
+            });
+        </script>
+
+
+        <script src="https://cdn.tiny.cloud/1/{{ env('TINYMCE_API_KEY') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: 'textarea.tinymce',
+                width: '100%',
+                height: 300,
+                plugins: [
+                    'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+                    'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
+                    'media', 'table', 'emoticons', 'template', 'help'
+                ],
+                toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+                    'forecolor backcolor emoticons | help',
+                menu: {
+                    favs: { title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons' }
+                },
+                menubar: 'favs file edit view insert format tools table help',
             });
         </script>
     @endpush

@@ -9,7 +9,7 @@
     <title>
         {{ $title ?? '' }}
     </title>
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" type="image/x-icon" sizes="128x128">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

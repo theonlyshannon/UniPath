@@ -87,7 +87,7 @@ class TransactionController extends Controller
         }
 
         if ($transaction->amount == 0) {
-            $transaction->status = 'success';
+            $transaction->status = 'paid';
             $transaction->save();
 
             return redirect()->route('app.transaction.payment.success', $transactionCode)->with('success', 'Transaksi berhasil tanpa pembayaran.');
