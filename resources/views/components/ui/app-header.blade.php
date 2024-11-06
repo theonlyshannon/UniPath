@@ -63,7 +63,7 @@
                             @if (Auth::user()->hasRole('admin'))
                                 <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a></li>
                             @elseif (Auth::user()->hasRole('student'))
-                                <li><a href="{{ route('student.dashboard') }}" class="dropdown-item">Dashboard</a></li>
+                                <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a></li>
                             @endif
                             <li>
                                 <a href="{{ route('logout') }}" class="dropdown-item"
