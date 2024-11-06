@@ -49,14 +49,6 @@
                                 Artikel
                             </a>
                         </li>
-                        <li>
-                            <a href="contact.html">
-                                <span class="footer-widget__links__icon">
-                                    <i class="icon-double-arrow"></i>
-                                </span>
-                                Contact Us
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
