@@ -386,7 +386,7 @@
                 </div>
             </div>
         </div>
-        <img src="assets/images/shapes/offer-shape-1-3.png" alt="shape" class="offer-one__shape">
+        <img src="{{asset('app/images/shapes/offer-shape-1-3.png')}}" alt="shape" class="offer-one__shape">
         <div class="offer-one__shape-box"></div>
     </section>
 
