@@ -83,24 +83,33 @@
                                                         <div class="course-details__accordion__inner">
                                                             @foreach ($course->syllabus as $syllabus)
                                                                 @if ($hasAccess)
-                                                                    <!-- Materi dapat diakses -->
+
                                                                     <a href="{{ $syllabus->video }}"
                                                                         class="course-details__accordion__class video-popup"
                                                                         onclick="markAsComplete('{{ $syllabus->id }}', 'video')">
-                                                                        <span class="course-details__accordion__class__title">
-                                                                            <span bclass="course-details__accordion__class__icon">
+                                                                        <span
+                                                                            class="course-details__accordion__class__title">
+                                                                            <span
+                                                                                bclass="course-details__accordion__class__icon">
                                                                                 <i class="icon-files"></i>
                                                                             </span>
                                                                             {{ $syllabus->title }}
                                                                         </span>
-                                                                        <span
-                                                                            class="course-details__accordion__class__right">
+                                                                        <span class="course-details__accordion__class__right">
                                                                             <x-ui.base-button
-                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'file'); window.location.href='{{ asset('storage/' . $syllabus->file) }}';"
+                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'file'); window.location.href='{{ asset('storage/assets/files/course/syllabus/' . $syllabus->file) }}';"
                                                                                 download>
                                                                                 File Materi
                                                                             </x-ui.base-button>
                                                                         </span>
+
+                                                                        <span class="course-details__accordion__class__right">
+                                                                            <x-ui.base-button
+                                                                                onclick="markAsComplete('{{ $syllabus->id }}', 'video'); window.open('{{ $syllabus->video }}', '_blank');">
+                                                                                Video Materi
+                                                                            </x-ui.base-button>
+                                                                        </span>
+
                                                                         <span
                                                                             class="course-details__accordion__class__check {{ $syllabus->is_complete ? 'complete' : '' }}">
                                                                             <i class="icon-check"></i>
@@ -137,13 +146,13 @@
                                         @else
                                             @foreach ($reviews as $review)
                                                 @if ($review->is_active)
-                                                    <x-ui.course-review-card :review="$review"/>
+                                                    <x-ui.course-review-card :review="$review" />
                                                 @endif
                                             @endforeach
                                         @endif
                                     </div>
                                     <div class="course-review-form mt-5">
-                                        <x-ui.course-review-form :course="$course"/>
+                                        <x-ui.course-review-form :course="$course" />
                                     </div>
                                 </div>
                             </div>
