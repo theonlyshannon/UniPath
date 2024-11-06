@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +11,8 @@
         {{ $title ?? 'No Page' }}
     </title>
     <!-- favicons Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/assets/images/Favicon-unipath 1.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('app/images/android-chrome-192x192.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('app/images/android-chrome-512x512.png') }}" />
     <link rel="manifest" href="{{ asset('app/images/favicons/site.webmanifest') }}" />
 
     <!-- fonts -->

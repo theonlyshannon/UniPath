@@ -58,6 +58,7 @@ Route::name('app.')->middleware(['update.last.active'])->group(function () {
         Route::get('/payment/success/{transactionCode}', [TransactionController::class, 'success'])->name('payment.success');
         Route::get('/success', [TransactionController::class, 'success'])->name('success');
         Route::get('/error', [TransactionController::class, 'error'])->name('error');
+        Route::get('/pending', [TransactionController::class, 'pending'])->name('pending');
     });
 });
 
@@ -65,3 +66,6 @@ Route::name('app.')->middleware(['update.last.active'])->group(function () {
 
 Route::post('/midtrans/notification', [TransactionController::class, 'receiveNotification'])->name('midtrans.notification');
 Route::post('/student/chat', [AIController::class, 'chat'])->name('chat');
+
+
+Route::get('/test-payment', [TransactionController::class, 'testPayment'])->name('test.payment');
