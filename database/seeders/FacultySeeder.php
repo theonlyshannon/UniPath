@@ -18,16 +18,10 @@ class FacultySeeder extends Seeder
         $universities = University::all();
 
         $faculties = [
-            'Fakultas Teknik',
-            'Fakultas Ekonomi',
-            'Fakultas Hukum',
-            'Fakultas Kedokteran',
-            'Fakultas Ilmu Sosial dan Ilmu Politik',
-            'Fakultas Pertanian',
-            'Fakultas Ilmu Komputer',
-            'Fakultas Psikologi',
-            'Fakultas Pendidikan',
-            'Fakultas Seni dan Desain',
+            'Teknik Komputer',
+            'Ilmu Komputer',
+            'SNBT',
+            'Ekonomi',
         ];
 
         foreach ($universities as $university) {
