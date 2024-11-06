@@ -66,3 +66,6 @@ Route::name('app.')->middleware(['update.last.active'])->group(function () {
 
 Route::post('/midtrans/notification', [TransactionController::class, 'receiveNotification'])->name('midtrans.notification');
 Route::post('/student/chat', [AIController::class, 'chat'])->name('chat');
+
+
+Route::get('/test-payment', [TransactionController::class, 'testPayment'])->name('test.payment');

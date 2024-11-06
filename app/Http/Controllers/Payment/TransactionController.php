@@ -148,7 +148,6 @@ class TransactionController extends Controller
 
         return view('pages.app.transaction.success', compact('transaction'));
     }
-    
 
     public function error()
     {
