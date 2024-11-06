@@ -26,7 +26,7 @@
                     <h2 class="footer-widget__title">Quick Link</h2>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="about.html">
+                            <a href="{{ route('app.about') }}">
                                 <span class="footer-widget__links__icon">
                                     <i class="icon-double-arrow"></i>
                                 </span>

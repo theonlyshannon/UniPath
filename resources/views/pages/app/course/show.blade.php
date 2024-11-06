@@ -300,7 +300,7 @@
             function closeVideoModal() {
                 const modal = document.getElementById('videoModal');
                 const iframe = document.getElementById('videoIframe');
-                iframe.src = ""; 
+                iframe.src = "";
                 modal.style.display = "none";
             }
         </script>
