@@ -11,9 +11,9 @@
                 <h2 class="page-header__title">{{ $course->title }}</h2>
             </div>
         </div>
-        <img src="{{ asset('assets/images/shapes/page-header-shape-1.png') }}" alt="shape"
+        <img src="{{ asset('app/images/shapes/page-header-shape-1.png') }}" alt="shape"
             class="page-header__shape-one">
-        <img src="{{ asset('assets/images/shapes/page-header-shape-2.png') }}" alt="shape"
+        <img src="{{ asset('app/images/shapes/page-header-shape-2.png') }}" alt="shape"
             class="page-header__shape-two">
         <div class="page-header__shape-three"></div>
         <div class="page-header__shape-four"></div>
