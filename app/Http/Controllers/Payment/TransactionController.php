@@ -149,6 +149,21 @@ class TransactionController extends Controller
         return view('pages.app.transaction.success', compact('transaction'));
     }
 
+    public function pending($transactionCode)
+{
+    $user = Auth::user();
+    $transaction = Transaction::where('transaction_code', $transactionCode)
+        ->where('user_id', $user->id)
+        ->first();
+
+    if (!$transaction) {
+        return redirect()->route('app.dashboard')->with('error', 'Transaksi tidak ditemukan.');
+    }
+
+    return view('pages.app.transaction.pending', compact('transaction'));
+}
+
+
     public function error()
     {
         return view('pages.app.transaction.error');
