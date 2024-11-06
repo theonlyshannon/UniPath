@@ -58,6 +58,7 @@ Route::name('app.')->middleware(['update.last.active'])->group(function () {
         Route::get('/payment/success/{transactionCode}', [TransactionController::class, 'success'])->name('payment.success');
         Route::get('/success', [TransactionController::class, 'success'])->name('success');
         Route::get('/error', [TransactionController::class, 'error'])->name('error');
+        Route::get('/pending', [TransactionController::class, 'pending'])->name('pending');
     });
 });
 
