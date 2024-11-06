@@ -21,7 +21,7 @@
                             @endforeach
                         </select>
                         <x-ui.base-button color="success" type="submit" id="scrape-button" disabled>
-                            Get All Faculty (Scraping)
+                            Get All Faculty
                         </x-ui.base-button>
                     </form>
                 </x-slot>
