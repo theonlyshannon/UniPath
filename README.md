@@ -70,4 +70,5 @@ Follow these steps to set up the project on your local environment.
    php artisan serve
 
 ## License
-1. https://theonlyshannon.github.io/license/
+1. License : https://theonlyshannon.github.io/license/
+2. Docs : https://drive.google.com/drive/folders/1LK4BEm71A3v43BZnHo5OpMsRbXV0_R2P?usp=drive_link
