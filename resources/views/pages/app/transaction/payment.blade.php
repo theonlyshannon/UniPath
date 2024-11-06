@@ -12,22 +12,20 @@
                 data-client-key="{{ config('midtrans.client_key') }}"></script>
 
                 <script type="text/javascript">
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         snap.pay('{{ $snapToken }}', {
-                            onSuccess: function(result) {
-                                console.log('Payment success:', result);
-                                window.location.href = "{{ route('app.transaction.success', $transaction->transaction_code) }}";
+                            onSuccess: function(result){
+                                window.location.href = '{{ route('app.transaction.success', ['transaction_code' => $transaction->transaction_code]) }}';
                             },
-                            onPending: function(result) {
-                                console.log('Payment pending:', result);
-                                window.location.href = "{{ route('app.transaction.pending', $transaction->transaction_code) }}";
+                            onPending: function(result){
+                                window.location.href = '{{ route('app.transaction.success', ['transaction_code' => $transaction->transaction_code]) }}';
                             },
-                            onError: function(result) {
-                                console.log('Payment error:', result);
-                                window.location.href = "{{ route('app.transaction.error') }}";
+                            onError: function(result){
+                                window.location.href = '{{ route('app.transaction.error') }}';
                             },
-                            onClose: function() {
-                                alert('Anda menutup popup tanpa menyelesaikan pembayaran.');
+                            onClose: function(){
+                                alert('Anda menutup popup tanpa menyelesaikan transaksi');
+                                window.location.href = '{{ route('app.cart.index') }}';
                             }
                         });
                     });
