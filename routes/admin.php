@@ -43,6 +43,7 @@ Route::resource('article', ArticleController::class);
 
 Route::resource('university', UniversityController::class);
 Route::resource('faculty', FacultyController::class);
+Route::post('faculty/scrape', [FacultyController::class, 'scrape'])->name('faculty.scrape');
 
 Route::resource('course-category', CourseCategoryController::class);
 Route::resource('course', CourseController::class);
