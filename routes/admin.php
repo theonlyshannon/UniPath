@@ -7,7 +7,7 @@ use App\Http\Controllers\Web\Admin\MentorController;
 use App\Http\Controllers\Web\Admin\WriterController;
 use App\Http\Controllers\Web\Admin\ArticleController;
 use App\Http\Controllers\Web\Admin\FacultyController;
-use App\Http\Controllers\Web\Admin\studentController;
+use App\Http\Controllers\Web\Admin\StudentController;
 use App\Http\Controllers\Web\Admin\ArticleTagController;
 use App\Http\Controllers\Web\Admin\PermissionController;
 use App\Http\Controllers\Web\Admin\UniversityController;
@@ -31,7 +31,7 @@ use App\Http\Controllers\Web\Admin\ArticleCategoryController;
 Route::get('/dashboard', [App\Http\Controllers\Web\Admin\DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('mentor', MentorController::class);
-Route::resource('student', studentController::class);
+Route::resource('student', StudentController::class);
 Route::resource('writer', WriterController::class);
 Route::resource('role', RoleController::class);
 Route::resource('permission', PermissionController::class);
