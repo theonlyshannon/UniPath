@@ -7,12 +7,16 @@
     'value' => '',
     'customClass' => '',
     'mb' => '3',
+    'editor' => false,
 ])
 
 @php
     $classes = 'form-control';
     $classes .= $errors->has($name) ? ' is-invalid' : '';
     $classes .= ' ' . $customClass;
+    if ($editor) {
+        $classes .= ' tinymce'; 
+    }
 @endphp
 
 <div class="mb-{{ $mb }}">
@@ -21,7 +25,7 @@
         <label for="{{ $id }}" class="form-label">{{ $label }}</label>
     @endif
     <textarea name="{{ $name }}" id="{{ $id }}" placeholder="{{ $placeholder }}"
-        value="{{ old($name, $value) }}" {{ $attributes->merge(['class' => $classes]) }} rows="3">{{ old($name, $value) }}</textarea>
+        {{ $attributes->merge(['class' => $classes]) }} rows="3">{{ old($name, $value) }}</textarea>
 
     @error($name)
         <div class="invalid-feedback">
