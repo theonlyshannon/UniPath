@@ -202,13 +202,13 @@
                             <h4 class="mb-0">
                                 {{
                                     \App\Models\Transaction::where('user_id', auth()->id())
-                                    ->where('status', 'paid')
-                                    ->with('courses')
-                                    ->get()
-                                    ->pluck('courses')
-                                    ->flatten()
-                                    ->unique('id')
-                                    ->count()
+                                        ->where('status', 'paid')
+                                        ->with('transactionDetails.course')
+                                        ->get()
+                                        ->pluck('transactionDetails.*.course')
+                                        ->flatten()
+                                        ->unique('id')
+                                        ->count()
                                 }}
                             </h4>
                         </div>
