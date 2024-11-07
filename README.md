@@ -65,9 +65,12 @@ Follow these steps to set up the project on your local environment.
    ```bash
    php artisan migrate
    php artisan db:seed
-4. Start Server:
+5. Start Server:
    ```bash
    php artisan serve
+6. Login to Admin Use This Email and Password 
+    Email : admin@unipath-academy.sch.id
+    Password : UnipathAdmin12
 
 ## License
 1. License : https://theonlyshannon.github.io/license/
